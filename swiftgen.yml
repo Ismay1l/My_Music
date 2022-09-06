@@ -1,0 +1,16 @@
+input_dir: MyMusic/
+output_dir: MyMusic/Generated/
+
+xcassets:
+    inputs:
+      - Assets.xcassets
+    outputs:
+      templateName: swift5
+      output: XCAssets+Image+Generated.swift
+
+
+# strings:
+#   inputs: en.lproj
+#   outputs:
+#    templateName: structured-swift5
+#    output: Strings.swift

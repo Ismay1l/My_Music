@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  MyMusic
+
+  Created by Ismayil Ismayilov on 02.09.22.
+  
+*/
+//MARK: Welcome VC
+"title_welcome_page" = "My Music";
+"title_welcomeVC_signin_label" = "Iniciar sesión con Spotify";
+
+//MARK: Auth VC
+"title_authVC_header" = "Iniciar sesión";
+
+//MARK: Login VC
+"title_loginVC_header" = "Acceso";
+
+//MARK: - Home VC
+"title_home_page" = "Navegar";
+
+//MARK: - Home VC -> Settings VC
+"title_settingsVC_header" = "Ajustes";
+"profile_label" = "Perfil";
+"title_profile_label" = "Ver tu perfil";
+"account_label" = "Cuenta";
+"title_account_label" = "Desconectar";
+
+//MARK: - Home VC -> Profile VC
+"title_profileVC_header" = "Perfil";
+"fullname_label" = "Nombre";
+"userID_label" = "ID de usuario";
+"product_label" = "Producto";
+"country_label" = "País";
+"follower_count_label" = "Seguidores";
+"could_not_get_data_label" = "No Se Pudieron Obtener Datos";
+
+//MARK: - Search VC
+"title_search_page" = "Búsqueda";
+
+//MARK: - Library VC
+"title_library_page" = "Biblioteca";
+
+//MARK: - Tabbar VC
+"title_home_tabbar" = "Hogar";
+
+//MARK: - Sign out Card
+"title_sign_out" = "Desconectar";
+"description_label" = "¿Estás seguro de cerrar sesión?";
+"button_sign_out" = "Desconectar";
+"button_cancel" = "Cancelar";

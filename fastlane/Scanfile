@@ -1,0 +1,8 @@
+project("MyMusic.xcodeproj")
+device("iPhone 13")
+
+clean(true)
+
+skip_build(false)
+
+code_coverage(true)

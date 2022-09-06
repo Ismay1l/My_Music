@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  MyMusic
+
+  Created by Ismayil Ismayilov on 02.09.22.
+  
+*/
+//MARK: Welcome VC
+"title_welcome_page" = "My Music";
+"title_welcomeVC_signin_label" = "Spotify ile giriş yap";
+
+//MARK: Auth VC
+"title_authVC_header" = "Kayıt ol";
+
+//MARK: Login VC
+"title_loginVC_header" = "Giriş yap";
+
+//MARK: - Home VC
+"title_home_page" = "Araştır";
+
+//MARK: - Home VC -> Settings VC
+"title_settingsVC_header" = "Ayarlar";
+"profile_label" = "Profil";
+"title_profile_label" = "Profilinizi Görüntüle";
+"account_label" = "Hesap";
+"title_account_label" = "Hesaptan çık";
+
+//MARK: - Home VC -> Profile VC
+"title_profileVC_header" = "Profil";
+"fullname_label" = "Kullanıcı ismi";
+"userID_label" = "Kullanıcı kimliği";
+"follower_count_label" = "Takipçiler";
+"product_label" = "Ürün";
+"country_label" = "Ülke";
+"could_not_get_data_label" = "Veri alınamadı";
+
+//MARK: - Search VC
+"title_search_page" = "Arama";
+
+//MARK: - Library VC
+"title_library_page" = "Kütüphane";
+
+//MARK: - Tabbar VC
+"title_home_tabbar" = "Ana Sayfa";
+
+//MARK: - Sign out Card
+"title_sign_out" = "Hesaptan çık";
+"description_label" = "Çıkış yaptığınızdan emin misiniz?";
+"button_sign_out" = "Hesaptan çık";
+"button_cancel" = "Iptal";
