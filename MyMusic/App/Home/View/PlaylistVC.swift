@@ -145,6 +145,6 @@ extension PlaylistVC: UICollectionViewDelegate,
     }
     
     func didTapPlayButton(_ header: PlaylistHeaderCollectionView) {
-        print("Play Music")
+        print("Play Music Now")
     }
 }
