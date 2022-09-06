@@ -14,6 +14,8 @@
 		4B1F866828C60FC400F2FC49 /* RAMAnimatedTabBarController in Frameworks */ = {isa = PBXBuildFile; productRef = 4B1F866728C60FC400F2FC49 /* RAMAnimatedTabBarController */; };
 		4B3B754D28BFC44800033B61 /* Shift in Frameworks */ = {isa = PBXBuildFile; productRef = 4B3B754C28BFC44800033B61 /* Shift */; };
 		4B44933E28C00B830030BC00 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4B44933D28C00B830030BC00 /* SDWebImage */; };
+		4B4AA74028C7AAF600465590 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4B4AA73F28C7AAF600465590 /* swiftgen.yml */; };
+		4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */ = {isa = PBXBuildFile; fileRef = 4B4AA73F28C7AAF600465590 /* swiftgen.yml */; };
 		4B64CEC028C4BE4400BE1935 /* BLTNBoard in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEBF28C4BE4400BE1935 /* BLTNBoard */; };
 		4B64CEC328C4C57600BE1935 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEC228C4C57600BE1935 /* Promises */; };
 		4B64CEC628C4C6A500BE1935 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64CEC528C4C6A500BE1935 /* Protocols.swift */; };
@@ -37,7 +39,6 @@
 		4BBFE2B028C666C100508C7E /* PlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE2AF28C666C100508C7E /* PlaylistCollectionViewCell.swift */; };
 		4BBFE2B228C66EEF00508C7E /* PlaylistHeaderCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE2B128C66EEF00508C7E /* PlaylistHeaderCollectionView.swift */; };
 		4BBFE2B528C67F0400508C7E /* SPStorkController in Frameworks */ = {isa = PBXBuildFile; productRef = 4BBFE2B428C67F0400508C7E /* SPStorkController */; };
-		4BCC4B3728C208B40061ABD1 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC4B3628C208B40061ABD1 /* swiftgen.yml */; };
 		4BCC4B4028C21E1F0061ABD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC4B4228C21E1F0061ABD1 /* Localizable.strings */; };
 		4BCC4B4D28C222EC0061ABD1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC4B4C28C222EC0061ABD1 /* Media.xcassets */; };
 		4BCC4B4F28C222FA0061ABD1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC4B4E28C222FA0061ABD1 /* Colors.xcassets */; };
@@ -84,6 +85,7 @@
 		4949433028C0988D00E82DBF /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		4949433328C09A4B00E82DBF /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVM.swift; sourceTree = "<group>"; };
+		4B4AA73F28C7AAF600465590 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		4B64CEC528C4C6A500BE1935 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4B7E3EA828C2284600BE990E /* XCAssets+Image+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Image+Generated.swift"; sourceTree = "<group>"; };
 		4B7E3EA928C2284600BE990E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -105,7 +107,6 @@
 		4B9430AD28BFBA11007295A0 /* MyMusicUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMusicUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4BBFE2AF28C666C100508C7E /* PlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		4BBFE2B128C66EEF00508C7E /* PlaylistHeaderCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistHeaderCollectionView.swift; sourceTree = "<group>"; };
-		4BCC4B3628C208B40061ABD1 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftgen.yml; path = ../swiftgen.yml; sourceTree = "<group>"; };
 		4BCC4B4128C21E1F0061ABD1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BCC4B4C28C222EC0061ABD1 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		4BCC4B4E28C222FA0061ABD1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -393,7 +394,7 @@
 		4BD4EA9928B6AFAF00CA24D8 = {
 			isa = PBXGroup;
 			children = (
-				4BCC4B3628C208B40061ABD1 /* swiftgen.yml */,
+				4B4AA73F28C7AAF600465590 /* swiftgen.yml */,
 				4BD4EAA428B6AFAF00CA24D8 /* MyMusic */,
 				4B94309D28BFB9FB007295A0 /* MyMusicTests */,
 				4B9430AA28BFBA11007295A0 /* MyMusicUITests */,
@@ -683,8 +684,8 @@
 				4BCC4B4028C21E1F0061ABD1 /* Localizable.strings in Resources */,
 				4BD4EAB228B6AFAF00CA24D8 /* LaunchScreen.storyboard in Resources */,
 				4BCC4B4D28C222EC0061ABD1 /* Media.xcassets in Resources */,
-				4BCC4B3728C208B40061ABD1 /* swiftgen.yml in Resources */,
 				4BCC4B4F28C222FA0061ABD1 /* Colors.xcassets in Resources */,
+				4B4AA74028C7AAF600465590 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,13 +713,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */,
 				4BD33C3728B7F16900BE1353 /* APIManager.swift in Sources */,
 				4949433428C09A4B00E82DBF /* HomeModel.swift in Sources */,
 				4BD33C3328B7F12000BE1353 /* SearchResultVC.swift in Sources */,
 				4BD33C2928B7F06F00BE1353 /* ProfileVC.swift in Sources */,
 				4BD33C2528B7F03000BE1353 /* SignInVC.swift in Sources */,
 				4B1F866528C6002F00F2FC49 /* PlaylistVM.swift in Sources */,
-				4B7E3EAB28C2284600BE990E /* Strings.swift in Sources */,
 				4B91550A28C532EC00BDFB95 /* AlbumVC.swift in Sources */,
 				4BD33C3528B7F14F00BE1353 /* AuthManager.swift in Sources */,
 				4BD33C2F28B7F0E000BE1353 /* PlayerVC.swift in Sources */,
@@ -730,11 +731,12 @@
 				4BD33C1F28B7EFDD00BE1353 /* LibraryVC.swift in Sources */,
 				4B80E7AE28C27B3F00CD4151 /* NewReleaseCollectionViewCell.swift in Sources */,
 				4B64CEC628C4C6A500BE1935 /* Protocols.swift in Sources */,
-				4B7E3EAA28C2284600BE990E /* XCAssets+Image+Generated.swift in Sources */,
 				4B80E7B228C27B6300CD4151 /* RecommendedTrackCollectionViewCell.swift in Sources */,
 				4BD33C4328B7F22A00BE1353 /* APIModel.swift in Sources */,
+				4B7E3EAB28C2284600BE990E /* Strings.swift in Sources */,
 				4BD33C1728B7EF4D00BE1353 /* TabBarVC.swift in Sources */,
 				4BD4EAA628B6AFAF00CA24D8 /* AppDelegate.swift in Sources */,
+				4B7E3EAA28C2284600BE990E /* XCAssets+Image+Generated.swift in Sources */,
 				4BD4EAE928B6B5FC00CA24D8 /* SceneDelegate.swift in Sources */,
 				4B80E7AB28C2753800CD4151 /* Enums.swift in Sources */,
 				4BE4FFFE28BCAC3A009CEDB4 /* ProfileVM.swift in Sources */,
