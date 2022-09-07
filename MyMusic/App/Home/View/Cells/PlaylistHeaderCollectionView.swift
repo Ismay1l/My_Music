@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SDWebImage
 import SwiftEntryKit
 
 class PlaylistHeaderCollectionView: UICollectionReusableView {

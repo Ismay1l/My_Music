@@ -24,13 +24,14 @@ class SearchVC: UIViewController {
     private lazy var mainCollectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { _, _ in
             let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 4, bottom: 3, trailing: 4)
             
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)), subitem: item, count: 2)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(120)), subitem: item, count: 2)
+            group.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
             return NSCollectionLayoutSection(group: group)
         }
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = .blue
+        view.backgroundColor = hexStringToUIColor(hex: "370617")
         
         view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "\(UICollectionViewCell.self)")
         
@@ -88,6 +89,7 @@ extension SearchVC: UISearchResultsUpdating,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(UICollectionViewCell.self)", for: indexPath)
         cell.backgroundColor = .yellow
+        cell.layer.cornerRadius = 10
         return cell
     }
     

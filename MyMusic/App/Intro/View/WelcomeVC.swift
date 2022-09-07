@@ -76,17 +76,6 @@ class WelcomeVC: UIViewController {
         }
     }
     
-    @objc private func didTapSignIn() {
-        let vc = SignInVC()
-        vc.completion = { [weak self] result in
-            DispatchQueue.main.async {
-                self?.handleSignIn(success: result)
-            }
-        }
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     private func handleSignIn(success: Bool) {
         guard success else {
             let alert = UIAlertController(title: "Oops", message: "Error while signing in.", preferredStyle: .alert)
@@ -101,5 +90,17 @@ class WelcomeVC: UIViewController {
         mainTabBarVC.shift.defaultAnimation = DefaultAnimations.Scale(.down)
         mainTabBarVC.shift.baselineDuration = 0.8
         present(mainTabBarVC, animated: true)
+    }
+    
+    @objc
+    private func didTapSignIn() {
+        let vc = SignInVC()
+        vc.completion = { [weak self] result in
+            DispatchQueue.main.async {
+                self?.handleSignIn(success: result)
+            }
+        }
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
