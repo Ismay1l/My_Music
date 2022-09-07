@@ -324,11 +324,11 @@ extension HomeVC: UICollectionViewDataSource,
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(MainCollectionHeaderView.self)", for: indexPath) as! MainCollectionHeaderView
             if indexPath.section == 0 {
-                header.configureHeader(_with: "Browse")
+                header.configureHeader(_with: MainCollectionViewHeaderType.browse.collectionViewHeaders)
             } else if indexPath.section == 1 {
-                header.configureHeader(_with: "Featured-Playlist")
+                header.configureHeader(_with: MainCollectionViewHeaderType.featuredPlaylists.collectionViewHeaders)
             } else {
-                header.configureHeader(_with: "Recommended tracks")
+                header.configureHeader(_with: MainCollectionViewHeaderType.recommendedTracks.collectionViewHeaders)
             }
             return header
         }

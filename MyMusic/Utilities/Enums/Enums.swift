@@ -30,3 +30,20 @@ enum AlbumDetailsState {
 enum PlaylistState {
     case showPlaylist(model: PlaylistResponse)
 }
+
+enum MainCollectionViewHeaderType {
+    case browse
+    case featuredPlaylists
+    case recommendedTracks
+    
+    var collectionViewHeaders: String {
+        switch self {
+        case MainCollectionViewHeaderType.browse:
+            return L10n.browseTitle
+        case MainCollectionViewHeaderType.featuredPlaylists:
+            return L10n.featuredPlaylistsTitle
+        case MainCollectionViewHeaderType.recommendedTracks:
+            return L10n.recommendedTracksTitle
+        }
+    }
+}

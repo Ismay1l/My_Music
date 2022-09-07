@@ -72,7 +72,6 @@ class PlaylistVC: UIViewController {
                 case .showPlaylist(let model):
                     DispatchQueue.main.async {
                         guard let trackItem = model.tracks?.items else { return }
-                        print(trackItem.count)
                         self?.playlistResponse = trackItem
                         self?.mainCollectionView.reloadData()
                     }
@@ -99,8 +98,8 @@ class PlaylistVC: UIViewController {
     
     @objc
     private func didTapShare() {
-        guard let url = URL(string: playlist.external_urls?["spotify"] ?? "") else { return }
-        let vc = UIActivityViewController(activityItems: ["Share this song via: ", url],
+        guard let url = URL(string: playlist.external_urls?["spotify"] ?? "NA") else { return }
+        let vc = UIActivityViewController(activityItems: ["\(L10n.sharePlaylistButton)", url],
                                           applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
@@ -133,7 +132,7 @@ extension PlaylistVC: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(PlaylistHeaderCollectionView.self)", for: indexPath) as! PlaylistHeaderCollectionView
-            header.configureCell(item: playlist)
+            header.configureHeader(item: playlist)
             header.delegate = self
             return header
         }

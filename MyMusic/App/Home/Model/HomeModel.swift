@@ -25,6 +25,7 @@ struct Album: Codable {
     let name: String?
     let release_date: String?
     let total_tracks: Int?
+    let external_urls: [String: String]?
 }
 
 struct Artist: Codable {
@@ -150,5 +151,12 @@ struct Track: Codable {
     let id: String?
     let name: String?
     let preview_url: String?
+}
+
+//MARK: - Browse Album Header Model
+struct BrowseAlbumHeader {
+    let image: [APIImage]?
+    let release_date: String?
+    let title: String?
 }
 

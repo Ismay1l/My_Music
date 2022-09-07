@@ -48,3 +48,12 @@
 "description_label" = "Are you sure to sign out?";
 "button_sign_out" = "Sign out";
 "button_cancel" = "Cancel";
+
+//MARK: - MainCollectionViewHeader
+"browse_title" = "Browse";
+"featured_playlists_title" = "Featured-Playlists";
+"recommended_tracks_title" = "Recommended Tracks";
+
+//MARK: - Share album/song button
+"share_album_button" = "Share this album via:";
+"share_playlist_button" = "Share this playlist via:";

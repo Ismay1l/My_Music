@@ -28,15 +28,15 @@ class AuthManager {
     }
     
     private var accessToken: String? {
-        return APPDefaultsManager.getString(key: "access_token")
+        return UserDefaultsManager.getString(key: "access_token")
     }
     
     private var refreshToken: String? {
-        return APPDefaultsManager.getString(key: "refresh_token")
+        return UserDefaultsManager.getString(key: "refresh_token")
     }
     
     private var tokenExpirationDate: Date? {
-        return APPDefaultsManager.getDate(key: "expiration_date")
+        return UserDefaultsManager.getDate(key: "expiration_date")
     }
     
     //MARK: - Checks if accessToken needs to be refreshed
@@ -207,20 +207,20 @@ class AuthManager {
     
     //MARK: - To cache tokens
     private func cacheToken(result: AuthResponse) {
-        APPDefaultsManager.setString(value: result.accessToken ?? "NA", key: "access_token")
+        UserDefaultsManager.setString(value: result.accessToken ?? "NA", key: "access_token")
         
         if let refreshToken = result.refreshToken {
-            APPDefaultsManager.setString(value: refreshToken, key: "refresh_token")
+            UserDefaultsManager.setString(value: refreshToken, key: "refresh_token")
         }
         
-        APPDefaultsManager.setDate(value: Date().addingTimeInterval(TimeInterval(result.expiresIn ?? 0)), key: "expiration_date")
+        UserDefaultsManager.setDate(value: Date().addingTimeInterval(TimeInterval(result.expiresIn ?? 0)), key: "expiration_date")
     }
     
     //MARK: To sign out
     public func signOut(completion: @escaping (Bool) -> Void) {
-        APPDefaultsManager.removeObject(key: "access_token")
-        APPDefaultsManager.removeObject(key: "refresh_token")
-        APPDefaultsManager.removeObject(key: "expiration_date")
+        UserDefaultsManager.removeObject(key: "access_token")
+        UserDefaultsManager.removeObject(key: "refresh_token")
+        UserDefaultsManager.removeObject(key: "expiration_date")
         completion(true)
     }
 }

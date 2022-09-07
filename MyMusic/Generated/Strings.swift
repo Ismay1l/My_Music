@@ -12,6 +12,8 @@ import Foundation
 internal enum L10n {
   /// Account
   internal static let accountLabel = L10n.tr("Localizable", "account_label", fallback: "Account")
+  /// Browse
+  internal static let browseTitle = L10n.tr("Localizable", "browse_title", fallback: "Browse")
   /// Cancel
   internal static let buttonCancel = L10n.tr("Localizable", "button_cancel", fallback: "Cancel")
   /// Sign out
@@ -22,6 +24,8 @@ internal enum L10n {
   internal static let countryLabel = L10n.tr("Localizable", "country_label", fallback: "Country")
   /// Are you sure to sign out?
   internal static let descriptionLabel = L10n.tr("Localizable", "description_label", fallback: "Are you sure to sign out?")
+  /// Featured-Playlists
+  internal static let featuredPlaylistsTitle = L10n.tr("Localizable", "featured_playlists_title", fallback: "Featured-Playlists")
   /// Followers
   internal static let followerCountLabel = L10n.tr("Localizable", "follower_count_label", fallback: "Followers")
   /// Name
@@ -30,6 +34,12 @@ internal enum L10n {
   internal static let productLabel = L10n.tr("Localizable", "product_label", fallback: "Product")
   /// Profile
   internal static let profileLabel = L10n.tr("Localizable", "profile_label", fallback: "Profile")
+  /// Recommended Tracks
+  internal static let recommendedTracksTitle = L10n.tr("Localizable", "recommended_tracks_title", fallback: "Recommended Tracks")
+  /// Share this album via:
+  internal static let shareAlbumButton = L10n.tr("Localizable", "share_album_button", fallback: "Share this album via:")
+  /// Share this playlist via:
+  internal static let sharePlaylistButton = L10n.tr("Localizable", "share_playlist_button", fallback: "Share this playlist via:")
   /// Sign out
   internal static let titleAccountLabel = L10n.tr("Localizable", "title_account_label", fallback: "Sign out")
   /// Sign in

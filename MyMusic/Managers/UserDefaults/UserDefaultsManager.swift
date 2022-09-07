@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APPDefaultsManager {
+class UserDefaultsManager {
     
     private static let defaults = UserDefaults.standard
     

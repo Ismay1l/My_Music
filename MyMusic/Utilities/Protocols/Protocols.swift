@@ -21,3 +21,7 @@ protocol APIManagerProtocol {
 protocol PlaylistHeaderCollectionViewDelegate: AnyObject {
     func didTapPlayButton(_ header: PlaylistHeaderCollectionView)
 }
+
+protocol BrowseAlbumsHeaderViewDelegate: AnyObject {
+    func didTapPlayButton(_ header: BrowseAlbumsHeaderView)
+}

@@ -30,8 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.makeKeyAndVisible()
-        print("AccessToken: \(APPDefaultsManager.getString(key: "access_token") ?? "NA")")
-        print("RefreshToken: \(APPDefaultsManager.getString(key: "refresh_token") ?? "NA")")
+        print("AccessToken: \(UserDefaultsManager.getString(key: "access_token") ?? "NA")")
+        print("RefreshToken: \(UserDefaultsManager.getString(key: "refresh_token") ?? "NA")")
         return true
     }
 }
