@@ -133,7 +133,7 @@ extension AlbumVC: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(BrowseAlbumsHeaderView.self)", for: indexPath) as! BrowseAlbumsHeaderView
-            let item = album[indexPath.row]
+            header.configureHeader(item: album)
             return header
         }
         return UICollectionReusableView()

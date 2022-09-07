@@ -23,6 +23,7 @@ class BrowseAlbumsHeaderView: UICollectionReusableView {
     
     private lazy var playlistNameLabel = createLabel(textColor: .white, fontSize: 24, fontWeight: .bold)
     private lazy var releaseDateLabel = createLabel(textColor: .darkGray, fontSize: 14, fontWeight: .semibold)
+    private lazy var trackCountLabel = createLabel(textColor: .darkGray, fontSize: 14, fontWeight: .semibold)
     
     private lazy var playButton: UIButton = {
         let button = UIButton()
@@ -52,6 +53,7 @@ class BrowseAlbumsHeaderView: UICollectionReusableView {
         addSubview(playlistNameLabel)
         addSubview(releaseDateLabel)
         addSubview(playButton)
+        addSubview(trackCountLabel)
         
         playlistImage.snp.makeConstraints { make in
             make.width.equalTo(200)
@@ -77,13 +79,19 @@ class BrowseAlbumsHeaderView: UICollectionReusableView {
             make.right.equalToSuperview().offset(-5)
             make.top.equalTo(playlistNameLabel.snp.bottom).offset(10)
         }
+        
+        trackCountLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(5)
+            make.top.equalTo(releaseDateLabel.snp.bottom).offset(10)
+        }
     }
     
     func configureHeader(item: Album) {
         guard let url = item.images?.first?.url else { return }
         playlistImage.sd_setImage(with: URL(string: url), completed: nil)
         playlistNameLabel.text = item.name
-        releaseDateLabel.text = item.release_date
+        releaseDateLabel.text = "Release date: \(item.release_date ?? "NA")"
+        trackCountLabel.text = "Total tracks: \(item.total_tracks ?? 0)"
     }
     
     @objc

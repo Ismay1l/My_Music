@@ -31,13 +31,13 @@ class BrowseAlbumsCollectionViewCell: UICollectionViewCell {
         
         artistNameLabel.textAlignment = .center
         artistNameLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(5)
+            make.left.equalToSuperview().offset(8)
             make.top.equalToSuperview().offset(3)
         }
         
         albumNameLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().offset(-3)
+            make.left.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
     
