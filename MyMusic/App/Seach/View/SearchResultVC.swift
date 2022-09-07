@@ -11,6 +11,6 @@ class SearchResultVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = .darkGray
     }
 }

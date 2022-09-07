@@ -101,7 +101,7 @@ class AlbumVC: UIViewController {
     @objc
     private func didTapShare() {
         guard let url = URL(string: album.external_urls?["spotify"] ?? "NA") else { return }
-        let vc = UIActivityViewController(activityItems: ["\(L10n.shareAlbumButton)", url],
+        let vc = UIActivityViewController(activityItems: [url],
                                           applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
@@ -110,8 +110,9 @@ class AlbumVC: UIViewController {
 
 //MARK: - Extension AlbumVC
 extension AlbumVC: UICollectionViewDelegate,
-                      UICollectionViewDataSource,
-                      UICollectionViewDelegateFlowLayout {
+                   UICollectionViewDataSource,
+                   UICollectionViewDelegateFlowLayout,
+                   BrowseAlbumsHeaderViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return albumResponse.count
@@ -134,6 +135,7 @@ extension AlbumVC: UICollectionViewDelegate,
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(BrowseAlbumsHeaderView.self)", for: indexPath) as! BrowseAlbumsHeaderView
             header.configureHeader(item: album)
+            header.delegate = self
             return header
         }
         return UICollectionReusableView()
@@ -143,7 +145,7 @@ extension AlbumVC: UICollectionViewDelegate,
         CGSize(width: mainCollectionView.frame.size.width, height: 380)
     }
     
-    func didTapPlayButton(_ header: PlaylistHeaderCollectionView) {
+    func didTapPlayButton(_ header: BrowseAlbumsHeaderView) {
         print("Play Music Now")
     }
 }
