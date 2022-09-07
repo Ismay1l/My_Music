@@ -84,7 +84,7 @@ class APIManager: APIManagerProtocol {
     
     //MARK: Fetch Featured-Playlist
     func fetchFeaturedPlaylist() -> Promise<FeaturedPlaylistResponse> {
-        let url = APIConstants.baseURL + "/browse/featured-playlists?limit=5"
+        let url = APIConstants.baseURL + "/browse/featured-playlists"
         let promise = Promise<FeaturedPlaylistResponse> { fulfill, reject in
             AF.request(url, method: .get, headers: self.header)
                 .validate()

@@ -32,6 +32,7 @@ class HomeVC: UIViewController {
         view.register(NewReleaseCollectionViewCell.self, forCellWithReuseIdentifier: "\(NewReleaseCollectionViewCell.self)")
         view.register(FeaturedPlaylistCollectionViewCell.self, forCellWithReuseIdentifier: "\(FeaturedPlaylistCollectionViewCell.self)")
         view.register(RecommendedTrackCollectionViewCell.self, forCellWithReuseIdentifier: "\(RecommendedTrackCollectionViewCell.self)")
+        view.register(MainCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(MainCollectionHeaderView.self)")
         
         view.dataSource = self
         view.delegate = self
@@ -80,6 +81,14 @@ class HomeVC: UIViewController {
     }
     
     private static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {
+        let supplementaryViews = [
+            NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .absolute(50)),
+                elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+            
+        ]
         switch section {
         case 0:
             //Item
@@ -111,6 +120,7 @@ class HomeVC: UIViewController {
             //Section
             let section = NSCollectionLayoutSection(group: horizontalGroup)
             section.orthogonalScrollingBehavior = .groupPagingCentered
+            section.boundarySupplementaryItems = supplementaryViews
             return section
         case 1:
             //Item
@@ -133,6 +143,7 @@ class HomeVC: UIViewController {
             //Section
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
+            section.boundarySupplementaryItems = supplementaryViews
             return section
         case 2:
             //Item
@@ -155,6 +166,7 @@ class HomeVC: UIViewController {
             
             //Section
             let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = supplementaryViews
             return section
         default:
             //Item
@@ -177,6 +189,7 @@ class HomeVC: UIViewController {
             
             //Section
             let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = supplementaryViews
             return section
         }
     }
@@ -305,5 +318,20 @@ extension HomeVC: UICollectionViewDataSource,
         else {
             
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(MainCollectionHeaderView.self)", for: indexPath) as! MainCollectionHeaderView
+            if indexPath.section == 0 {
+                header.configureHeader(_with: "Browse")
+            } else if indexPath.section == 1 {
+                header.configureHeader(_with: "Featured-Playlist")
+            } else {
+                header.configureHeader(_with: "Recommended tracks")
+            }
+            return header
+        }
+        return UICollectionReusableView()
     }
 }
