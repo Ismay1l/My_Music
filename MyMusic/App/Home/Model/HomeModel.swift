@@ -153,10 +153,3 @@ struct Track: Codable {
     let preview_url: String?
 }
 
-//MARK: - Browse Album Header Model
-struct BrowseAlbumHeader {
-    let image: [APIImage]?
-    let release_date: String?
-    let title: String?
-}
-

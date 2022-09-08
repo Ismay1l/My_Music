@@ -93,6 +93,7 @@ class PlaylistVC: UIViewController {
     
     private func setupBarButton() {
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
+        shareButton.tintColor = hexStringToUIColor(hex: "f8f9fa")
         navigationItem.rightBarButtonItem = shareButton
     }
     

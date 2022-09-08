@@ -53,6 +53,10 @@ class HomeVC: UIViewController {
         
         configureConstraints()
         observeData()
+        
+        let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        item.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        self.navigationItem.backBarButtonItem = item
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -306,6 +310,9 @@ extension HomeVC: UICollectionViewDataSource,
             let albumVC = AlbumVC(album: album)
             albumVC.title = album.name
             albumVC.navigationItem.largeTitleDisplayMode = .never
+            let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+            item.tintColor = hexStringToUIColor(hex: "#231F20")
+            albumVC.navigationItem.backBarButtonItem = item
             navigationController?.pushViewController(albumVC, animated: true)
         }
         else if indexPath.section == 1 {
