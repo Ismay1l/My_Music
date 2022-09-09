@@ -22,3 +22,26 @@ struct CategoryItems: Codable {
     let id: String?
     let name: String?
 }
+
+//MARK: - Category's Playlist
+struct CategoriesPlaylistResponse: Codable {
+    let playlists: CategoryPlaylist?
+}
+
+struct CategoryPlaylist: Codable {
+    let items: [CategoriesPlaylistItem]?
+}
+
+struct CategoriesPlaylistItem: Codable {
+    let description: String?
+    let external_urls: [String: String]?
+    let id: String?
+    let images: [APIImage]?
+    let name: String?
+    let owner: Owner?
+    let tracks: CategoriesPlaylistTracks?
+}
+
+struct CategoriesPlaylistTracks: Codable {
+    let total: Int?
+}

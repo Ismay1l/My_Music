@@ -27,6 +27,7 @@ class PlaylistVC: UIViewController {
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.showsVerticalScrollIndicator = false
         
         view.dataSource = self
         view.delegate = self

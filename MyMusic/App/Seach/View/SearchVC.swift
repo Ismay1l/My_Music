@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import CHTCollectionViewWaterfallLayout
 
 class SearchVC: UIViewController {
     
@@ -27,16 +28,12 @@ class SearchVC: UIViewController {
     }()
     
     private lazy var mainCollectionView: UICollectionView = {
-        let layout = UICollectionViewCompositionalLayout { _, _ in
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 4, bottom: 3, trailing: 4)
-            
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(120)), subitem: item, count: 2)
-            group.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
-            return NSCollectionLayoutSection(group: group)
-        }
+        let layout = CHTCollectionViewWaterfallLayout()
+        layout.itemRenderDirection = .leftToRight
+        layout.columnCount = 2
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.showsVerticalScrollIndicator = false
         
         view.register(SearchGenreCollectionViewCell.self, forCellWithReuseIdentifier: "\(SearchGenreCollectionViewCell.self)")
         
@@ -93,7 +90,11 @@ class SearchVC: UIViewController {
                     }
                 }
             }
-        let _ = compositeBag.insert(categoriesSubscription)
+        addToDisposeBag(subscription: categoriesSubscription)
+    }
+    
+    private func addToDisposeBag(subscription: Disposable) {
+        let _ = compositeBag.insert(subscription)
     }
 }
 
@@ -101,8 +102,13 @@ class SearchVC: UIViewController {
 extension SearchVC: UISearchResultsUpdating,
                     UICollectionViewDelegate,
                     UICollectionViewDataSource,
-                    UICollectionViewDelegateFlowLayout {
+                    CHTCollectionViewDelegateWaterfallLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: view.frame.size.width / 2,
+               height: CGFloat.random(in: 150...350))
+    }
+
     func updateSearchResults(for searchController: UISearchController) {
         guard let resultController = searchController.searchResultsController as? SearchResultVC,
               let query = searchController.searchBar.text,
@@ -118,7 +124,7 @@ extension SearchVC: UISearchResultsUpdating,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(SearchGenreCollectionViewCell.self)", for: indexPath) as! SearchGenreCollectionViewCell
-        cell.layer.cornerRadius = 10
+        cell.layer.cornerRadius = 16
         cell.layer.masksToBounds = true
         let item = categories[indexPath.row]
         cell.configureCell(with: item)
@@ -127,5 +133,13 @@ extension SearchVC: UISearchResultsUpdating,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let categoryVC = CategoryVC(category: categories[indexPath.row])
+        categoryVC.title = categories.first?.name
+        categoryVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(categoryVC, animated: true)
     }
 }

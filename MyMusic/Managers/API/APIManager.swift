@@ -245,9 +245,36 @@ class APIManager: APIManagerProtocol {
                     
                     do {
                         print("Data of Categories: \(data)")
-//                        let result = try JSONSerialization.jsonObject(with: data)
                         let result = try self.jsonDecoder.decode(CategoriesResponse.self, from: data)
-                        print("Result of Categories: \(result)")
+                        fulfill(result)
+                    } catch {
+                        reject(error)
+                    }
+                }
+        }
+        return promise
+    }
+    
+    //MARK: - Fetch Category's Playlist for SearchVC
+    func fetchCategoriesPlaylist(item: CategoryItems) -> Promise<CategoriesPlaylistResponse> {
+        let promise = Promise<CategoriesPlaylistResponse> { fulfill, reject in
+            guard let id = item.id else { return }
+            let url = APIConstants.baseURL + "/browse/categories/\(id)/playlists"
+            AF.request(url, method: .get, headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                    }
+                    
+                    do {
+                        print("Data of category's playlist: \(data)")
+                        let result = try self.jsonDecoder.decode(CategoriesPlaylistResponse.self, from: data)
                         fulfill(result)
                     } catch {
                         reject(error)

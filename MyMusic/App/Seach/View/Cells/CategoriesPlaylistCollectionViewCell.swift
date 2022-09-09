@@ -1,14 +1,15 @@
 //
-//  FeaturedPlaylistCollectionViewCell.swift
+//  CategoriesPlaylistCollectionViewCell.swift
 //  MyMusic
 //
-//  Created by Ismayil Ismayilov on 02.09.22.
+//  Created by USER11 on 9/9/22.
 //
 
 import UIKit
 
-class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
+class CategoriesPlaylistCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - UI Elements
     //MARK: UI Elements
     private lazy var albumCoverImage: UIImageView = {
         let image = UIImageView()
@@ -17,6 +18,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var nameLabel = createLabel(textColor: .black, fontSize: 14, fontWeight: .semibold)
+    
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -30,6 +32,8 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     
     //MARK: Functions
     private func setupUI() {
+        contentView.backgroundColor = hexStringToUIColor(hex: "d3d3d3")
+        
         contentView.backgroundColor = hexStringToUIColor(hex: "d3d3d3")
         contentView.addSubview(albumCoverImage)
         contentView.addSubview(nameLabel)
@@ -48,9 +52,9 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(item: FeaturedPlaylistItem) {
-        guard let url = item.images?.first?.url else { return }
-        albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
+    func configureCell(with item: CategoriesPlaylistItem) {
+        guard let urlStr = item.images?.first?.url else { return }
+        albumCoverImage.sd_setImage(with: URL(string: urlStr), completed: nil)
         nameLabel.text = item.owner?.display_name
     }
 }

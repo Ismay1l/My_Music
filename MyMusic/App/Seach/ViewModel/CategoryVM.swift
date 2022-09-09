@@ -1,15 +1,15 @@
 //
-//  SearchVM.swift
+//  CategoryVM.swift
 //  MyMusic
 //
 //  Created by USER11 on 9/9/22.
 //
 
 import Foundation
-import RxRelay
 import RxSwift
+import RxRelay
 
-class SearchVM {
+class CategoryVM {
     
     private let apiManager: APIManagerProtocol
     
@@ -18,16 +18,15 @@ class SearchVM {
     }
     
     //MARK: - Variables
-    private let categoriesRelay = BehaviorRelay<CategoriesState?>.init(value: nil)
     private let categoriesPlaylistRelay = BehaviorRelay<CategoriesPlaylistState?>.init(value: nil)
     
-    //MARK: - Fetch Categories
-    func fetchCategories() -> Observable<CategoriesState> {
-        apiManager.fetchCategories()
+    //MARK: - Fetch Category's Playlist
+    func fetchCategoriesPlaylist(item: CategoryItems) -> Observable<CategoriesPlaylistState> {
+        apiManager.fetchCategoriesPlaylist(item: item)
             .then { result in
-                self.categoriesRelay.accept(.showCategories(model: result))
+                self.categoriesPlaylistRelay.accept(.showCategoriesPlaylist(model: result))
             }
-        return categoriesRelay
+        return categoriesPlaylistRelay
             .filter { state in
                 state != nil
             }

@@ -30,13 +30,13 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Elements
     private lazy var iconImage: UIImageView = {
-        let icon = UIImageView(image: UIImage(systemName: "", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular)))
-        icon.contentMode = .scaleToFill
+        let icon = UIImageView()
+        icon.contentMode = .scaleAspectFill
         icon.tintColor = .white
         return icon
     }()
     
-    private lazy var titleLabel = createLabel(textColor: .white, fontSize: 22, fontWeight: .semibold)
+    private lazy var titleLabel = createLabel(textColor: .white, fontSize: 18, fontWeight: .semibold)
     
     //MARK: - Parent Delegate
     required init?(coder: NSCoder) {
@@ -60,9 +60,10 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         iconImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(4)
-            make.right.equalToSuperview().offset(-4)
-            make.width.height.equalTo(60)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -75,6 +76,7 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
         titleLabel.text = item.name
         guard let urlStr = item.icons?.first?.url else { return }
         iconImage.sd_setImage(with: URL(string: urlStr), completed: nil)
+        iconImage.tintColor = colors.randomElement()
         contentView.backgroundColor = colors.randomElement()
     }
 }

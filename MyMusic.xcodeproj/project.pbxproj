@@ -16,6 +16,10 @@
 		498A674728C78703000B18DD /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 498A674628C78703000B18DD /* SwiftEntryKit */; };
 		49F0DD2A28CB0EDC00EB470B /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD2928CB0EDC00EB470B /* SearchVM.swift */; };
 		49F0DD2D28CB131C00EB470B /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD2C28CB131C00EB470B /* SearchModel.swift */; };
+		49F0DD3528CB1E0A00EB470B /* CHTCollectionViewWaterfallLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 49F0DD3428CB1E0A00EB470B /* CHTCollectionViewWaterfallLayout */; };
+		49F0DD3728CB30C200EB470B /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD3628CB30C200EB470B /* CategoryVC.swift */; };
+		49F0DD3928CB31A200EB470B /* CategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD3828CB31A200EB470B /* CategoryVM.swift */; };
+		49F0DD3B28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD3A28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift */; };
 		4B1F866528C6002F00F2FC49 /* PlaylistVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */; };
 		4B1F866828C60FC400F2FC49 /* RAMAnimatedTabBarController in Frameworks */ = {isa = PBXBuildFile; productRef = 4B1F866728C60FC400F2FC49 /* RAMAnimatedTabBarController */; };
 		4B3B754D28BFC44800033B61 /* Shift in Frameworks */ = {isa = PBXBuildFile; productRef = 4B3B754C28BFC44800033B61 /* Shift */; };
@@ -96,6 +100,9 @@
 		49795E9D28C8C8BA00EFF96A /* SearchGenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGenreCollectionViewCell.swift; sourceTree = "<group>"; };
 		49F0DD2928CB0EDC00EB470B /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
 		49F0DD2C28CB131C00EB470B /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		49F0DD3628CB30C200EB470B /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
+		49F0DD3828CB31A200EB470B /* CategoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVM.swift; sourceTree = "<group>"; };
+		49F0DD3A28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesPlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVM.swift; sourceTree = "<group>"; };
 		4B4AA73F28C7AAF600465590 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		4B64CEC528C4C6A500BE1935 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -164,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F0DD3528CB1E0A00EB470B /* CHTCollectionViewWaterfallLayout in Frameworks */,
 				4B1F866828C60FC400F2FC49 /* RAMAnimatedTabBarController in Frameworks */,
 				4B80E7BB28C3485500CD4151 /* RxRelay in Frameworks */,
 				4B64CEC028C4BE4400BE1935 /* BLTNBoard in Frameworks */,
@@ -211,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				49795E9D28C8C8BA00EFF96A /* SearchGenreCollectionViewCell.swift */,
+				49F0DD3A28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -219,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				49F0DD2928CB0EDC00EB470B /* SearchVM.swift */,
+				49F0DD3828CB31A200EB470B /* CategoryVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -273,12 +283,12 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
-		4B80E7A828C2751900CD4151 /* General Fuctions */ = {
+		4B80E7A828C2751900CD4151 /* Generals */ = {
 			isa = PBXGroup;
 			children = (
 				4BE4FFFB28BBE50E009CEDB4 /* General Functions.swift */,
 			);
-			path = "General Fuctions";
+			path = Generals;
 			sourceTree = "<group>";
 		};
 		4B80E7A928C2752B00CD4151 /* Enums */ = {
@@ -362,6 +372,7 @@
 			children = (
 				49795E9C28C8C7EB00EFF96A /* Cells */,
 				4BD33C1B28B7EFC900BE1353 /* SearchVC.swift */,
+				49F0DD3628CB30C200EB470B /* CategoryVC.swift */,
 				4BD33C3228B7F12000BE1353 /* SearchResultVC.swift */,
 			);
 			path = View;
@@ -563,7 +574,7 @@
 			children = (
 				4B64CEC428C4C68D00BE1935 /* Protocols */,
 				4B80E7A928C2752B00CD4151 /* Enums */,
-				4B80E7A828C2751900CD4151 /* General Fuctions */,
+				4B80E7A828C2751900CD4151 /* Generals */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -633,6 +644,7 @@
 				4B1F866728C60FC400F2FC49 /* RAMAnimatedTabBarController */,
 				4BBFE2B428C67F0400508C7E /* SPStorkController */,
 				498A674628C78703000B18DD /* SwiftEntryKit */,
+				49F0DD3428CB1E0A00EB470B /* CHTCollectionViewWaterfallLayout */,
 			);
 			productName = MyMusic;
 			productReference = 4BD4EAA228B6AFAF00CA24D8 /* MyMusic.app */;
@@ -684,6 +696,7 @@
 				4B1F866628C60FC400F2FC49 /* XCRemoteSwiftPackageReference "animated-tab-bar" */,
 				4BBFE2B328C67F0400508C7E /* XCRemoteSwiftPackageReference "SPStorkController" */,
 				498A674528C78703000B18DD /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
+				49F0DD3328CB1E0A00EB470B /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */,
 			);
 			productRefGroup = 4BD4EAA328B6AFAF00CA24D8 /* Products */;
 			projectDirPath = "";
@@ -747,6 +760,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F0DD3728CB30C200EB470B /* CategoryVC.swift in Sources */,
 				4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */,
 				4BD33C3728B7F16900BE1353 /* APIManager.swift in Sources */,
 				4949433428C09A4B00E82DBF /* HomeModel.swift in Sources */,
@@ -766,6 +780,8 @@
 				4BD4EAC728B6B1CF00CA24D8 /* HomeVC.swift in Sources */,
 				4B910ECB28BA837E00E19863 /* UserDefaultsManager.swift in Sources */,
 				4BD33C1F28B7EFDD00BE1353 /* LibraryVC.swift in Sources */,
+				49F0DD3B28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift in Sources */,
+				49F0DD3928CB31A200EB470B /* CategoryVM.swift in Sources */,
 				4B80E7AE28C27B3F00CD4151 /* NewReleaseCollectionViewCell.swift in Sources */,
 				4B64CEC628C4C6A500BE1935 /* Protocols.swift in Sources */,
 				4B80E7B228C27B6300CD4151 /* RecommendedTrackCollectionViewCell.swift in Sources */,
@@ -1119,6 +1135,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		49F0DD3328CB1E0A00EB470B /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chiahsien/CHTCollectionViewWaterfallLayout.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
 		4B1F866628C60FC400F2FC49 /* XCRemoteSwiftPackageReference "animated-tab-bar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Ramotion/animated-tab-bar.git";
@@ -1198,6 +1222,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 498A674528C78703000B18DD /* XCRemoteSwiftPackageReference "SwiftEntryKit" */;
 			productName = SwiftEntryKit;
+		};
+		49F0DD3428CB1E0A00EB470B /* CHTCollectionViewWaterfallLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49F0DD3328CB1E0A00EB470B /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */;
+			productName = CHTCollectionViewWaterfallLayout;
 		};
 		4B1F866728C60FC400F2FC49 /* RAMAnimatedTabBarController */ = {
 			isa = XCSwiftPackageProductDependency;

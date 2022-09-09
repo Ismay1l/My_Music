@@ -28,6 +28,7 @@ class HomeVC: UIViewController {
         }
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.showsVerticalScrollIndicator = false
         
         view.register(NewReleaseCollectionViewCell.self, forCellWithReuseIdentifier: "\(NewReleaseCollectionViewCell.self)")
         view.register(FeaturedPlaylistCollectionViewCell.self, forCellWithReuseIdentifier: "\(FeaturedPlaylistCollectionViewCell.self)")
@@ -275,7 +276,7 @@ extension HomeVC: UICollectionViewDataSource,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(NewReleaseCollectionViewCell.self)", for: indexPath) as! NewReleaseCollectionViewCell
             let item = newReleases[indexPath.row]
             cell.configureCell(item: item)
-            cell.layer.cornerRadius = 5
+            cell.layer.cornerRadius = 12
             cell.clipsToBounds = true
             return cell
         }
@@ -283,7 +284,7 @@ extension HomeVC: UICollectionViewDataSource,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(FeaturedPlaylistCollectionViewCell.self)", for: indexPath) as! FeaturedPlaylistCollectionViewCell
             let item = featuredPlaylists[indexPath.row]
             cell.configureCell(item: item)
-            cell.layer.cornerRadius = 5
+            cell.layer.cornerRadius = 12
             cell.clipsToBounds = true
             return cell
         }
@@ -292,7 +293,7 @@ extension HomeVC: UICollectionViewDataSource,
             cell.backgroundColor = hexStringToUIColor(hex: "370617")
             let item = recommendations[indexPath.row]
             cell.configureCell(item: item)
-            cell.layer.cornerRadius = 5
+            cell.layer.cornerRadius = 12
             cell.clipsToBounds = true
             return cell
         }
@@ -304,6 +305,7 @@ extension HomeVC: UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
         if indexPath.section == 0 {
             let album = newReleases[indexPath.row]
