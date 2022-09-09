@@ -106,7 +106,7 @@ extension SearchVC: UISearchResultsUpdating,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.size.width / 2,
-               height: CGFloat.random(in: 150...350))
+               height: CGFloat.random(in: 100...200))
     }
 
     func updateSearchResults(for searchController: UISearchController) {
