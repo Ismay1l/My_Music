@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import RxSwift
 
 class SearchVC: UIViewController {
     
     //MARK: - Variables
+    private let searchVM = SearchVM()
+    private var compositeBag = CompositeDisposable()
+    private var disposeBag = DisposeBag()
+    private var categories = [CategoryItems]()
     
     //MARK: - UI Elements
     private var searchController: UISearchController = {
@@ -33,7 +38,7 @@ class SearchVC: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = hexStringToUIColor(hex: "370617")
         
-        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "\(UICollectionViewCell.self)")
+        view.register(SearchGenreCollectionViewCell.self, forCellWithReuseIdentifier: "\(SearchGenreCollectionViewCell.self)")
         
         view.delegate = self
         view.dataSource = self
@@ -47,6 +52,14 @@ class SearchVC: UIViewController {
         
         setUpSearchView()
         configureConstraints()
+        observeData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        compositeBag = CompositeDisposable()
+        compositeBag.disposed(by: disposeBag)
     }
     
     //MARK: - Functions
@@ -64,6 +77,23 @@ class SearchVC: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
         }
+    }
+    
+    private func observeData() {
+        let categoriesSubscription = searchVM.fetchCategories()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] received in
+                guard let data = received.element else { return }
+                switch data {
+                case .showCategories(let model):
+                    DispatchQueue.main.async {
+                        guard let items = model.categories?.items else { return }
+                        self?.categories = items
+                        self?.mainCollectionView.reloadData()
+                    }
+                }
+            }
+        let _ = compositeBag.insert(categoriesSubscription)
     }
 }
 
@@ -83,13 +113,15 @@ extension SearchVC: UISearchResultsUpdating,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(UICollectionViewCell.self)", for: indexPath)
-        cell.backgroundColor = .yellow
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(SearchGenreCollectionViewCell.self)", for: indexPath) as! SearchGenreCollectionViewCell
         cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
+        let item = categories[indexPath.row]
+        cell.configureCell(with: item)
         return cell
     }
     

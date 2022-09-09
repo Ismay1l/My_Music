@@ -31,6 +31,10 @@ enum PlaylistState {
     case showPlaylist(model: PlaylistResponse)
 }
 
+enum CategoriesState {
+    case showCategories(model: CategoriesResponse)
+}
+
 enum MainCollectionViewHeaderType {
     case browse
     case featuredPlaylists

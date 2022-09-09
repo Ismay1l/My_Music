@@ -9,8 +9,9 @@ import UIKit
 
 class SearchResultVC: UIViewController {
 
+    //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = hexStringToUIColor(hex: "370617")
     }
 }

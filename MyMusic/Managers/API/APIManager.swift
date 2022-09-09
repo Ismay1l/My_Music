@@ -225,4 +225,35 @@ class APIManager: APIManagerProtocol {
         }
         return promise
     }
+    
+    //MARK: - Fetch Categories for SearchVC
+    func fetchCategories() -> Promise<CategoriesResponse> {
+        let promise = Promise<CategoriesResponse> { fulfill, reject in
+            let url = APIConstants.baseURL + "/browse/categories"
+            AF.request(url, method: .get, headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    do {
+                        print("Data of Categories: \(data)")
+//                        let result = try JSONSerialization.jsonObject(with: data)
+                        let result = try self.jsonDecoder.decode(CategoriesResponse.self, from: data)
+                        print("Result of Categories: \(result)")
+                        fulfill(result)
+                    } catch {
+                        reject(error)
+                    }
+                }
+        }
+        return promise
+    }
 }
