@@ -47,6 +47,7 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = hexStringToUIColor(hex: "370617")
         
+        setUpBackBarButton()
         setUpSearchView()
         configureConstraints()
         observeData()
@@ -63,6 +64,12 @@ class SearchVC: UIViewController {
     private func setUpSearchView() {
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+    }
+    
+    private func setUpBackBarButton() {
+        let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        item.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        self.navigationItem.backBarButtonItem = item
     }
     
     private func configureConstraints() {
@@ -106,7 +113,7 @@ extension SearchVC: UISearchResultsUpdating,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.size.width / 2,
-               height: CGFloat.random(in: 100...200))
+               height: CGFloat.random(in: 150...250))
     }
 
     func updateSearchResults(for searchController: UISearchController) {

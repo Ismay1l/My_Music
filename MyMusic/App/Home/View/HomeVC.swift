@@ -52,12 +52,9 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = hexStringToUIColor(hex: "370617")
         
+        setUpBackBarButton()
         configureConstraints()
         observeData()
-        
-        let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        item.tintColor = hexStringToUIColor(hex: "f8f9fa")
-        self.navigationItem.backBarButtonItem = item
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +80,12 @@ class HomeVC: UIViewController {
             make.right.equalTo(right)
             make.bottom.equalTo(bottom).offset(-10)
         }
+    }
+    
+    private func setUpBackBarButton() {
+        let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        item.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        self.navigationItem.backBarButtonItem = item
     }
     
     private static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {

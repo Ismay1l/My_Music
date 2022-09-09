@@ -32,7 +32,7 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
     private lazy var iconImage: UIImageView = {
         let icon = UIImageView()
         icon.contentMode = .scaleAspectFill
-        icon.tintColor = .white
+        icon.tintColor = colors.randomElement()
         return icon
     }()
     
@@ -60,10 +60,10 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         iconImage.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(2)
+            make.left.equalToSuperview().offset(2)
+            make.right.equalToSuperview().offset(-2)
+            make.bottom.equalToSuperview().offset(-2)
         }
         
         titleLabel.snp.makeConstraints { make in

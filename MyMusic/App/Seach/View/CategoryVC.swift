@@ -62,6 +62,10 @@ class CategoryVC: UIViewController {
         
         configureConstraints()
         observeData()
+        
+        let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        item.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        self.navigationItem.backBarButtonItem = item
     }
     
     override func viewWillAppear(_ animated: Bool) {
