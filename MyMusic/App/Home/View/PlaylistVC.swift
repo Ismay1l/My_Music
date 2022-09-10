@@ -11,11 +11,11 @@ import RxSwift
 class PlaylistVC: UIViewController {
 
     //MARK: - Variables
-    private let playlist: FeaturedPlaylistItem
+    private let playlist: Item
     private let playlistVM = PlaylistVM()
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
-    private var playlistResponse = [PlaylistTrackItem]()
+    private var playlistResponse = [PlaylistItem]()
     
     //MARK: - UI Elements
     private lazy var mainCollectionView: UICollectionView = {
@@ -37,7 +37,7 @@ class PlaylistVC: UIViewController {
         return view
     }()
     
-    init(playlist: FeaturedPlaylistItem) {
+    init(playlist: Item) {
         self.playlist = playlist
         super.init(nibName: nil, bundle: nil)
     }
@@ -100,7 +100,7 @@ class PlaylistVC: UIViewController {
     
     @objc
     private func didTapShare() {
-        guard let url = URL(string: playlist.external_urls?["spotify"] ?? "NA") else { return }
+        guard let url = URL(string: playlist.external_urls?.spotify ?? "NA") else { return }
         let vc = UIActivityViewController(activityItems: [url],
                                           applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
@@ -147,9 +147,7 @@ extension PlaylistVC: UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let trackResponse = playlistResponse[indexPath.row].track.map { track in
-            AudioTrack(album: track.album, artists: track.artists, available_markets: track.available_markets, disc_number: nil, duration_ms: nil, explicit: nil, external_urls: track.external_urls, id: track.id, name: track.name, popularity: nil)
-        }
+        let trackResponse = playlistResponse[indexPath.row].track
         guard let track = trackResponse else { return }
         PlaybackPresenter.shared.startPlaybackSong(from: self, song: track)
     }

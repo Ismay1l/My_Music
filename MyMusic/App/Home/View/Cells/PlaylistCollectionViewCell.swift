@@ -58,7 +58,7 @@ class PlaylistCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(item: PlaylistTrackItem) {
+    func configureCell(item: PlaylistItem) {
         guard let url = item.track?.album?.images?.first?.url else { return }
         albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
         trackNameLabel.text = item.track?.name

@@ -8,6 +8,23 @@
 import Foundation
 import UIKit
 
+let randomColors: [UIColor] = [
+    .systemPurple,
+    .systemRed,
+    .systemBlue,
+    .systemCyan,
+    .systemFill,
+    .systemGray,
+    .systemMint,
+    .systemPink,
+    .systemTeal,
+    .systemBrown,
+    .systemGreen,
+    .systemIndigo,
+    .systemOrange,
+    .systemYellow
+]
+
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
     

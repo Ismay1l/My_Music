@@ -101,7 +101,6 @@ class APIManager: APIManagerProtocol {
                     do {
                         print("Data of Featured Playlist: \(data)")
                         let result = try self.jsonDecoder.decode(FeaturedPlaylistResponse.self, from: data)
-                        print("Count: \(result.playlists?.items?.count ?? 0)")
                         fulfill(result)
                     } catch {
                         reject(error)
@@ -168,7 +167,7 @@ class APIManager: APIManagerProtocol {
         return promise
     }
     
-    //MARK: - Fetch Album Details
+//    MARK: - Fetch Album Details
     func fetchAlbumDetails(album: Album) -> Promise<AlbumDetailResponse> {
         let promise = Promise<AlbumDetailResponse> { fulfill, reject in
             guard let id = album.id else { return }
@@ -197,8 +196,8 @@ class APIManager: APIManagerProtocol {
         return promise
     }
     
-    //MARK: - Fetch Playlists
-    func fetchPlaylists(playlist: FeaturedPlaylistItem) -> Promise<PlaylistResponse> {
+//    MARK: - Fetch Playlists
+    func fetchPlaylists(playlist: Item) -> Promise<PlaylistResponse> {
         let promise = Promise<PlaylistResponse> { fulfill, reject in
             guard let id = playlist.id else { return }
             let url = APIConstants.baseURL + "/playlists/\(id)"
@@ -209,11 +208,11 @@ class APIManager: APIManagerProtocol {
                         reject(APIError.failedToGetData)
                         return
                     }
-                    
+
                     if response.error != nil {
                         reject(APIError.failedToGetData)
                     }
-                    
+
                     do {
                         print("Data of Playlists: \(data)")
                         let result = try self.jsonDecoder.decode(PlaylistResponse.self, from: data)
@@ -256,7 +255,7 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Fetch Category's Playlist for SearchVC
-    func fetchCategoriesPlaylist(item: CategoryItems) -> Promise<CategoriesPlaylistResponse> {
+    func fetchCategoriesPlaylist(item: CategoryItem) -> Promise<CategoriesPlaylistResponse> {
         let promise = Promise<CategoriesPlaylistResponse> { fulfill, reject in
             guard let id = item.id else { return }
             let url = APIConstants.baseURL + "/browse/categories/\(id)/playlists"

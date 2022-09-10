@@ -48,7 +48,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(item: FeaturedPlaylistItem) {
+    func configureCell(item: Item) {
         guard let url = item.images?.first?.url else { return }
         albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
         nameLabel.text = item.owner?.display_name

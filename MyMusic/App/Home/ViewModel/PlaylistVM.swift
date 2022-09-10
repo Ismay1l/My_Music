@@ -21,7 +21,7 @@ class PlaylistVM {
     private let playlistRelay = BehaviorRelay<PlaylistState?>.init(value: nil)
     
     //MARK: - Fetch Playlists
-    func fetchPlaylists(playlist: FeaturedPlaylistItem) -> Observable<PlaylistState> {
+    func fetchPlaylists(playlist: Item) -> Observable<PlaylistState> {
         apiManager.fetchPlaylists(playlist: playlist)
             .then { response in
                 self.playlistRelay.accept(.showPlaylist(model: response))

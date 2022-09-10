@@ -11,11 +11,11 @@ import RxSwift
 class CategoryVC: UIViewController {
     
     //MARK: - Variables
-    var category: CategoryItems
+    var category: CategoryItem
     private let categoryVM = CategoryVM()
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
-    private var playlist = [CategoriesPlaylistItem]()
+    private var playlist = [Item]()
     
     //MARK: - UI Elements
     private lazy var playlistCollectionView: UICollectionView = {
@@ -45,7 +45,7 @@ class CategoryVC: UIViewController {
         return view
     }()
     
-    init(category: CategoryItems) {
+    init(category: CategoryItem) {
         self.category = category
         super.init(nibName: nil, bundle: nil)
     }

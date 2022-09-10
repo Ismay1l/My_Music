@@ -15,7 +15,7 @@ class SearchVC: UIViewController {
     private let searchVM = SearchVM()
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
-    private var categories = [CategoryItems]()
+    private var categories = [CategoryItem]()
     
     //MARK: - UI Elements
     private var searchController: UISearchController = {

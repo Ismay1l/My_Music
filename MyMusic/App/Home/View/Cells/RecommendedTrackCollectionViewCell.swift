@@ -58,7 +58,7 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(item: AudioTrack) {
+    func configureCell(item: Track) {
         guard let url = item.album?.images?.first?.url else { return }
         albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
         trackNameLabel.text = item.name

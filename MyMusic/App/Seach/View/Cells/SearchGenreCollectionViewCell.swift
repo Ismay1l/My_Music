@@ -10,29 +10,11 @@ import SDWebImage
 
 class SearchGenreCollectionViewCell: UICollectionViewCell {
     
-    //MARK: - Variables
-    let colors: [UIColor] = [
-        .systemPurple,
-        .systemRed,
-        .systemBlue,
-        .systemCyan,
-        .systemFill,
-        .systemGray,
-        .systemMint,
-        .systemPink,
-        .systemTeal,
-        .systemBrown,
-        .systemGreen,
-        .systemIndigo,
-        .systemOrange,
-        .systemYellow
-    ]
-    
     //MARK: - UI Elements
     private lazy var iconImage: UIImageView = {
         let icon = UIImageView()
         icon.contentMode = .scaleAspectFill
-        icon.tintColor = colors.randomElement()
+        icon.tintColor = randomColors.randomElement()
         return icon
     }()
     
@@ -72,11 +54,11 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(with item: CategoryItems) {
+    func configureCell(with item: CategoryItem) {
         titleLabel.text = item.name
         guard let urlStr = item.icons?.first?.url else { return }
         iconImage.sd_setImage(with: URL(string: urlStr), completed: nil)
-        iconImage.tintColor = colors.randomElement()
-        contentView.backgroundColor = colors.randomElement()
+        iconImage.tintColor = randomColors.randomElement()
+        contentView.backgroundColor = randomColors.randomElement()
     }
 }

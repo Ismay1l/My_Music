@@ -15,7 +15,7 @@ class AlbumVC: UIViewController {
     private let albumVM = AlbumVM()
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
-    private var albumResponse = [TrackItem]()
+    private var albumResponse = [Track]()
     private var albums = [AlbumDetailResponse]()
     
     //MARK: - UI Elements
@@ -102,7 +102,7 @@ class AlbumVC: UIViewController {
     
     @objc
     private func didTapShare() {
-        guard let url = URL(string: album.external_urls?["spotify"] ?? "NA") else { return }
+        guard let url = URL(string: album.external_urls?.spotify ?? "NA") else { return }
         let vc = UIActivityViewController(activityItems: [url],
                                           applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem

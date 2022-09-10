@@ -34,15 +34,6 @@ struct UserProfile: Codable {
     }
 }
 
-struct ExternalUrls: Codable {
-    let spotify: String?
-}
-
-struct Followers: Codable {
-    let href: String?
-    let total: Int?
-}
-
 struct UserImage: Codable {
     let url: String?
 }

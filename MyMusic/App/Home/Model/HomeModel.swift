@@ -9,49 +9,52 @@ import Foundation
 
 //MARK: - Browse New Releases
 struct NewReleaseResponse: Codable {
-    let albums: AlbumResponse?
+    let albums: Albums?
 }
 
-struct AlbumResponse: Codable {
+struct Albums: Codable {
     let items: [Album]?
 }
 
 struct Album: Codable {
-    let album_type: String?
     let artists: [Artist]?
     let available_markets: [String]?
+    let external_urls: ExternalUrls?
     let id: String?
-    let images: [APIImage]?
-    let name: String?
-    let release_date: String?
+    let images: [Image]?
+    let name, release_date: String?
     let total_tracks: Int?
-    let external_urls: [String: String]?
 }
 
 struct Artist: Codable {
-    let id: String?
-    let name: String?
-    let type: String?
+    let external_urls: ExternalUrls?
+    let id, name: String?
 }
 
-struct APIImage: Codable {
+struct ExternalUrls: Codable {
+    let spotify: String?
+}
+
+struct Image: Codable {
+    let height: Int?
     let url: String?
+    let width: Int?
 }
 
 //MARK: - Featured Playlist
 struct FeaturedPlaylistResponse: Codable {
-    let playlists: PlaylistItem?
+    let playlists: Playlists?
 }
 
-struct PlaylistItem: Codable {
-    let items: [FeaturedPlaylistItem]?
+struct Playlists: Codable {
+    let items: [Item]?
 }
 
-struct FeaturedPlaylistItem: Codable {
+struct Item: Codable {
     let description: String?
-    let external_urls: [String: String]?
+    let external_urls: ExternalUrls?
     let id: String?
-    let images: [APIImage]?
+    let images: [Image]?
     let name: String?
     let owner: Owner?
 }
@@ -69,87 +72,63 @@ struct RecommendedGenreResponse: Codable {
 
 //MARK: - Recommendations
 struct RecommendationsResponse: Codable {
+    let tracks: [Track]?
     let seeds: [Seed]?
-    let tracks: [AudioTrack]?
 }
 
 struct Seed: Codable {
     let id: String?
-    let type: String?
-}
-
-struct AudioTrack: Codable {
-    let album: Album?
-    let artists: [Artist]?
-    let available_markets: [String]?
-    let disc_number: Int?
-    let duration_ms: Int?
-    let explicit: Bool?
-    let external_urls: [String: String]?
-    let id: String?
-    let name: String?
-    let popularity: Int?
-}
-
-//MARK: - Album Details
-struct AlbumDetailResponse: Codable {
-    let album_type: String?
-    let artists: [Artist]?
-    let available_markets: [String]?
-    let copyrights: [Copyright]?
-    let external_urls: [String: String]?
-    let id: String?
-    let images: [APIImage]?
-    let label: String?
-    let name: String?
-    let release_date: String?
-    let tracks: AlbumTrack?
-}
-
-struct Copyright: Codable {
-    let text: String?
-    let type: String?
-}
-
-struct AlbumTrack: Codable {
-    let items: [TrackItem]?
-}
-
-struct TrackItem: Codable {
-    let artists: [Artist]?
-    let available_markets: [String]?
-    let external_urls: [String: String]?
-    let name: String?
-    let id: String?
-}
-
-//MARK: - Playlists
-struct PlaylistResponse: Codable {
-    let external_urls: [String: String]?
-    let id: String?
-    let images: [APIImage]?
-    let name: String?
-    let owner: Owner?
-    let primary_color: String?
-    let tracks: PlaylistTrack?
-}
-
-struct PlaylistTrack: Codable {
-    let items: [PlaylistTrackItem]?
-}
-
-struct PlaylistTrackItem: Codable {
-    let added_at: String?
-    let track: Track?
 }
 
 struct Track: Codable {
     let album: Album?
     let artists: [Artist]?
     let available_markets: [String]?
-    let external_urls: [String: String]?
+    let external_urls: ExternalUrls?
     let id: String?
     let name: String?
-    let preview_url: String?
+    let previewURL: String?
+    let trackNumber: Int?
+}
+
+//MARK: - Album Details
+struct AlbumDetailResponse: Codable {
+    let artists: [Artist]?
+    let available_markets: [String]?
+    let external_urls: ExternalUrls?
+    let id: String?
+    let images: [Image]?
+    let label, name: String?
+    let release_date: String?
+    let total_tracks: Int?
+    let tracks: Tracks?
+}
+
+struct Tracks: Codable {
+    let items: [Track]?
+}
+
+//MARK: - Playlists
+struct PlaylistResponse: Codable {
+    let images: [Image]?
+    let name: String?
+    let owner: Owner?
+    let tracks: PlaylistTrack?
+    let external_urls: [String: String]?
+    let id: String?
+}
+
+struct Followers: Codable {
+    let href: String?
+    let total: Int?
+}
+
+struct PlaylistTrack: Codable {
+    let items: [PlaylistItem]?
+}
+
+struct PlaylistItem: Codable {
+    let added_at: String?
+    let track: Track?
 }
 

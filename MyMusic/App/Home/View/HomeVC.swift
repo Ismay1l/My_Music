@@ -18,8 +18,8 @@ class HomeVC: UIViewController {
     private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
     
     private var newReleases = [Album]()
-    private var featuredPlaylists = [FeaturedPlaylistItem]()
-    private var recommendations = [AudioTrack]()
+    private var featuredPlaylists = [Item]()
+    private var recommendations = [Track]()
     
     //MARK: - UI Elements
     private lazy var mainCollectionView: UICollectionView = {

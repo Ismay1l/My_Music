@@ -80,7 +80,7 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
         }
     }
     
-    func configureHeader(item: FeaturedPlaylistItem) {
+    func configureHeader(item: Item) {
         guard let url = item.images?.first?.url else { return }
         playlistImage.sd_setImage(with: URL(string: url), completed: nil)
         playlistNameLabel.text = item.name

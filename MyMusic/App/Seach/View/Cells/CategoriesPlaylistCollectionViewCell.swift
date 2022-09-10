@@ -10,7 +10,6 @@ import UIKit
 class CategoriesPlaylistCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI Elements
-    //MARK: UI Elements
     private lazy var albumCoverImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleToFill
@@ -52,7 +51,7 @@ class CategoriesPlaylistCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(with item: CategoriesPlaylistItem) {
+    func configureCell(with item: Item) {
         guard let urlStr = item.images?.first?.url else { return }
         albumCoverImage.sd_setImage(with: URL(string: urlStr), completed: nil)
         nameLabel.text = item.owner?.display_name

@@ -41,7 +41,7 @@ class BrowseAlbumsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(item: TrackItem) {
+    func configureCell(item: Track) {
         artistNameLabel.text = item.artists?.first?.name
         albumNameLabel.text = item.name
     }

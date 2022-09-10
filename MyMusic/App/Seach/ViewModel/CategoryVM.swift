@@ -21,7 +21,7 @@ class CategoryVM {
     private let categoriesPlaylistRelay = BehaviorRelay<CategoriesPlaylistState?>.init(value: nil)
     
     //MARK: - Fetch Category's Playlist
-    func fetchCategoriesPlaylist(item: CategoryItems) -> Observable<CategoriesPlaylistState> {
+    func fetchCategoriesPlaylist(item: CategoryItem) -> Observable<CategoriesPlaylistState> {
         apiManager.fetchCategoriesPlaylist(item: item)
             .then { result in
                 self.categoriesPlaylistRelay.accept(.showCategoriesPlaylist(model: result))

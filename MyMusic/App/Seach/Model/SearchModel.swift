@@ -7,41 +7,22 @@
 
 import Foundation
 
-//MARK: - Categpries
+//MARK: - Categories
 struct CategoriesResponse: Codable {
-    let categories: SearchCategory?
+    let categories: Categories?
 }
 
-struct SearchCategory: Codable {
-    let items: [CategoryItems]?
+struct Categories: Codable {
+    let items: [CategoryItem]?
 }
 
-struct CategoryItems: Codable {
+struct CategoryItem: Codable {
     let href: String?
-    let icons: [APIImage]?
-    let id: String?
-    let name: String?
+    let icons: [Image]?
+    let id, name: String?
 }
 
 //MARK: - Category's Playlist
 struct CategoriesPlaylistResponse: Codable {
-    let playlists: CategoryPlaylist?
-}
-
-struct CategoryPlaylist: Codable {
-    let items: [CategoriesPlaylistItem]?
-}
-
-struct CategoriesPlaylistItem: Codable {
-    let description: String?
-    let external_urls: [String: String]?
-    let id: String?
-    let images: [APIImage]?
-    let name: String?
-    let owner: Owner?
-    let tracks: CategoriesPlaylistTracks?
-}
-
-struct CategoriesPlaylistTracks: Codable {
-    let total: Int?
+    let playlists: Playlists?
 }
