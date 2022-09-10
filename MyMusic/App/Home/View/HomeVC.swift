@@ -328,7 +328,8 @@ extension HomeVC: UICollectionViewDataSource,
             navigationController?.pushViewController(playlistVC, animated: true)
         }
         else {
-            
+            let track = recommendations[indexPath.row]
+            PlaybackPresenter.shared.startPlaybackSong(from: self, song: track)
         }
     }
     

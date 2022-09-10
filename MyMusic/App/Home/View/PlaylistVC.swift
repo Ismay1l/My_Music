@@ -145,7 +145,15 @@ extension PlaylistVC: UICollectionViewDelegate,
         CGSize(width: mainCollectionView.frame.size.width, height: 380)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let trackResponse = playlistResponse[indexPath.row].track.map { track in
+            AudioTrack(album: track.album, artists: track.artists, available_markets: track.available_markets, disc_number: nil, duration_ms: nil, explicit: nil, external_urls: track.external_urls, id: track.id, name: track.name, popularity: nil)
+        }
+        guard let track = trackResponse else { return }
+        PlaybackPresenter.shared.startPlaybackSong(from: self, song: track)
+    }
+    
     func didTapPlayButton(_ header: PlaylistHeaderCollectionView) {
-        print("Play Music Now")
     }
 }

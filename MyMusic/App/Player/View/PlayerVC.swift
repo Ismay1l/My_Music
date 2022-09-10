@@ -12,6 +12,6 @@ class PlayerVC: UIViewController {
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view.backgroundColor = .darkGray
     }
 }

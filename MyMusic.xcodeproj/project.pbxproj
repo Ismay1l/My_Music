@@ -26,6 +26,7 @@
 		4B44933E28C00B830030BC00 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4B44933D28C00B830030BC00 /* SDWebImage */; };
 		4B4AA74028C7AAF600465590 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4B4AA73F28C7AAF600465590 /* swiftgen.yml */; };
 		4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */ = {isa = PBXBuildFile; fileRef = 4B4AA73F28C7AAF600465590 /* swiftgen.yml */; };
+		4B52F46528CCAA9C00E5AD94 /* PlaybackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B52F46428CCAA9C00E5AD94 /* PlaybackPresenter.swift */; };
 		4B64CEC028C4BE4400BE1935 /* BLTNBoard in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEBF28C4BE4400BE1935 /* BLTNBoard */; };
 		4B64CEC328C4C57600BE1935 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEC228C4C57600BE1935 /* Promises */; };
 		4B64CEC628C4C6A500BE1935 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64CEC528C4C6A500BE1935 /* Protocols.swift */; };
@@ -105,6 +106,7 @@
 		49F0DD3A28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesPlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVM.swift; sourceTree = "<group>"; };
 		4B4AA73F28C7AAF600465590 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		4B52F46428CCAA9C00E5AD94 /* PlaybackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackPresenter.swift; sourceTree = "<group>"; };
 		4B64CEC528C4C6A500BE1935 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4B7E3EA828C2284600BE990E /* XCAssets+Image+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Image+Generated.swift"; sourceTree = "<group>"; };
 		4B7E3EA928C2284600BE990E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -247,6 +249,14 @@
 				4BD33C1628B7EF4D00BE1353 /* TabBarVC.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4B52F46328CCAA5E00E5AD94 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4B52F46428CCAA9C00E5AD94 /* PlaybackPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		4B64CEC428C4C68D00BE1935 /* Protocols */ = {
@@ -520,6 +530,7 @@
 				4B910E9528B8E2AD00E19863 /* Auth */,
 				4B7B311628BBB64B00FFE7E3 /* API */,
 				4B7B311728BBB66B00FFE7E3 /* UserDefaults */,
+				4B52F46328CCAA5E00E5AD94 /* Presenter */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -803,6 +814,7 @@
 				4BBFE2B028C666C100508C7E /* PlaylistCollectionViewCell.swift in Sources */,
 				49795E9B28C890D500EFF96A /* BrowseAlbumsHeaderView.swift in Sources */,
 				4BE4FFFC28BBE50E009CEDB4 /* General Functions.swift in Sources */,
+				4B52F46528CCAA9C00E5AD94 /* PlaybackPresenter.swift in Sources */,
 				4BBFE2B228C66EEF00508C7E /* PlaylistHeaderCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
