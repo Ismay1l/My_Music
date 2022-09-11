@@ -9,6 +9,10 @@ import UIKit
 import MarqueeLabel
 
 class TrackControllerView: UIView {
+    
+    //MARK: - Variables
+    weak var delegate: TrackControllerViewDelegate?
+    var isPlaying: Bool = true
 
     //MARK: - UI Elements
     private lazy var volumeSlider: UISlider = {
@@ -36,6 +40,8 @@ class TrackControllerView: UIView {
         let button = UIButton()
         let image = UIImage(systemName: "backward.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: UIImage.SymbolWeight.regular))
         button.setImage(image, for: .normal)
+        button.tag = 1
+        button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -43,6 +49,8 @@ class TrackControllerView: UIView {
         let button = UIButton()
         let image = UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 38, weight: UIImage.SymbolWeight.regular))
         button.setImage(image, for: .normal)
+        button.tag = 2
+        button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -50,6 +58,8 @@ class TrackControllerView: UIView {
         let button = UIButton()
         let image = UIImage(systemName: "forward.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: UIImage.SymbolWeight.regular))
         button.setImage(image, for: .normal)
+        button.tag = 3
+        button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -142,6 +152,47 @@ class TrackControllerView: UIView {
             make.right.equalToSuperview().offset(-25)
             make.centerY.equalTo(volumeSlider.snp.centerY)
             make.height.equalTo(18)
+        }
+    }
+    
+    private func changeButtonIcon(_ sender: UIButton) {
+        if isPlaying {
+            UIView.animate(withDuration: 0.2, animations: {
+                sender.alpha = 0.0
+            }, completion:{(finished) in
+                sender.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 38, weight: UIImage.SymbolWeight.regular)), for: .normal)
+                UIView.animate(withDuration: 0.5, animations:{
+                    sender.alpha = 1.0
+                },completion:nil)
+            })
+            isPlaying = false
+        } else {
+            UIView.animate(withDuration: 0.2, animations: {
+                sender.alpha = 0.0
+            }, completion:{(finished) in
+                sender.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 38, weight: UIImage.SymbolWeight.regular)), for: .normal)
+                UIView.animate(withDuration: 0.5, animations:{
+                    sender.alpha = 1.0
+                },completion:nil)
+            })
+            isPlaying = true
+        }
+    }
+    
+    @objc
+    private func didTapButton(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            delegate?.trackControllerViewDidTapBackButton(self)
+            print("Back tapped")
+        case 2:
+            delegate?.trackControllerViewDidTapPlayButton(self)
+            changeButtonIcon(sender)
+            print("Play tapped")
+        case 3:
+            delegate?.trackControllerViewDidTapForwardButton(self)
+            print("Forward tapped")
+        default: print("Default")
         }
     }
 }

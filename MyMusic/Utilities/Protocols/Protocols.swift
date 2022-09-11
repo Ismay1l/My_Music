@@ -27,3 +27,9 @@ protocol PlaylistHeaderCollectionViewDelegate: AnyObject {
 protocol BrowseAlbumsHeaderViewDelegate: AnyObject {
     func didTapPlayButton(_ header: BrowseAlbumsHeaderView)
 }
+
+protocol TrackControllerViewDelegate: AnyObject {
+    func trackControllerViewDidTapPlayButton(_ playerController: TrackControllerView)
+    func trackControllerViewDidTapBackButton(_ playerController: TrackControllerView)
+    func trackControllerViewDidTapForwardButton(_ playerController: TrackControllerView)
+}
