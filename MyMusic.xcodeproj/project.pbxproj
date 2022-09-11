@@ -13,7 +13,6 @@
 		49795E9928C86F6400EFF96A /* BrowseAlbumsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49795E9828C86F6400EFF96A /* BrowseAlbumsCollectionViewCell.swift */; };
 		49795E9B28C890D500EFF96A /* BrowseAlbumsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49795E9A28C890D500EFF96A /* BrowseAlbumsHeaderView.swift */; };
 		49795E9E28C8C8BA00EFF96A /* SearchGenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49795E9D28C8C8BA00EFF96A /* SearchGenreCollectionViewCell.swift */; };
-		498A674728C78703000B18DD /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 498A674628C78703000B18DD /* SwiftEntryKit */; };
 		49F0DD2A28CB0EDC00EB470B /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD2928CB0EDC00EB470B /* SearchVM.swift */; };
 		49F0DD2D28CB131C00EB470B /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD2C28CB131C00EB470B /* SearchModel.swift */; };
 		49F0DD3728CB30C200EB470B /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD3628CB30C200EB470B /* CategoryVC.swift */; };
@@ -27,6 +26,9 @@
 		4B4AA74028C7AAF600465590 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4B4AA73F28C7AAF600465590 /* swiftgen.yml */; };
 		4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */ = {isa = PBXBuildFile; fileRef = 4B4AA73F28C7AAF600465590 /* swiftgen.yml */; };
 		4B52F46528CCAA9C00E5AD94 /* PlaybackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B52F46428CCAA9C00E5AD94 /* PlaybackPresenter.swift */; };
+		4B52F46728CE239B00E5AD94 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B52F46628CE239B00E5AD94 /* ImageView.swift */; };
+		4B52F46928CE249700E5AD94 /* TrackControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B52F46828CE249700E5AD94 /* TrackControllerView.swift */; };
+		4B52F47228CE2A8900E5AD94 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 4B52F47128CE2A8900E5AD94 /* MarqueeLabel */; };
 		4B64CEC028C4BE4400BE1935 /* BLTNBoard in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEBF28C4BE4400BE1935 /* BLTNBoard */; };
 		4B64CEC328C4C57600BE1935 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEC228C4C57600BE1935 /* Promises */; };
 		4B64CEC628C4C6A500BE1935 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64CEC528C4C6A500BE1935 /* Protocols.swift */; };
@@ -71,7 +73,7 @@
 		4BD4EAC728B6B1CF00CA24D8 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD4EAC628B6B1CF00CA24D8 /* HomeVC.swift */; };
 		4BD4EAE928B6B5FC00CA24D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD4EAE828B6B5FC00CA24D8 /* SceneDelegate.swift */; };
 		4BE4FFF628BBE366009CEDB4 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFF528BBE366009CEDB4 /* ProfileModel.swift */; };
-		4BE4FFFC28BBE50E009CEDB4 /* General Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFFB28BBE50E009CEDB4 /* General Functions.swift */; };
+		4BE4FFFC28BBE50E009CEDB4 /* Generals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFFB28BBE50E009CEDB4 /* Generals.swift */; };
 		4BE4FFFE28BCAC3A009CEDB4 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFFD28BCAC3A009CEDB4 /* ProfileVM.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +109,8 @@
 		4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVM.swift; sourceTree = "<group>"; };
 		4B4AA73F28C7AAF600465590 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		4B52F46428CCAA9C00E5AD94 /* PlaybackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackPresenter.swift; sourceTree = "<group>"; };
+		4B52F46628CE239B00E5AD94 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		4B52F46828CE249700E5AD94 /* TrackControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackControllerView.swift; sourceTree = "<group>"; };
 		4B64CEC528C4C6A500BE1935 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4B7E3EA828C2284600BE990E /* XCAssets+Image+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Image+Generated.swift"; sourceTree = "<group>"; };
 		4B7E3EA928C2284600BE990E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -150,7 +154,7 @@
 		4BD4EAC628B6B1CF00CA24D8 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		4BD4EAE828B6B5FC00CA24D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4BE4FFF528BBE366009CEDB4 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
-		4BE4FFFB28BBE50E009CEDB4 /* General Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "General Functions.swift"; sourceTree = "<group>"; };
+		4BE4FFFB28BBE50E009CEDB4 /* Generals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generals.swift; sourceTree = "<group>"; };
 		4BE4FFFD28BCAC3A009CEDB4 /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,7 +186,7 @@
 				4BBFE2B528C67F0400508C7E /* SPStorkController in Frameworks */,
 				4B80E7B928C3485500CD4151 /* RxCocoa in Frameworks */,
 				4B64CEC328C4C57600BE1935 /* Promises in Frameworks */,
-				498A674728C78703000B18DD /* SwiftEntryKit in Frameworks */,
+				4B52F47228CE2A8900E5AD94 /* MarqueeLabel in Frameworks */,
 				4B44933E28C00B830030BC00 /* SDWebImage in Frameworks */,
 				4BD33C4D28B82C7800BE1353 /* SnapKit in Frameworks */,
 				4B80E7BD28C3485500CD4151 /* RxSwift in Frameworks */,
@@ -296,7 +300,7 @@
 		4B80E7A828C2751900CD4151 /* Generals */ = {
 			isa = PBXGroup;
 			children = (
-				4BE4FFFB28BBE50E009CEDB4 /* General Functions.swift */,
+				4BE4FFFB28BBE50E009CEDB4 /* Generals.swift */,
 			);
 			path = Generals;
 			sourceTree = "<group>";
@@ -443,6 +447,8 @@
 			isa = PBXGroup;
 			children = (
 				4BD33C2E28B7F0E000BE1353 /* PlayerVC.swift */,
+				4B52F46628CE239B00E5AD94 /* ImageView.swift */,
+				4B52F46828CE249700E5AD94 /* TrackControllerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -654,8 +660,8 @@
 				4B64CEC228C4C57600BE1935 /* Promises */,
 				4B1F866728C60FC400F2FC49 /* RAMAnimatedTabBarController */,
 				4BBFE2B428C67F0400508C7E /* SPStorkController */,
-				498A674628C78703000B18DD /* SwiftEntryKit */,
 				4B1D1F0928CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout */,
+				4B52F47128CE2A8900E5AD94 /* MarqueeLabel */,
 			);
 			productName = MyMusic;
 			productReference = 4BD4EAA228B6AFAF00CA24D8 /* MyMusic.app */;
@@ -706,8 +712,8 @@
 				4B64CEC128C4C57600BE1935 /* XCRemoteSwiftPackageReference "promises" */,
 				4B1F866628C60FC400F2FC49 /* XCRemoteSwiftPackageReference "animated-tab-bar" */,
 				4BBFE2B328C67F0400508C7E /* XCRemoteSwiftPackageReference "SPStorkController" */,
-				498A674528C78703000B18DD /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
 				4B1D1F0828CBBCE800E2CF21 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */,
+				4B52F47028CE2A8900E5AD94 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 			);
 			productRefGroup = 4BD4EAA328B6AFAF00CA24D8 /* Products */;
 			projectDirPath = "";
@@ -780,9 +786,11 @@
 				4BD33C2928B7F06F00BE1353 /* ProfileVC.swift in Sources */,
 				4BD33C2528B7F03000BE1353 /* SignInVC.swift in Sources */,
 				4B1F866528C6002F00F2FC49 /* PlaylistVM.swift in Sources */,
+				4B52F46928CE249700E5AD94 /* TrackControllerView.swift in Sources */,
 				4B91550A28C532EC00BDFB95 /* AlbumVC.swift in Sources */,
 				4BD33C3528B7F14F00BE1353 /* AuthManager.swift in Sources */,
 				4BD33C2F28B7F0E000BE1353 /* PlayerVC.swift in Sources */,
+				4B52F46728CE239B00E5AD94 /* ImageView.swift in Sources */,
 				4BD33C1C28B7EFC900BE1353 /* SearchVC.swift in Sources */,
 				4B91550C28C5330000BDFB95 /* PlaylistVC.swift in Sources */,
 				49F0DD2D28CB131C00EB470B /* SearchModel.swift in Sources */,
@@ -813,7 +821,7 @@
 				4BD33C2328B7F01A00BE1353 /* WelcomeVC.swift in Sources */,
 				4BBFE2B028C666C100508C7E /* PlaylistCollectionViewCell.swift in Sources */,
 				49795E9B28C890D500EFF96A /* BrowseAlbumsHeaderView.swift in Sources */,
-				4BE4FFFC28BBE50E009CEDB4 /* General Functions.swift in Sources */,
+				4BE4FFFC28BBE50E009CEDB4 /* Generals.swift in Sources */,
 				4B52F46528CCAA9C00E5AD94 /* PlaybackPresenter.swift in Sources */,
 				4BBFE2B228C66EEF00508C7E /* PlaylistHeaderCollectionView.swift in Sources */,
 			);
@@ -1139,14 +1147,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		498A674528C78703000B18DD /* XCRemoteSwiftPackageReference "SwiftEntryKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/huri000/SwiftEntryKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		4B1D1F0828CBBCE800E2CF21 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/chiahsien/CHTCollectionViewWaterfallLayout.git";
@@ -1177,6 +1177,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
+			};
+		};
+		4B52F47028CE2A8900E5AD94 /* XCRemoteSwiftPackageReference "MarqueeLabel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cbpowell/MarqueeLabel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
 			};
 		};
 		4B64CEBE28C4BE4400BE1935 /* XCRemoteSwiftPackageReference "BulletinBoard" */ = {
@@ -1230,11 +1238,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		498A674628C78703000B18DD /* SwiftEntryKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 498A674528C78703000B18DD /* XCRemoteSwiftPackageReference "SwiftEntryKit" */;
-			productName = SwiftEntryKit;
-		};
 		4B1D1F0928CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4B1D1F0828CBBCE800E2CF21 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */;
@@ -1254,6 +1257,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4B44933C28C00B830030BC00 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		4B52F47128CE2A8900E5AD94 /* MarqueeLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B52F47028CE2A8900E5AD94 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
+			productName = MarqueeLabel;
 		};
 		4B64CEBF28C4BE4400BE1935 /* BLTNBoard */ = {
 			isa = XCSwiftPackageProductDependency;

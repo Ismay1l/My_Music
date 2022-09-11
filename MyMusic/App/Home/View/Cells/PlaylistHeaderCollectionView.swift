@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftEntryKit
 
 class PlaylistHeaderCollectionView: UICollectionReusableView {
     
@@ -87,14 +86,8 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
         descriptionLabel.text = item.description
     }
     
-    private func setupAttributes() -> EKAttributes {
-        var attributes = EKAttributes.bottomFloat
-        return attributes
-    }
-    
     @objc
     private func didTapPlay() {
         delegate?.didTapPlayButton(self)
-        SwiftEntryKit.display(entry: playerVC, using: setupAttributes())
     }
 }

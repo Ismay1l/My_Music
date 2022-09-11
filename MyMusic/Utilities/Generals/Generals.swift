@@ -55,3 +55,9 @@ func createLabel(textColor: UIColor, fontSize: Int, fontWeight: UIFont.Weight) -
     label.numberOfLines = 1
     return label
 }
+
+func createImageView(imageName: String) -> UIImageView {
+    let view = UIImageView()
+    view.image = UIImage(systemName: imageName)
+    return view
+}

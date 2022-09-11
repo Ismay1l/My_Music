@@ -16,6 +16,7 @@ class PlaylistVC: UIViewController {
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
     private var playlistResponse = [PlaylistItem]()
+    private var tracks = [Track]()
     
     //MARK: - UI Elements
     private lazy var mainCollectionView: UICollectionView = {
@@ -73,6 +74,8 @@ class PlaylistVC: UIViewController {
                 case .showPlaylist(let model):
                     DispatchQueue.main.async {
                         guard let trackItem = model.tracks?.items else { return }
+                        guard let track = model.tracks?.items?.compactMap({ $0.track }) else { return }
+                        self?.tracks = track
                         self?.playlistResponse = trackItem
                         self?.mainCollectionView.reloadData()
                     }
@@ -147,11 +150,12 @@ extension PlaylistVC: UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let trackResponse = playlistResponse[indexPath.row].track
-        guard let track = trackResponse else { return }
+        let index = indexPath.row
+        let track = tracks[index]
         PlaybackPresenter.shared.startPlaybackSong(from: self, song: track)
     }
     
     func didTapPlayButton(_ header: PlaylistHeaderCollectionView) {
+        PlaybackPresenter.shared.startPlaybackSongs(from: self, songs: tracks)
     }
 }

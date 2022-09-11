@@ -124,7 +124,7 @@ extension AlbumVC: UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(BrowseAlbumsCollectionViewCell.self)", for: indexPath) as!  BrowseAlbumsCollectionViewCell
         let item = albumResponse[indexPath.row]
         cell.configureCell(item: item)
-        cell.layer.cornerRadius = 5
+        cell.layer.cornerRadius = 10
         cell.clipsToBounds = true
         return cell
     }
@@ -147,7 +147,13 @@ extension AlbumVC: UICollectionViewDelegate,
         CGSize(width: mainCollectionView.frame.size.width, height: 380)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let index = indexPath.row
+        let track = albumResponse[index]
+        PlaybackPresenter.shared.startPlaybackSong(from: self, song: track)
+    }
+    
     func didTapPlayButton(_ header: BrowseAlbumsHeaderView) {
-        print("Play Music Now")
+        PlaybackPresenter.shared.startPlaybackSongs(from: self, songs: albumResponse)
     }
 }
