@@ -51,7 +51,6 @@
 		4B9430B628BFBD57007295A0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4B9430B528BFBD57007295A0 /* Alamofire */; };
 		4BBFE2B028C666C100508C7E /* PlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE2AF28C666C100508C7E /* PlaylistCollectionViewCell.swift */; };
 		4BBFE2B228C66EEF00508C7E /* PlaylistHeaderCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE2B128C66EEF00508C7E /* PlaylistHeaderCollectionView.swift */; };
-		4BBFE2B528C67F0400508C7E /* SPStorkController in Frameworks */ = {isa = PBXBuildFile; productRef = 4BBFE2B428C67F0400508C7E /* SPStorkController */; };
 		4BCC4B4028C21E1F0061ABD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC4B4228C21E1F0061ABD1 /* Localizable.strings */; };
 		4BCC4B4D28C222EC0061ABD1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC4B4C28C222EC0061ABD1 /* Media.xcassets */; };
 		4BCC4B4F28C222FA0061ABD1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC4B4E28C222FA0061ABD1 /* Colors.xcassets */; };
@@ -183,7 +182,6 @@
 				4B64CEC028C4BE4400BE1935 /* BLTNBoard in Frameworks */,
 				4B3B754D28BFC44800033B61 /* Shift in Frameworks */,
 				4B9430B628BFBD57007295A0 /* Alamofire in Frameworks */,
-				4BBFE2B528C67F0400508C7E /* SPStorkController in Frameworks */,
 				4B80E7B928C3485500CD4151 /* RxCocoa in Frameworks */,
 				4B64CEC328C4C57600BE1935 /* Promises in Frameworks */,
 				4B52F47228CE2A8900E5AD94 /* MarqueeLabel in Frameworks */,
@@ -659,7 +657,6 @@
 				4B64CEBF28C4BE4400BE1935 /* BLTNBoard */,
 				4B64CEC228C4C57600BE1935 /* Promises */,
 				4B1F866728C60FC400F2FC49 /* RAMAnimatedTabBarController */,
-				4BBFE2B428C67F0400508C7E /* SPStorkController */,
 				4B1D1F0928CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout */,
 				4B52F47128CE2A8900E5AD94 /* MarqueeLabel */,
 			);
@@ -711,7 +708,6 @@
 				4B64CEBE28C4BE4400BE1935 /* XCRemoteSwiftPackageReference "BulletinBoard" */,
 				4B64CEC128C4C57600BE1935 /* XCRemoteSwiftPackageReference "promises" */,
 				4B1F866628C60FC400F2FC49 /* XCRemoteSwiftPackageReference "animated-tab-bar" */,
-				4BBFE2B328C67F0400508C7E /* XCRemoteSwiftPackageReference "SPStorkController" */,
 				4B1D1F0828CBBCE800E2CF21 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */,
 				4B52F47028CE2A8900E5AD94 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 			);
@@ -1219,14 +1215,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		4BBFE2B328C67F0400508C7E /* XCRemoteSwiftPackageReference "SPStorkController" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/varabeis/SPStorkController";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		4BD33C4B28B82C7800BE1353 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1292,11 +1280,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4B9430B428BFBD56007295A0 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		4BBFE2B428C67F0400508C7E /* SPStorkController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4BBFE2B328C67F0400508C7E /* XCRemoteSwiftPackageReference "SPStorkController" */;
-			productName = SPStorkController;
 		};
 		4BD33C4C28B82C7800BE1353 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

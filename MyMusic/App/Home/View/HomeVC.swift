@@ -329,7 +329,7 @@ extension HomeVC: UICollectionViewDataSource,
         }
         else {
             let track = recommendations[indexPath.row]
-            PlaybackPresenter.shared.startPlaybackSong(from: self, song: track)
+            PlaybackPresenter.shared.startPlaybackSong(from: self, track: track)
         }
     }
     

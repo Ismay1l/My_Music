@@ -29,7 +29,13 @@ protocol BrowseAlbumsHeaderViewDelegate: AnyObject {
 }
 
 protocol TrackControllerViewDelegate: AnyObject {
-    func trackControllerViewDidTapPlayButton(_ playerController: TrackControllerView)
-    func trackControllerViewDidTapBackButton(_ playerController: TrackControllerView)
-    func trackControllerViewDidTapForwardButton(_ playerController: TrackControllerView)
+    func didTapPlayButton(_ playerController: TrackControllerView)
+    func didTapBackButton(_ playerController: TrackControllerView)
+    func didTapForwardButton(_ playerController: TrackControllerView)
+}
+
+protocol PlayerVCDataSource: AnyObject {
+    var trackName: String? { get }
+    var artistName: String? { get }
+    var imageURL: URL? { get }
 }

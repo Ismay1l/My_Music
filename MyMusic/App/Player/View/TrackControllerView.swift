@@ -21,20 +21,19 @@ class TrackControllerView: UIView {
         return slider
     }()
     
-    private lazy var titleLabel: MarqueeLabel = {
+    lazy var titleLabel: MarqueeLabel = {
         let label = MarqueeLabel()
         label.type = .continuous
         label.textAlignment = .left
         label.speed = .duration(80)
         label.fadeLength = 15.0
-        label.leadingBuffer = 40
+        label.leadingBuffer = 0
         label.textColor = .white
         label.font = .systemFont(ofSize: 25, weight: .semibold)
-        label.text = "helloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooohelloooo"
         return label
     }()
     
-    private lazy var artistLabel = createLabel(textColor: .gray, fontSize: 20, fontWeight: .semibold)
+    lazy var artistLabel = createLabel(textColor: .gray, fontSize: 20, fontWeight: .semibold)
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
@@ -111,7 +110,6 @@ class TrackControllerView: UIView {
             make.width.height.equalTo(30)
         }
         
-        artistLabel.text = "You are doing very well"
         artistLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(25)
             make.right.equalToSuperview().offset(-25)
@@ -183,16 +181,13 @@ class TrackControllerView: UIView {
     private func didTapButton(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            delegate?.trackControllerViewDidTapBackButton(self)
-            print("Back tapped")
+            delegate?.didTapBackButton(self)
         case 2:
-            delegate?.trackControllerViewDidTapPlayButton(self)
+            delegate?.didTapPlayButton(self)
             changeButtonIcon(sender)
-            print("Play tapped")
         case 3:
-            delegate?.trackControllerViewDidTapForwardButton(self)
-            print("Forward tapped")
-        default: print("Default")
+            delegate?.didTapForwardButton(self)
+        default: return 
         }
     }
 }

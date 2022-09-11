@@ -87,7 +87,7 @@ struct Track: Codable {
     let external_urls: ExternalUrls?
     let id: String?
     let name: String?
-    let previewURL: String?
+    let preview_url: String?
     let trackNumber: Int?
 }
 

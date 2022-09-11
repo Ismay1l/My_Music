@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PlayerVC: UIViewController {
+    
+    //MARK: - Variables
+    weak var dataSource: PlayerVCDataSource?
     
     //MARK: - UI Elements
     private let imageView = ImageView()
@@ -19,6 +23,8 @@ class PlayerVC: UIViewController {
         view.backgroundColor = .darkGray
         
         configureConstraints()
+        configureData()
+        trackControllerView.delegate = self
     }
     
     //MARK: - Functions
@@ -44,5 +50,26 @@ class PlayerVC: UIViewController {
             make.left.equalTo(left)
             make.bottom.equalTo(bottom)
         }
+    }
+    
+    private func configureData() {
+        imageView.trackImage.sd_setImage(with: dataSource?.imageURL, completed: nil)
+        trackControllerView.titleLabel.text = dataSource?.trackName
+        trackControllerView.artistLabel.text = dataSource?.artistName
+    }
+}
+
+//MARK: - Extension PlayerVC
+extension PlayerVC: TrackControllerViewDelegate {
+    func didTapPlayButton(_ playerController: TrackControllerView) {
+        print("Play tapped")
+    }
+    
+    func didTapBackButton(_ playerController: TrackControllerView) {
+        print("Back tapped")
+    }
+    
+    func didTapForwardButton(_ playerController: TrackControllerView) {
+        print("Forward tapped")
     }
 }
