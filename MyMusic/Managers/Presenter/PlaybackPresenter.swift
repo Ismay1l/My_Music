@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SPStorkController
 import AVFoundation
 
 final class PlaybackPresenter {

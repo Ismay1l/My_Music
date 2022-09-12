@@ -102,11 +102,11 @@ class TrackControllerView: UIView {
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(25)
             make.right.equalTo(settingsButton.snp.left).offset(-15)
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview()
         }
         
         settingsButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(-10)
             make.right.equalToSuperview().offset(-25)
             make.width.height.equalTo(30)
         }
@@ -114,12 +114,12 @@ class TrackControllerView: UIView {
         artistLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(25)
             make.right.equalToSuperview().offset(-25)
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
         
         playButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(artistLabel.snp.bottom).offset(20)
+            make.top.equalTo(artistLabel.snp.bottom).offset(10)
             make.width.height.equalTo(130)
         }
         
@@ -138,7 +138,7 @@ class TrackControllerView: UIView {
         volumeSlider.snp.makeConstraints { make in
             make.left.equalTo(volumeDownImage.snp.right).offset(10)
             make.right.equalTo(volumeUpImage.snp.left).offset(-10)
-            make.bottom.equalToSuperview().offset(-25)
+            make.bottom.equalToSuperview().offset(-30)
         }
         
         volumeDownImage.snp.makeConstraints { make in

@@ -42,7 +42,7 @@ class PlayerVC: UIViewController {
             make.top.equalTo(top)
             make.left.equalTo(left)
             make.right.equalTo(right)
-            make.height.equalTo(view.frame.size.height / 2)
+            make.height.equalTo((view.frame.size.height / 2) - 50)
         }
         
         trackControllerView.snp.makeConstraints { make in
