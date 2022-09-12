@@ -12,6 +12,7 @@ class PlayerVC: UIViewController {
     
     //MARK: - Variables
     weak var dataSource: PlayerVCDataSource?
+    weak var delegate: PlayerVCDelegate?
     
     //MARK: - UI Elements
     private let imageView = ImageView()
@@ -62,14 +63,18 @@ class PlayerVC: UIViewController {
 //MARK: - Extension PlayerVC
 extension PlayerVC: TrackControllerViewDelegate {
     func didTapPlayButton(_ playerController: TrackControllerView) {
-        print("Play tapped")
+        delegate?.didTapPlay()
     }
     
     func didTapBackButton(_ playerController: TrackControllerView) {
-        print("Back tapped")
+        delegate?.didTapBack()
     }
     
     func didTapForwardButton(_ playerController: TrackControllerView) {
-        print("Forward tapped")
+        delegate?.didTapForward()
+    }
+    
+    func didChangeSliderValue(_ playerController: TrackControllerView, value: Float) {
+        delegate?.didChangeSliderValue(value)
     }
 }

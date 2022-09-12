@@ -19,6 +19,7 @@ final class PlaybackPresenter {
     private var track: Track?
     private var tracks = [Track]()
     var player: AVPlayer?
+    var playerQueue: AVQueuePlayer?
     
     var currentTrack: Track? {
         if let track = track, tracks.isEmpty {
@@ -38,6 +39,7 @@ final class PlaybackPresenter {
         self.tracks = []
         let playerVC = PlayerVC()
         playerVC.dataSource = self
+        playerVC.delegate = self
         viewController.present(UINavigationController(rootViewController: playerVC), animated: true) { [weak self] in
             self?.player?.play()
         }
@@ -48,12 +50,14 @@ final class PlaybackPresenter {
         self.track = nil
         let playerVC = PlayerVC()
         playerVC.dataSource = self
+        playerVC.delegate = self
         viewController.present(UINavigationController(rootViewController: playerVC), animated: true)
     }
 }
 
 //MARK: - Extension PlaybackPresenter
-extension PlaybackPresenter: PlayerVCDataSource {
+extension PlaybackPresenter: PlayerVCDataSource,
+                             PlayerVCDelegate {
     var trackName: String? {
         currentTrack?.name
     }
@@ -67,6 +71,39 @@ extension PlaybackPresenter: PlayerVCDataSource {
             return URL(string: urlStr)
         }
         return nil
+    }
+    
+    func didTapPlay() {
+        if let player = player {
+            if player.timeControlStatus == .playing {
+                player.pause()
+            } else if player.timeControlStatus == .paused {
+                player.play()
+            }
+        }
+    }
+    
+    func didTapBack() {
+        if tracks.isEmpty {
+            player?.pause()
+            player?.play()
+        } else {
+            
+        }
+    }
+    
+    func didTapForward() {
+        if tracks.isEmpty {
+            player?.pause()
+        } else {
+            
+        }
+    }
+    
+    func didChangeSliderValue(_ value: Float) {
+        if let player = player {
+            player.volume = value
+        }
     }
 }
  

@@ -18,6 +18,7 @@ class TrackControllerView: UIView {
     private lazy var volumeSlider: UISlider = {
         let slider = UISlider()
         slider.value = 0.5
+        slider.addTarget(self, action: #selector(didChangeSliderValue(_:)), for: .valueChanged)
         return slider
     }()
     
@@ -189,5 +190,10 @@ class TrackControllerView: UIView {
             delegate?.didTapForwardButton(self)
         default: return 
         }
+    }
+    
+    @objc
+    private func didChangeSliderValue(_ sender: UISlider) {
+        delegate?.didChangeSliderValue(self, value: sender.value)
     }
 }

@@ -32,10 +32,18 @@ protocol TrackControllerViewDelegate: AnyObject {
     func didTapPlayButton(_ playerController: TrackControllerView)
     func didTapBackButton(_ playerController: TrackControllerView)
     func didTapForwardButton(_ playerController: TrackControllerView)
+    func didChangeSliderValue(_ playerController: TrackControllerView, value: Float)
 }
 
 protocol PlayerVCDataSource: AnyObject {
     var trackName: String? { get }
     var artistName: String? { get }
     var imageURL: URL? { get }
+}
+
+protocol PlayerVCDelegate: AnyObject {
+    func didTapPlay()
+    func didTapBack()
+    func didTapForward()
+    func didChangeSliderValue(_ value: Float)
 }
