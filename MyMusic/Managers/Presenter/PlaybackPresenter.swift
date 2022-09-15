@@ -23,8 +23,13 @@ final class PlaybackPresenter {
     var currentTrack: Track? {
         if let track = track, tracks.isEmpty {
             return track
-        } else if !tracks.isEmpty {
-            return tracks.first
+        } else if let player = playerQueue, !tracks.isEmpty {
+            let item = player.currentItem
+            let items = player.items()
+            guard let index = items.firstIndex(where: { track in
+                item == track
+            }) else { return nil }
+            return tracks[index]
         }
         return nil
     }
@@ -47,6 +52,13 @@ final class PlaybackPresenter {
     func startPlaybackSongs(from viewController: UIViewController, tracks: [Track]) {
         self.tracks = tracks
         self.track = nil
+        let items: [AVPlayerItem] = tracks.compactMap { track in
+            guard let url = URL(string: track.preview_url ?? "NA") else { return nil }
+            return AVPlayerItem(url: url)
+        }
+        playerQueue = AVQueuePlayer(items: items)
+        playerQueue?.volume = 0.5
+        playerQueue?.play()
         let playerVC = PlayerVC()
         playerVC.dataSource = self
         playerVC.delegate = self
@@ -80,22 +92,33 @@ extension PlaybackPresenter: PlayerVCDataSource,
                 player.play()
             }
         }
+        else if let player = playerQueue {
+            if player.timeControlStatus == .playing {
+                player.pause()
+            } else if player.timeControlStatus == .paused {
+                player.play()
+            }
+        }
     }
     
     func didTapBack() {
         if tracks.isEmpty {
             player?.pause()
             player?.play()
-        } else {
-            
+        } else if let firstItem = playerQueue?.items().first {
+            playerQueue?.pause()
+            playerQueue?.removeAllItems()
+            playerQueue = AVQueuePlayer(items: [firstItem])
+            playerQueue?.play()
+            player?.volume = 0.5
         }
     }
     
     func didTapForward() {
         if tracks.isEmpty {
             player?.pause()
-        } else {
-            
+        } else if let player = playerQueue {
+            player.advanceToNextItem()
         }
     }
     
