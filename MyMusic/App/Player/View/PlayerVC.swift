@@ -17,6 +17,13 @@ class PlayerVC: UIViewController {
     //MARK: - UI Elements
     private let imageView = ImageView()
     private let trackControllerView = TrackControllerView()
+    
+    private lazy var navigationBarHeader: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray
+        view.layer.cornerRadius = 10
+        return view
+    }()
 
     //MARK: - Parent Delegate
     override func viewDidLoad() {
@@ -32,6 +39,7 @@ class PlayerVC: UIViewController {
     private func configureConstraints() {
         view.addSubview(imageView)
         view.addSubview(trackControllerView)
+        view.addSubview(navigationBarHeader)
         
         let top = view.safeAreaLayoutGuide.snp.top
         let left = view.safeAreaLayoutGuide.snp.left
@@ -39,7 +47,7 @@ class PlayerVC: UIViewController {
         let bottom = view.safeAreaLayoutGuide.snp.bottom
         
         imageView.snp.makeConstraints { make in
-            make.top.equalTo(top)
+            make.top.equalTo(navigationBarHeader.snp.bottom)
             make.left.equalTo(left)
             make.right.equalTo(right)
             make.height.equalTo((view.frame.size.height / 2) - 50)
@@ -50,6 +58,13 @@ class PlayerVC: UIViewController {
             make.right.equalTo(right)
             make.left.equalTo(left)
             make.bottom.equalTo(bottom)
+        }
+        
+        navigationBarHeader.snp.makeConstraints { make in
+            make.top.equalTo(top)
+            make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
+            make.width.equalTo(80)
+            make.height.equalTo(3)
         }
     }
     

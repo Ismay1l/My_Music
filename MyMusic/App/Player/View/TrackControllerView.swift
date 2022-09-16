@@ -183,11 +183,19 @@ class TrackControllerView: UIView {
         switch sender.tag {
         case 1:
             delegate?.didTapBackButton(self)
+            if isPlaying == false {
+                changeButtonIcon(playButton)
+                isPlaying = true
+            }
         case 2:
             delegate?.didTapPlayButton(self)
             changeButtonIcon(sender)
         case 3:
             delegate?.didTapForwardButton(self)
+            if isPlaying {
+                changeButtonIcon(playButton)
+                isPlaying = false
+            }
         default: return 
         }
     }
