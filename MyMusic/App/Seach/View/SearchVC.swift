@@ -16,6 +16,7 @@ class SearchVC: UIViewController {
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
     private var categories = [CategoryItem]()
+//    var query: String?
     
     //MARK: - UI Elements
     private var searchController: UISearchController = {
@@ -97,7 +98,11 @@ class SearchVC: UIViewController {
                     }
                 }
             }
+        
+        
+        
         addToDisposeBag(subscription: categoriesSubscription)
+//        addToDisposeBag(subscription: searchResultSubscription)
     }
     
     private func addToDisposeBag(subscription: Disposable) {
@@ -120,7 +125,21 @@ extension SearchVC: UISearchResultsUpdating,
         guard let resultController = searchController.searchResultsController as? SearchResultVC,
               let query = searchController.searchBar.text,
               !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+//        self.query = query
         print("Query: \(query)")
+        let searchResultSubscription = searchVM.fetchSearchResult(query: query)
+            .observe(on: MainScheduler.instance)
+            .subscribe { received in
+                guard let data = received.element else { return }
+                DispatchQueue.main.async {
+                    switch data {
+                    case .showSearchResult(let model):
+                        print(model)
+                    }
+                }
+            }
+        addToDisposeBag(subscription: searchResultSubscription)
+        
         //Call Search Call
         //resultController.update(with:_)
     }

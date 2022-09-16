@@ -282,4 +282,32 @@ class APIManager: APIManagerProtocol {
         }
         return promise
     }
+    
+    //MARK: - Fetch Search Result
+    func fetchSearchResult(query: String) -> Promise<Result<String, Error>> {
+        let promise = Promise<Result<String, Error>> { fulfill, reject in
+            let url = APIConstants.baseURL + "/search?limit=10&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+            AF.request(url, method: .get, headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                    }
+                    
+                    do {
+                        print("Data of Search Result: \(data)")
+                        let result = try JSONSerialization.jsonObject(with: data)
+                        print("Result: \(result)")
+                    } catch {
+                        reject(error)
+                    }
+                }
+        }
+        return promise
+    }
 }

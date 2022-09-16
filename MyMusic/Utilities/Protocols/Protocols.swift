@@ -18,6 +18,7 @@ protocol APIManagerProtocol {
     func fetchPlaylists(playlist: Item) -> Promise<PlaylistResponse>
     func fetchCategories() -> Promise<CategoriesResponse>
     func fetchCategoriesPlaylist(item: CategoryItem) -> Promise<CategoriesPlaylistResponse>
+    func fetchSearchResult(query: String) -> Promise<Result<String, Error>>
 }
 
 protocol PlaylistHeaderCollectionViewDelegate: AnyObject {

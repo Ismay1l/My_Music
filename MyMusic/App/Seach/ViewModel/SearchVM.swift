@@ -19,7 +19,7 @@ class SearchVM {
     
     //MARK: - Variables
     private let categoriesRelay = BehaviorRelay<CategoriesState?>.init(value: nil)
-    private let categoriesPlaylistRelay = BehaviorRelay<CategoriesPlaylistState?>.init(value: nil)
+    private let searchResultRelay = BehaviorRelay<SearchResultState?>.init(value: nil)
     
     //MARK: - Fetch Categories
     func fetchCategories() -> Observable<CategoriesState> {
@@ -28,6 +28,22 @@ class SearchVM {
                 self.categoriesRelay.accept(.showCategories(model: result))
             }
         return categoriesRelay
+            .filter { state in
+                state != nil
+            }
+            .map { state in
+                state!
+            }
+            .asObservable()
+    }
+    
+    //MARK: - Fetch Search Result
+    func fetchSearchResult(query: String) -> Observable<SearchResultState> {
+        apiManager.fetchSearchResult(query: query)
+            .then { result in
+                self.searchResultRelay.accept(.showSearchResult(model: result))
+            }
+        return searchResultRelay
             .filter { state in
                 state != nil
             }
