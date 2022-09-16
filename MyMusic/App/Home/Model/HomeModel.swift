@@ -21,7 +21,7 @@ struct Album: Codable {
     let available_markets: [String]?
     let external_urls: ExternalUrls?
     let id: String?
-    let images: [Image]?
+    var images: [Image]?
     let name, release_date: String?
     let total_tracks: Int?
 }
@@ -81,7 +81,7 @@ struct Seed: Codable {
 }
 
 struct Track: Codable {
-    let album: Album?
+    var album: Album?
     let artists: [Artist]?
     let available_markets: [String]?
     let external_urls: ExternalUrls?

@@ -73,6 +73,10 @@ class PlayerVC: UIViewController {
         trackControllerView.titleLabel.text = dataSource?.trackName
         trackControllerView.artistLabel.text = dataSource?.artistName
     }
+    
+    func refreshUI() {
+        configureData()
+    }
 }
 
 //MARK: - Extension PlayerVC

@@ -19,34 +19,32 @@ final class PlaybackPresenter {
     private var tracks = [Track]()
     var player: AVPlayer?
     var playerQueue: AVQueuePlayer?
+    var playerVC: PlayerVC?
+    var index = 0
     
     var currentTrack: Track? {
         if let track = track, tracks.isEmpty {
             return track
-        } else if let player = playerQueue, !tracks.isEmpty {
-            let item = player.currentItem
-            let items = player.items()
-            guard let index = items.firstIndex(where: { track in
-                item == track
-            }) else { return nil }
+        } else if let _ = playerQueue, !tracks.isEmpty {
             return tracks[index]
         }
         return nil
     }
     
     //MARK: - Functions
-    func startPlaybackSong(from viewController: UIViewController, track: Track) {
+    func startPlaybackSong(from viewController: UIViewController, track: Track, tracks: [Track?]) {
         guard let url = URL(string: track.preview_url ?? "") else { return }
         player = AVPlayer(url: url)
         player?.volume = 0.5
         self.track = track
-        self.tracks = []
+//        self.tracks = []
         let playerVC = PlayerVC()
         playerVC.dataSource = self
         playerVC.delegate = self
         viewController.present(UINavigationController(rootViewController: playerVC), animated: true) { [weak self] in
             self?.player?.play()
         }
+        self.playerVC = playerVC
     }
     
     func startPlaybackSongs(from viewController: UIViewController, tracks: [Track]) {
@@ -63,6 +61,7 @@ final class PlaybackPresenter {
         playerVC.dataSource = self
         playerVC.delegate = self
         viewController.present(UINavigationController(rootViewController: playerVC), animated: true)
+        self.playerVC = playerVC
     }
 }
 
@@ -119,6 +118,8 @@ extension PlaybackPresenter: PlayerVCDataSource,
             player?.pause()
         } else if let player = playerQueue {
             player.advanceToNextItem()
+            index += 1
+            playerVC?.refreshUI()
         }
     }
     

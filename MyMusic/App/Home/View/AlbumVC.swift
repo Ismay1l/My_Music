@@ -149,11 +149,17 @@ extension AlbumVC: UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.row
-        let track = albumResponse[index]
-        PlaybackPresenter.shared.startPlaybackSong(from: self, track: track)
+        var track = albumResponse[index]
+        track.album = album
+        PlaybackPresenter.shared.startPlaybackSong(from: self, track: track, tracks: albumResponse)
     }
     
     func didTapPlayButton(_ header: BrowseAlbumsHeaderView) {
-        PlaybackPresenter.shared.startPlaybackSongs(from: self, tracks: albumResponse)
+        let tracksWithAlbumImage: [Track] = albumResponse.compactMap {
+            var track = $0
+            track.album = album
+            return track
+        }
+        PlaybackPresenter.shared.startPlaybackSongs(from: self, tracks: tracksWithAlbumImage)
     }
 }
