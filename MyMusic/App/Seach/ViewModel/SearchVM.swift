@@ -41,7 +41,12 @@ class SearchVM {
     func fetchSearchResult(query: String) -> Observable<SearchResultState> {
         apiManager.fetchSearchResult(query: query)
             .then { result in
-                self.searchResultRelay.accept(.showSearchResult(model: result))
+                switch result {
+                case .success(let model):
+                    self.searchResultRelay.accept(.showSearchResult(model: model))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         return searchResultRelay
             .filter { state in

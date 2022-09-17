@@ -7,6 +7,7 @@
 
 import Foundation
 import Promises
+import UIKit
 
 protocol APIManagerProtocol {
     func fetchUserProfile() -> Promise<UserProfile>
@@ -18,7 +19,7 @@ protocol APIManagerProtocol {
     func fetchPlaylists(playlist: Item) -> Promise<PlaylistResponse>
     func fetchCategories() -> Promise<CategoriesResponse>
     func fetchCategoriesPlaylist(item: CategoryItem) -> Promise<CategoriesPlaylistResponse>
-    func fetchSearchResult(query: String) -> Promise<Result<String, Error>>
+    func fetchSearchResult(query: String) -> Promise<Result<[SearchResult], Error>>
 }
 
 protocol PlaylistHeaderCollectionViewDelegate: AnyObject {
@@ -47,4 +48,8 @@ protocol PlayerVCDelegate: AnyObject {
     func didTapBack()
     func didTapForward()
     func didChangeSliderValue(_ value: Float)
+}
+
+protocol SearchResultVCDelegate: AnyObject {
+    func didSelectOption(_ result: SearchResult)
 }

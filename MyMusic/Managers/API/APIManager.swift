@@ -284,8 +284,8 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Fetch Search Result
-    func fetchSearchResult(query: String) -> Promise<Result<String, Error>> {
-        let promise = Promise<Result<String, Error>> { fulfill, reject in
+    func fetchSearchResult(query: String) -> Promise<Result<[SearchResult], Error>> {
+        let promise = Promise<Result<[SearchResult], Error>> { fulfill, reject in
             let url = APIConstants.baseURL + "/search?limit=10&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
             AF.request(url, method: .get, headers: self.header)
                 .validate()
@@ -301,8 +301,19 @@ class APIManager: APIManagerProtocol {
                     
                     do {
                         print("Data of Search Result: \(data)")
-                        let result = try JSONSerialization.jsonObject(with: data)
-                        print("Result: \(result)")
+                        let result = try self.jsonDecoder.decode(SearchResultResponse.self, from: data)
+                        
+                        guard let artistItems = result.artists?.items else { return }
+                        guard let albumItems = result.albums?.items else { return }
+                        guard let trackItems = result.tracks?.items else { return }
+                        guard let playlistItems = result.playlists?.items else { return }
+                        
+                        var searchResult: [SearchResult] = [] 
+                        searchResult.append(contentsOf: artistItems.compactMap({ SearchResult.artist(model: $0)}))
+                        searchResult.append(contentsOf: albumItems.compactMap({ SearchResult.album(model: $0)}))
+                        searchResult.append(contentsOf: trackItems.compactMap({ SearchResult.track(model: $0)}))
+                        searchResult.append(contentsOf: playlistItems.compactMap({ SearchResult.playlist(model: $0)}))
+                        fulfill(.success(searchResult))
                     } catch {
                         reject(error)
                     }

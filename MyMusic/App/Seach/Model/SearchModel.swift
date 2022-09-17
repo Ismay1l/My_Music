@@ -26,3 +26,33 @@ struct CategoryItem: Codable {
 struct CategoriesPlaylistResponse: Codable {
     let playlists: Playlists?
 }
+
+//MARK: - Search Result
+struct SearchResultResponse: Codable {
+    let albums: SearchAlbum?
+    let artists: SearchArtist?
+    let tracks: SearchTrack?
+    let playlists: SearchPlaylist?
+}
+
+struct SearchAlbum: Codable {
+    let items: [Album]?
+}
+
+struct SearchArtist: Codable {
+    let items: [Artist]?
+}
+
+struct SearchPlaylist: Codable {
+    let items: [Item]?
+}
+
+struct SearchTrack: Codable {
+    let items: [Track]?
+}
+
+//MARK: - SearchResult TableView Model
+struct SearchSection {
+    let title: String?
+    let results: [SearchResult]?
+}

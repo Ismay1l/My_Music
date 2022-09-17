@@ -16,7 +16,6 @@ class SearchVC: UIViewController {
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
     private var categories = [CategoryItem]()
-//    var query: String?
     
     //MARK: - UI Elements
     private var searchController: UISearchController = {
@@ -64,6 +63,7 @@ class SearchVC: UIViewController {
     //MARK: - Functions
     private func setUpSearchView() {
         searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
     }
     
@@ -102,7 +102,6 @@ class SearchVC: UIViewController {
         
         
         addToDisposeBag(subscription: categoriesSubscription)
-//        addToDisposeBag(subscription: searchResultSubscription)
     }
     
     private func addToDisposeBag(subscription: Disposable) {
@@ -114,34 +113,13 @@ class SearchVC: UIViewController {
 extension SearchVC: UISearchResultsUpdating,
                     UICollectionViewDelegate,
                     UICollectionViewDataSource,
-                    CHTCollectionViewDelegateWaterfallLayout {
+                    CHTCollectionViewDelegateWaterfallLayout,
+                    UISearchBarDelegate,
+                    SearchResultVCDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.size.width / 2,
                height: CGFloat.random(in: 150...250))
-    }
-
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let resultController = searchController.searchResultsController as? SearchResultVC,
-              let query = searchController.searchBar.text,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-//        self.query = query
-        print("Query: \(query)")
-        let searchResultSubscription = searchVM.fetchSearchResult(query: query)
-            .observe(on: MainScheduler.instance)
-            .subscribe { received in
-                guard let data = received.element else { return }
-                DispatchQueue.main.async {
-                    switch data {
-                    case .showSearchResult(let model):
-                        print(model)
-                    }
-                }
-            }
-        addToDisposeBag(subscription: searchResultSubscription)
-        
-        //Call Search Call
-        //resultController.update(with:_)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -167,5 +145,43 @@ extension SearchVC: UISearchResultsUpdating,
         categoryVC.title = categories.first?.name
         categoryVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(categoryVC, animated: true)
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let resultController = searchController.searchResultsController as? SearchResultVC,
+              let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        resultController.delegate = self
+        let searchResultSubscription = searchVM.fetchSearchResult(query: query)
+            .observe(on: MainScheduler.instance)
+            .subscribe { received in
+                guard let data = received.element else { return }
+                DispatchQueue.main.async {
+                    switch data {
+                    case .showSearchResult(let model):
+                        resultController.update(with: model)
+                    }
+                }
+            }
+        addToDisposeBag(subscription: searchResultSubscription)
+    }
+    
+    func didSelectOption(_ result: SearchResult) {
+        switch result {
+        case .playlist(let model):
+            let playlistVC = PlaylistVC(playlist: model)
+            navigationController?.pushViewController(playlistVC, animated: true)
+        case .album(let model):
+            let albumVC = AlbumVC(album: model)
+            navigationController?.pushViewController(albumVC, animated: true)
+        case .artist(let model):
+            break
+        case .track(let model):
+            break
+        }
     }
 }

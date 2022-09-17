@@ -40,7 +40,7 @@ enum CategoriesPlaylistState {
 }
 
 enum SearchResultState {
-    case showSearchResult(model: Result<String, Error>)
+    case showSearchResult(model: [SearchResult])
 }
 
 enum MainCollectionViewHeaderType {
@@ -58,4 +58,11 @@ enum MainCollectionViewHeaderType {
             return L10n.recommendedTracksTitle
         }
     }
+}
+
+enum SearchResult {
+    case artist(model: Artist)
+    case album(model: Album)
+    case track(model: Track)
+    case playlist(model: Item)
 }
