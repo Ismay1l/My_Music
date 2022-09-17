@@ -18,7 +18,12 @@ class SearchResultVC: UIViewController {
         let view = UITableView(frame: .zero, style: .grouped)
         view.isHidden = true
         view.backgroundColor = hexStringToUIColor(hex: "370617")
-        view.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
+        view.scrollsToTop = true
+        view.showsVerticalScrollIndicator = false
+        
+        view.register(SearchResultArtistCell.self, forCellReuseIdentifier: "\(SearchResultArtistCell.self)")
+        view.register(SearchResultAlbumCell.self, forCellReuseIdentifier: "\(SearchResultAlbumCell.self)")
+        
         view.dataSource = self
         view.delegate = self
         return view
@@ -105,24 +110,37 @@ extension SearchResultVC: UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let result = sections[indexPath.section].results?[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
         
         switch result {
-        case .artist(let model):
-            cell.textLabel?.text = model.name ?? "NA"
-        case .album(let model):
-            cell.textLabel?.text = model.name ?? "NA"
-        case .track(let model):
-            cell.textLabel?.text = model.name ?? "NA"
-        case .playlist(let model):
-            cell.textLabel?.text = model.name ?? "NA"
+        case .artist(let artist):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultArtistCell.self)", for: indexPath) as! SearchResultArtistCell
+            let model = SearchResultArtistTableViewModel(title: artist.name,
+                                                        imageURL: URL(string: artist.images?.first?.url ?? ""))
+            cell.configure(_with: model)
+            cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            return cell
+        case .album(let album):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
+            let model = SearchResultAlbumTableViewModel(title: album.name, subtitle: album.artists?.first?.name, imageURL: URL(string: album.images?.first?.url ?? ""))
+            cell.configure(_with: model)
+            cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            return cell
+        case .track(let track):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
+            let model = SearchResultAlbumTableViewModel(title: track.name, subtitle: track.artists?.first?.name, imageURL: URL(string: track.album?.images?.first?.url ?? ""))
+            cell.configure(_with: model)
+            cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            return cell
+        case .playlist(let playlist):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
+            let model = SearchResultAlbumTableViewModel(title: playlist.name, subtitle: playlist.owner?.display_name, imageURL: URL(string: playlist.images?.first?.url ?? ""))
+            cell.configure(_with: model)
+            cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            return cell
         case .none:
             break
         }
-        
-        cell.backgroundColor = hexStringToUIColor(hex: "370617")
-        cell.selectionStyle = .none
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import CHTCollectionViewWaterfallLayout
+import SafariServices
 
 class SearchVC: UIViewController {
     
@@ -179,7 +180,10 @@ extension SearchVC: UISearchResultsUpdating,
             let albumVC = AlbumVC(album: model)
             navigationController?.pushViewController(albumVC, animated: true)
         case .artist(let model):
-            break
+            guard let externalURL = model.external_urls?.spotify else { return }
+            guard let url = URL(string: externalURL) else { return}
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true)
         case .track(let model):
             break
         }

@@ -29,6 +29,7 @@ struct Album: Codable {
 struct Artist: Codable {
     let external_urls: ExternalUrls?
     let id, name: String?
+    let images: [Image]?
 }
 
 struct ExternalUrls: Codable {

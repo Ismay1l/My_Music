@@ -21,6 +21,8 @@
 		4B1D1F0A28CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4B1D1F0928CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout */; };
 		4B1F866528C6002F00F2FC49 /* PlaylistVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */; };
 		4B1F866828C60FC400F2FC49 /* RAMAnimatedTabBarController in Frameworks */ = {isa = PBXBuildFile; productRef = 4B1F866728C60FC400F2FC49 /* RAMAnimatedTabBarController */; };
+		4B21572B28D60A5D00C655DF /* SearchResultArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21572A28D60A5D00C655DF /* SearchResultArtistCell.swift */; };
+		4B21572D28D614B300C655DF /* SearchResultAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21572C28D614B300C655DF /* SearchResultAlbumCell.swift */; };
 		4B3B754D28BFC44800033B61 /* Shift in Frameworks */ = {isa = PBXBuildFile; productRef = 4B3B754C28BFC44800033B61 /* Shift */; };
 		4B44933E28C00B830030BC00 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4B44933D28C00B830030BC00 /* SDWebImage */; };
 		4B4AA74028C7AAF600465590 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4B4AA73F28C7AAF600465590 /* swiftgen.yml */; };
@@ -106,6 +108,8 @@
 		49F0DD3828CB31A200EB470B /* CategoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVM.swift; sourceTree = "<group>"; };
 		49F0DD3A28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesPlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVM.swift; sourceTree = "<group>"; };
+		4B21572A28D60A5D00C655DF /* SearchResultArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultArtistCell.swift; sourceTree = "<group>"; };
+		4B21572C28D614B300C655DF /* SearchResultAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultAlbumCell.swift; sourceTree = "<group>"; };
 		4B4AA73F28C7AAF600465590 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		4B52F46428CCAA9C00E5AD94 /* PlaybackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackPresenter.swift; sourceTree = "<group>"; };
 		4B52F46628CE239B00E5AD94 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 			children = (
 				49795E9D28C8C8BA00EFF96A /* SearchGenreCollectionViewCell.swift */,
 				49F0DD3A28CB59A200EB470B /* CategoriesPlaylistCollectionViewCell.swift */,
+				4B21572A28D60A5D00C655DF /* SearchResultArtistCell.swift */,
+				4B21572C28D614B300C655DF /* SearchResultAlbumCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -786,6 +792,7 @@
 				4B91550A28C532EC00BDFB95 /* AlbumVC.swift in Sources */,
 				4BD33C3528B7F14F00BE1353 /* AuthManager.swift in Sources */,
 				4BD33C2F28B7F0E000BE1353 /* PlayerVC.swift in Sources */,
+				4B21572B28D60A5D00C655DF /* SearchResultArtistCell.swift in Sources */,
 				4B52F46728CE239B00E5AD94 /* ImageView.swift in Sources */,
 				4BD33C1C28B7EFC900BE1353 /* SearchVC.swift in Sources */,
 				4B91550C28C5330000BDFB95 /* PlaylistVC.swift in Sources */,
@@ -806,6 +813,7 @@
 				4BD4EAA628B6AFAF00CA24D8 /* AppDelegate.swift in Sources */,
 				4B7E3EAA28C2284600BE990E /* XCAssets+Image+Generated.swift in Sources */,
 				49F0DD2A28CB0EDC00EB470B /* SearchVM.swift in Sources */,
+				4B21572D28D614B300C655DF /* SearchResultAlbumCell.swift in Sources */,
 				4BD4EAE928B6B5FC00CA24D8 /* SceneDelegate.swift in Sources */,
 				4B80E7AB28C2753800CD4151 /* Enums.swift in Sources */,
 				49795E9728C863D100EFF96A /* MainCollectionHeaderView.swift in Sources */,
