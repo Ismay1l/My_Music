@@ -8,9 +8,81 @@
 import UIKit
 
 class LibraryVC: UIViewController {
-
+    
+    //MARK: - Variables
+    let libraryPlaylistVC = LibraryPlaylistVC()
+    let libraryAlbumVC = LibraryAlbumVC()
+    let switchView = LibrarySwitchView()
+    
+    //MARK: - UI Elements
+    private lazy var segmentScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.isPagingEnabled = true
+        view.delegate = self
+        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.showsHorizontalScrollIndicator = false
+        return view
+    }()
+    
+    //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = hexStringToUIColor(hex: "370617")
+        segmentScrollView.contentSize = CGSize(width: view.frame.size.width * 2, height: segmentScrollView.frame.size.height)
+        switchView.delegate = self
+        
+        configureConstraints()
+        addChildVC()
+    }
+    
+    //MARK: - Functions
+    private func configureConstraints() {
+        view.addSubview(segmentScrollView)
+        view.addSubview(switchView)
+        
+        let top = view.safeAreaLayoutGuide.snp.top
+        let left = view.safeAreaLayoutGuide.snp.left
+        let right = view.safeAreaLayoutGuide.snp.right
+        let bottom = view.safeAreaLayoutGuide.snp.bottom
+        
+        switchView.snp.makeConstraints { make in
+            make.left.equalTo(left)
+            make.right.equalTo(right)
+            make.top.equalTo(top)
+            make.height.equalTo(40)
+        }
+        
+        segmentScrollView.snp.makeConstraints { make in
+            make.left.equalTo(left)
+            make.right.equalTo(right)
+            make.top.equalTo(switchView.snp.bottom)
+            make.bottom.equalTo(bottom)
+        }
+    }
+    
+    private func addChildVC() {
+        addChild(libraryPlaylistVC)
+        segmentScrollView.addSubview(libraryPlaylistVC.view)
+        
+        libraryPlaylistVC.view.frame = CGRect(x: 0, y: 0, width: segmentScrollView.frame.size.width, height: segmentScrollView.frame.size.height)
+        libraryPlaylistVC.didMove(toParent: self)
+        
+        addChild(libraryAlbumVC)
+        segmentScrollView.addSubview(libraryAlbumVC.view)
+        
+        libraryAlbumVC.view.frame = CGRect(x: view.frame.size.width, y: 0, width: segmentScrollView.frame.size.width, height: segmentScrollView.frame.size.height)
+        libraryAlbumVC .didMove(toParent: self)
+    }
+}
+
+//MARK: - Extension LibraryVC
+extension LibraryVC: UIScrollViewDelegate,
+                     LibrarySwitchViewDelegate {
+    func switchToPlaylistVC(_ view: LibrarySwitchView) {
+        segmentScrollView.setContentOffset(.zero, animated: true)
+    }
+    
+    func switchToAlbumVC(_ view: LibrarySwitchView) {
+        segmentScrollView.setContentOffset(CGPoint(x: view.frame.size.width, y: 0), animated: true)
     }
 }

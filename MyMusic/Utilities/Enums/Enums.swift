@@ -66,3 +66,8 @@ enum SearchResult {
     case track(model: Track)
     case playlist(model: Item)
 }
+
+enum SwitchLibraryVCState {
+    case playlist
+    case album
+}
