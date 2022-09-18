@@ -19,12 +19,12 @@ struct Option {
 }
 
 //MARK: User
-struct UserProfile: Codable {
+struct UserProfileResponse: Codable {
     let country, displayName: String?
     let externalUrls: ExternalUrls?
     let followers: Followers?
     let id, product, type: String?
-    let images: [UserImage]?
+    let images: [Image]?
 
     enum CodingKeys: String, CodingKey {
         case country
@@ -32,8 +32,4 @@ struct UserProfile: Codable {
         case externalUrls = "external_urls"
         case followers, id, product, type, images
     }
-}
-
-struct UserImage: Codable {
-    let url: String?
 }

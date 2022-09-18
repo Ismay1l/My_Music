@@ -20,7 +20,7 @@ enum RecommendationState {
 }
 
 enum UserProfileState {
-    case showUserProfile(model: UserProfile)
+    case showUserProfile(model: UserProfileResponse)
 }
 
 enum AlbumDetailsState {

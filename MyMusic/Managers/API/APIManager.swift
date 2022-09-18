@@ -27,9 +27,9 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Fetch User Profile
-    func fetchUserProfile() -> Promise<UserProfile> {
+    func fetchUserProfile() -> Promise<UserProfileResponse> {
         let url = APIConstants.baseURL + "/me"
-        let promise = Promise<UserProfile> { fulfill, reject in
+        let promise = Promise<UserProfileResponse> { fulfill, reject in
             AF.request(url, method: .get, headers: self.header)
                 .validate()
                 .response { response in
@@ -44,7 +44,7 @@ class APIManager: APIManagerProtocol {
 
                     do {
                         print("Data of Profile Result: \(data)")
-                        let result = try self.jsonDecoder.decode(UserProfile.self, from: data)
+                        let result = try self.jsonDecoder.decode(UserProfileResponse.self, from: data)
                         fulfill(result)
                     } catch {
                         reject(error)

@@ -10,7 +10,7 @@ import Promises
 import UIKit
 
 protocol APIManagerProtocol {
-    func fetchUserProfile() -> Promise<UserProfile>
+    func fetchUserProfile() -> Promise<UserProfileResponse>
     func fetchBrowseNewReleases() -> Promise<NewReleaseResponse>
     func fetchFeaturedPlaylist() -> Promise<FeaturedPlaylistResponse>
     func fetchRecommendedGenres() -> Promise<RecommendedGenreResponse>

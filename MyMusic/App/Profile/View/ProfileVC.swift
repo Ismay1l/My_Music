@@ -99,7 +99,7 @@ class ProfileVC: UIViewController {
         }
     }
     
-    private func updateUI(with model: UserProfile) {
+    private func updateUI(with model: UserProfileResponse) {
         profileTableView.isHidden = false
         profileVM.model.removeAll()
         profileVM.model.append("\(L10n.fullnameLabel): \(model.displayName ?? "NA")")
