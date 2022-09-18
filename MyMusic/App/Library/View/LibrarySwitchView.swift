@@ -72,13 +72,20 @@ class LibrarySwitchView: UIView {
     private func setUpUnderIndicatorView() {
         switch state {
         case .playlist:
-            underIndicatorView.frame = CGRect(x: 0,
-                                              y: playlistButton.frame.size.height + 10,
-                                              width: 150,
-                                              height: 3)
+            underIndicatorView.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.top.equalTo(playlistButton.snp.bottom)
+                make.height.equalTo(3)
+                make.width.equalTo(150)
+            }
+//            underIndicatorView.frame = CGRect(x: 0,
+//                                              y: playlistButton.frame.size.height,
+//                                              width: 150,
+//                                              height: 3)
         case .album:
+            
             underIndicatorView.frame = CGRect(x: 100,
-                                              y: playlistButton.frame.size.height + 10,
+                                              y: playlistButton.frame.size.height,
                                               width: 150,
                                               height: 3)
         }
@@ -89,13 +96,13 @@ class LibrarySwitchView: UIView {
         switch sender.tag {
         case 1:
             state = .playlist
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.2) {
                 self.setUpUnderIndicatorView()
             }
             delegate?.switchToPlaylistVC(self)
         case 2:
             state = .album
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.2) {
                 self.setUpUnderIndicatorView()
             }
             delegate?.switchToAlbumVC(self)
