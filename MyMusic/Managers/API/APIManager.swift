@@ -225,6 +225,59 @@ class APIManager: APIManagerProtocol {
         return promise
     }
     
+    //MARK: - Fetch Current User Playlist
+    func fetchCurrentUserPlaylist() -> Promise<CurrentUserPlaylistResponse> {
+        let promise = Promise<CurrentUserPlaylistResponse> { fulfill, reject in
+            let url = APIConstants.baseURL + "/me/playlists"
+            AF.request(url, method: .get, headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                    }
+                    
+                    do {
+                        print("Data of User's Playlist: \(data)")
+//                        let result = try JSONSerialization.jsonObject(with: data)
+                        let result = try self.jsonDecoder.decode(CurrentUserPlaylistResponse.self, from: data)
+                        fulfill(result)
+                    } catch {
+                        reject(error)
+                    }
+                }
+        }
+        return promise
+    }
+    
+    //MARK: - Create A Playlist
+    func createPlaylist(with name: String, playlist: PlaylistResponse) -> Promise<Result<String, Error>> {
+        let promise = Promise<Result<String, Error>> { fulfill, reject in
+            let url = APIConstants.baseURL + "/users/user_id/playlists"
+        }
+        return promise
+    }
+    
+    //MARK: - Add Track To Playlist
+    func addTrackToPlaylist(add track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>> {
+        let promise = Promise<Result<String, Error>> { fulfill, reject in
+            let url = APIConstants.baseURL + "/playlists/playlist_id/tracks"
+        }
+        return promise
+    }
+    
+    //MARK: - Remove Track From Playlist
+    func removeTrackFromPlaylist(remove track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>> {
+        let promise = Promise<Result<String, Error>> { fulfill, reject in
+            let url = APIConstants.baseURL + "/playlists/playlist_id/tracks"
+        }
+        return promise
+    }
+    
     //MARK: - Fetch Categories for SearchVC
     func fetchCategories() -> Promise<CategoriesResponse> {
         let promise = Promise<CategoriesResponse> { fulfill, reject in

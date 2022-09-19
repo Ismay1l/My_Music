@@ -16,7 +16,6 @@ class HomeVC: UIViewController {
     private var compositeDisposable = CompositeDisposable()
     private var disposeBag = DisposeBag()
     private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
-    
     private var newReleases = [Album]()
     private var featuredPlaylists = [Item]()
     private var recommendations = [Track]()

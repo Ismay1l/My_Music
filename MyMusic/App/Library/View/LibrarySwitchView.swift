@@ -62,7 +62,7 @@ class LibrarySwitchView: UIView {
         }
         
         albumButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-60)
+            make.left.equalTo(self.snp.centerX).offset(60)
             make.top.equalToSuperview()
         }
         
@@ -72,22 +72,22 @@ class LibrarySwitchView: UIView {
     private func setUpUnderIndicatorView() {
         switch state {
         case .playlist:
-            underIndicatorView.snp.makeConstraints { make in
-                make.left.equalToSuperview()
-                make.top.equalTo(playlistButton.snp.bottom)
-                make.height.equalTo(3)
-                make.width.equalTo(150)
-            }
-//            underIndicatorView.frame = CGRect(x: 0,
-//                                              y: playlistButton.frame.size.height,
-//                                              width: 150,
-//                                              height: 3)
-        case .album:
-            
-            underIndicatorView.frame = CGRect(x: 100,
-                                              y: playlistButton.frame.size.height,
+            underIndicatorView.frame = CGRect(x: 0,
+                                              y: 38,
                                               width: 150,
                                               height: 3)
+        case .album:
+            underIndicatorView.frame = CGRect(x: self.frame.size.width / 2,
+                                              y: 38,
+                                              width: 150,
+                                              height: 3)
+        }
+    }
+    
+    func updateIndicator(_for state: SwitchLibraryVCState) {
+        self.state = state
+        UIView.animate(withDuration: 0.2) {
+            self.setUpUnderIndicatorView()
         }
     }
     

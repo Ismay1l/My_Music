@@ -45,6 +45,9 @@
 		4B64CEC028C4BE4400BE1935 /* BLTNBoard in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEBF28C4BE4400BE1935 /* BLTNBoard */; };
 		4B64CEC328C4C57600BE1935 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64CEC228C4C57600BE1935 /* Promises */; };
 		4B64CEC628C4C6A500BE1935 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64CEC528C4C6A500BE1935 /* Protocols.swift */; };
+		4B64D7EC28D88A9700337836 /* LibraryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D7EB28D88A9700337836 /* LibraryVM.swift */; };
+		4B64D7EF28D88F5100337836 /* CurrentUerPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D7EE28D88F5100337836 /* CurrentUerPlaylist.swift */; };
+		4B64D7F128D8963400337836 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D7F028D8963400337836 /* AlertView.swift */; };
 		4B7E3EAA28C2284600BE990E /* XCAssets+Image+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E3EA828C2284600BE990E /* XCAssets+Image+Generated.swift */; };
 		4B7E3EAB28C2284600BE990E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E3EA928C2284600BE990E /* Strings.swift */; };
 		4B80E7AB28C2753800CD4151 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B80E7AA28C2753800CD4151 /* Enums.swift */; };
@@ -137,6 +140,9 @@
 		4B52F46628CE239B00E5AD94 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		4B52F46828CE249700E5AD94 /* TrackControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackControllerView.swift; sourceTree = "<group>"; };
 		4B64CEC528C4C6A500BE1935 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		4B64D7EB28D88A9700337836 /* LibraryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryVM.swift; sourceTree = "<group>"; };
+		4B64D7EE28D88F5100337836 /* CurrentUerPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUerPlaylist.swift; sourceTree = "<group>"; };
+		4B64D7F028D8963400337836 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		4B7E3EA828C2284600BE990E /* XCAssets+Image+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Image+Generated.swift"; sourceTree = "<group>"; };
 		4B7E3EA928C2284600BE990E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		4B7E3EAC28C22ABE00BE990E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -305,6 +311,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		4B64D7EA28D88A7700337836 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4B64D7EB28D88A9700337836 /* LibraryVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4B64D7ED28D88F3A00337836 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4B64D7EE28D88F5100337836 /* CurrentUerPlaylist.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4B7B311628BBB64B00FFE7E3 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,7 +432,9 @@
 		4BD33C1928B7EF9200BE1353 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				4B64D7ED28D88F3A00337836 /* Model */,
 				4BD33C1D28B7EFCE00BE1353 /* View */,
+				4B64D7EA28D88A7700337836 /* ViewModel */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -433,6 +457,7 @@
 				4B13004528D7150B00775E8F /* LibraryPlaylistVC.swift */,
 				4B13004728D7152800775E8F /* LibraryAlbumVC.swift */,
 				4B13004C28D71B7E00775E8F /* LibrarySwitchView.swift */,
+				4B64D7F028D8963400337836 /* AlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -814,6 +839,7 @@
 			files = (
 				4B13003A28D706AA00775E8F /* Recommendations.swift in Sources */,
 				49F0DD3728CB30C200EB470B /* CategoryVC.swift in Sources */,
+				4B64D7F128D8963400337836 /* AlertView.swift in Sources */,
 				4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */,
 				4BD33C3728B7F16900BE1353 /* APIManager.swift in Sources */,
 				4949433428C09A4B00E82DBF /* NewRelease.swift in Sources */,
@@ -822,9 +848,11 @@
 				49795E9928C86F6400EFF96A /* BrowseAlbumsCollectionViewCell.swift in Sources */,
 				4B13004D28D71B7E00775E8F /* LibrarySwitchView.swift in Sources */,
 				4BD33C3328B7F12000BE1353 /* SearchResultVC.swift in Sources */,
+				4B64D7EF28D88F5100337836 /* CurrentUerPlaylist.swift in Sources */,
 				4BD33C2928B7F06F00BE1353 /* ProfileVC.swift in Sources */,
 				4BD33C2528B7F03000BE1353 /* SignInVC.swift in Sources */,
 				4B1F866528C6002F00F2FC49 /* PlaylistVM.swift in Sources */,
+				4B64D7EC28D88A9700337836 /* LibraryVM.swift in Sources */,
 				4B52F46928CE249700E5AD94 /* TrackControllerView.swift in Sources */,
 				4B91550A28C532EC00BDFB95 /* AlbumVC.swift in Sources */,
 				4BD33C3528B7F14F00BE1353 /* AuthManager.swift in Sources */,

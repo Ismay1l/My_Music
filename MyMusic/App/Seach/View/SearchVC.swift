@@ -17,6 +17,7 @@ class SearchVC: UIViewController {
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
     private var categories = [CategoryItem]()
+    private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
     
     //MARK: - UI Elements
     private var searchController: UISearchController = {
@@ -87,7 +88,7 @@ class SearchVC: UIViewController {
     
     private func observeData() {
         let categoriesSubscription = searchVM.fetchCategories()
-            .observe(on: MainScheduler.instance)
+            .observe(on: mainSchedulerInstance)
             .subscribe { [weak self] received in
                 guard let data = received.element else { return }
                 switch data {

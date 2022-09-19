@@ -43,6 +43,10 @@ enum SearchResultState {
     case showSearchResult(model: [SearchResult])
 }
 
+enum CurrentUserPlaylistState {
+    case showUserPlaylist(model: CurrentUserPlaylistResponse)
+}
+
 enum MainCollectionViewHeaderType {
     case browse
     case featuredPlaylists

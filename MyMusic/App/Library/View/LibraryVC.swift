@@ -6,13 +6,19 @@
 //
 
 import UIKit
+import RxSwift
 
 class LibraryVC: UIViewController {
     
     //MARK: - Variables
-    let libraryPlaylistVC = LibraryPlaylistVC()
-    let libraryAlbumVC = LibraryAlbumVC()
-    let switchView = LibrarySwitchView()
+    private let libraryPlaylistVC = LibraryPlaylistVC()
+    private let libraryAlbumVC = LibraryAlbumVC()
+    private let switchView = LibrarySwitchView()
+    private let  libraryVM = LibraryVM()
+    private var  compositeBag = CompositeDisposable()
+    private var disposeBag = DisposeBag()
+    private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
+    private var currentUserPlaylist = [Item]()
     
     //MARK: - UI Elements
     private lazy var segmentScrollView: UIScrollView = {
@@ -33,6 +39,13 @@ class LibraryVC: UIViewController {
         
         configureConstraints()
         addChildVC()
+        observeData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        compositeBag = CompositeDisposable()
+        compositeBag.disposed(by: disposeBag)
     }
     
     //MARK: - Functions
@@ -73,6 +86,35 @@ class LibraryVC: UIViewController {
         libraryAlbumVC.view.frame = CGRect(x: view.frame.size.width, y: 0, width: segmentScrollView.frame.size.width, height: segmentScrollView.frame.size.height)
         libraryAlbumVC .didMove(toParent: self)
     }
+    
+    private func observeData() {
+        let currentUserPlaylistSubscription = libraryVM.fetchCurrentUserPlaylist()
+            .observe(on: mainSchedulerInstance)
+            .subscribe { [weak self] response in
+                guard let data = response.element else { return }
+                DispatchQueue.main.async {
+                    switch data {
+                    case .showUserPlaylist(let model):
+                        guard let items = model.items else { return }
+                        self?.currentUserPlaylist = items
+                        self?.updateUI()
+                    }
+                }
+            }
+        addToDisposeBag(subscription: currentUserPlaylistSubscription)
+    }
+    
+    private func addToDisposeBag(subscription: Disposable) {
+        let _ = compositeBag.insert(subscription)
+    }
+    
+    private func updateUI() {
+        if currentUserPlaylist.isEmpty {
+            
+        } else {
+            
+        }
+    }
 }
 
 //MARK: - Extension LibraryVC
@@ -84,5 +126,13 @@ extension LibraryVC: UIScrollViewDelegate,
     
     func switchToAlbumVC(_ view: LibrarySwitchView) {
         segmentScrollView.setContentOffset(CGPoint(x: view.frame.size.width, y: 0), animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x >= (view.frame.size.width - 100) {
+            switchView.updateIndicator(_for: .album)
+        } else {
+            switchView.updateIndicator(_for: .playlist)
+        }
     }
 }

@@ -20,6 +20,10 @@ protocol APIManagerProtocol {
     func fetchCategories() -> Promise<CategoriesResponse>
     func fetchCategoriesPlaylist(item: CategoryItem) -> Promise<CategoriesPlaylistResponse>
     func fetchSearchResult(query: String) -> Promise<Result<[SearchResult], Error>>
+    func fetchCurrentUserPlaylist() -> Promise<CurrentUserPlaylistResponse>
+    func createPlaylist(with name: String, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
+    func addTrackToPlaylist(add track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
+    func removeTrackFromPlaylist(remove track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
 }
 
 protocol PlaylistHeaderCollectionViewDelegate: AnyObject {
