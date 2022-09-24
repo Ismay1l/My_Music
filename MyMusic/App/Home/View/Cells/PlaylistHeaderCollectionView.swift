@@ -81,9 +81,9 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
     
     func configureHeader(item: Item) {
         guard let url = item.images?.first?.url else { return }
-        playlistImage.sd_setImage(with: URL(string: url), completed: nil)
+        playlistImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(systemName: "photo"), completed: nil)
         playlistNameLabel.text = item.name
-        descriptionLabel.text = item.description
+        descriptionLabel.text = item.owner?.display_name
     }
     
     @objc

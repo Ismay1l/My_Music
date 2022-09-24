@@ -17,6 +17,7 @@ class LibraryPlaylistVC: UIViewController {
     private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
+    public var selectionHandler: ((Item) -> Void)?
     
     //MARK: - UI Elements
     private lazy var playlistTableView: UITableView = {
@@ -36,11 +37,12 @@ class LibraryPlaylistVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = hexStringToUIColor(hex: "370617")
-        
         alertView.delegate = self
         
         configureConstraints()
         observeData()
+        
+        addDismissButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +66,12 @@ class LibraryPlaylistVC: UIViewController {
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
+        }
+    }
+    
+    private func addDismissButton() {
+        if selectionHandler != nil {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton(_:)))
         }
     }
     
@@ -128,6 +136,11 @@ class LibraryPlaylistVC: UIViewController {
         
         present(alert, animated: true)
     }
+    
+    @objc
+    private func didTapCancelButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
 }
 
 //MARK: - Extension LibraryPlaylistVC
@@ -155,10 +168,12 @@ extension LibraryPlaylistVC: AlertViewDelegate,
         tableView.deselectRow(at: indexPath, animated: true)
         let model = currentUserPlaylist[indexPath.row]
         let playlistVC = PlaylistVC(playlist: model)
+        
+        guard selectionHandler == nil else {
+            selectionHandler?(model)
+            dismiss(animated: true)
+            return
+        }
         navigationController?.pushViewController(playlistVC, animated: true)
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        60
-//    }
 }

@@ -77,6 +77,7 @@ class PlaylistVC: UIViewController {
                         guard let track = model.tracks?.items?.compactMap({ $0.track }) else { return }
                         self?.tracks = track
                         self?.playlistResponse = trackItem
+                        print(model)
                         self?.mainCollectionView.reloadData()
                     }
                 }

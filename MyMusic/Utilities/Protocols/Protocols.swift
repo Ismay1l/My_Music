@@ -22,7 +22,7 @@ protocol APIManagerProtocol {
     func fetchSearchResult(query: String) -> Promise<Result<[SearchResult], Error>>
     func fetchCurrentUserPlaylist() -> Promise<CurrentUserPlaylistResponse>
     func createPlaylist(with name: String, completion: @escaping (Bool) -> Void)
-    func addTrackToPlaylist(add track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
+    func addTrackToPlaylist(add track: Track, playlist: Item) -> Promise<Bool>
     func removeTrackFromPlaylist(remove track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
 }
 

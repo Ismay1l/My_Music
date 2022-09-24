@@ -286,9 +286,36 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Add Track To Playlist
-    func addTrackToPlaylist(add track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>> {
-        let promise = Promise<Result<String, Error>> { fulfill, reject in
-            let url = APIConstants.baseURL + "/playlists/playlist_id/tracks"
+    func addTrackToPlaylist(add track: Track, playlist: Item) -> Promise<Bool> {
+        let promise = Promise<Bool> { fulfill, reject in
+            guard let playlistID = playlist.id else { return }
+            guard let trackID = track.id else { return }
+            let url = APIConstants.baseURL + "/playlists/\(playlistID)/tracks"
+            let params: Parameters = [
+                "uris": [
+                    "spotify:track:\(trackID)"
+                ]
+            ]
+            AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                    }
+                    
+                    do {
+                        print("Data of Add Track to Playlist")
+                        let result = try JSONSerialization.jsonObject(with: data)
+                        fulfill(true)
+                    } catch {
+                        reject(error)
+                    }
+                }
         }
         return promise
     }

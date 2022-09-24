@@ -8,6 +8,7 @@
 import Foundation
 import RxRelay
 import RxSwift
+import Promises
 
 class HomeVM {
     
@@ -80,5 +81,13 @@ class HomeVM {
                 state!
             }
             .asObservable()
+    }
+    
+    //MARK: - Add Track To Playlist
+    func addTrackToPlaylist(add track: Track, playlist: Item) -> Promise<Bool> {
+        apiManager.addTrackToPlaylist(add: track, playlist: playlist)
+            .then { success in
+                print(success)
+            }
     }
 }

@@ -54,6 +54,7 @@ class HomeVC: UIViewController {
         setUpBackBarButton()
         configureConstraints()
         observeData()
+        addGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +80,11 @@ class HomeVC: UIViewController {
             make.right.equalTo(right)
             make.bottom.equalTo(bottom).offset(-10)
         }
+    }
+    
+    private func addGesture() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
+        mainCollectionView.addGestureRecognizer(gesture)
     }
     
     private func setUpBackBarButton() {
@@ -251,6 +257,42 @@ class HomeVC: UIViewController {
     
     private func addToDisposeBag(subscription: Disposable) {
         let _ = compositeDisposable.insert(subscription)
+    }
+    
+    @objc
+    private func didLongPress(_ sender: UILongPressGestureRecognizer) {
+        guard sender.state == .began else {
+            return
+        }
+        
+        let touchPoint = sender.location(in: mainCollectionView)
+        guard let indexPath = mainCollectionView.indexPathForItem(at: touchPoint),
+              indexPath.section == 2 else {
+            return
+        }
+        let model = recommendations[indexPath.row]
+        
+        let actionSheet = UIAlertController(title: model.name, message: "Do you want to add this song to a playlist?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Add to Playlist", style: .default, handler: {[weak self] _ in
+            DispatchQueue.main.async {
+                let libraryPlaylistVC = LibraryPlaylistVC()
+                libraryPlaylistVC.selectionHandler = { playlist in
+                    self?.homeVM.addTrackToPlaylist(add: model, playlist: playlist)
+                        .then({ _ in
+                            let alert = UIAlertController(title: "Success", message: "Song added to \(playlist.name ?? "")", preferredStyle: .alert)
+                            self?.present(alert, animated: true)
+                            let when = DispatchTime.now() + 2
+                            DispatchQueue.main.asyncAfter(deadline: when) {
+                              alert.dismiss(animated: true, completion: nil)
+                            }
+                        })
+                }
+                libraryPlaylistVC.title = "Select Playlist"
+                self?.present(UINavigationController(rootViewController: libraryPlaylistVC), animated: true)
+            }
+        }))
+        present(actionSheet, animated: true)
     }
 }
 
