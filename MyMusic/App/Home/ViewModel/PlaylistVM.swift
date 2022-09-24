@@ -8,6 +8,7 @@
 import Foundation
 import RxRelay
 import RxSwift
+import Promises
 
 class PlaylistVM {
     
@@ -34,5 +35,10 @@ class PlaylistVM {
                 state!
             }
             .asObservable()
+    }
+    
+    //MARK: - Remove Track From Playlist
+    func removeTrackFromPlaylist(add track: PlaylistItem, playlist: Item) -> Promise<Bool> {
+        apiManager.removeTrackFromPlaylist(remove: track, playlist: playlist)
     }
 }

@@ -86,8 +86,5 @@ class HomeVM {
     //MARK: - Add Track To Playlist
     func addTrackToPlaylist(add track: Track, playlist: Item) -> Promise<Bool> {
         apiManager.addTrackToPlaylist(add: track, playlist: playlist)
-            .then { success in
-                print(success)
-            }
     }
 }

@@ -167,13 +167,14 @@ extension LibraryPlaylistVC: AlertViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = currentUserPlaylist[indexPath.row]
-        let playlistVC = PlaylistVC(playlist: model)
         
         guard selectionHandler == nil else {
             selectionHandler?(model)
             dismiss(animated: true)
             return
         }
+        let playlistVC = PlaylistVC(playlist: model)
+        playlistVC.isOwner = true
         navigationController?.pushViewController(playlistVC, animated: true)
     }
 }

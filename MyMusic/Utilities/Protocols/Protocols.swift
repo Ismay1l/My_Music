@@ -23,7 +23,7 @@ protocol APIManagerProtocol {
     func fetchCurrentUserPlaylist() -> Promise<CurrentUserPlaylistResponse>
     func createPlaylist(with name: String, completion: @escaping (Bool) -> Void)
     func addTrackToPlaylist(add track: Track, playlist: Item) -> Promise<Bool>
-    func removeTrackFromPlaylist(remove track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
+    func removeTrackFromPlaylist(remove track: PlaylistItem, playlist: Item) -> Promise<Bool>
 }
 
 protocol PlaylistHeaderCollectionViewDelegate: AnyObject {

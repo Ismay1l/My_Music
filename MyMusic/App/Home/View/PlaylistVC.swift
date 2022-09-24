@@ -17,6 +17,7 @@ class PlaylistVC: UIViewController {
     private var disposeBag = DisposeBag()
     private var playlistResponse = [PlaylistItem]()
     private var tracks = [Track]()
+    var isOwner = false
     
     //MARK: - UI Elements
     private lazy var mainCollectionView: UICollectionView = {
@@ -55,6 +56,7 @@ class PlaylistVC: UIViewController {
         configureConstraints()
         setupBarButton()
         observeData()
+        addGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +104,34 @@ class PlaylistVC: UIViewController {
         navigationItem.rightBarButtonItem = shareButton
     }
     
+    private func addGesture() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
+        mainCollectionView.addGestureRecognizer(gesture)
+    }
+    
+    private func addAlert(track: PlaylistItem, indexPath: IndexPath) {
+        let actionSheet = UIAlertController(title: track.track?.name, message: "Do you want to remove the track from playlist?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Remove from playlist", style: .destructive, handler: {[weak self] _ in
+            DispatchQueue.main.async {
+                guard let playlist = self?.playlist else { return }
+                self?.playlistVM.removeTrackFromPlaylist(add: track, playlist: playlist)
+                    .then({ _ in
+                        self?.tracks.remove(at: indexPath.row)
+                        self?.playlistResponse.remove(at: indexPath.row)
+                        self?.mainCollectionView.reloadData()
+                        let alert = UIAlertController(title: "Success", message: "Track removed", preferredStyle: .alert)
+                        self?.present(alert, animated: true)
+                        let when = DispatchTime.now() + 2
+                        DispatchQueue.main.asyncAfter(deadline: when) {
+                          alert.dismiss(animated: true, completion: nil)
+                        }
+                    })
+            }
+        }))
+        present(actionSheet, animated: true)
+    }
+    
     @objc
     private func didTapShare() {
         guard let url = URL(string: playlist.external_urls?.spotify ?? "NA") else { return }
@@ -109,6 +139,16 @@ class PlaylistVC: UIViewController {
                                           applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
+    }
+    
+    @objc
+    private func didLongPress(_ sender: UILongPressGestureRecognizer) {
+        guard sender.state == .began else { return }
+        
+        let touchPoint = sender.location(in: mainCollectionView)
+        guard let indexPath = mainCollectionView.indexPathForItem(at: touchPoint) else { return }
+        let track = playlistResponse[indexPath.row]
+        addAlert(track: track, indexPath: indexPath)
     }
 }
 

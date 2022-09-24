@@ -259,19 +259,7 @@ class HomeVC: UIViewController {
         let _ = compositeDisposable.insert(subscription)
     }
     
-    @objc
-    private func didLongPress(_ sender: UILongPressGestureRecognizer) {
-        guard sender.state == .began else {
-            return
-        }
-        
-        let touchPoint = sender.location(in: mainCollectionView)
-        guard let indexPath = mainCollectionView.indexPathForItem(at: touchPoint),
-              indexPath.section == 2 else {
-            return
-        }
-        let model = recommendations[indexPath.row]
-        
+    private func addAlert(model: Track) {
         let actionSheet = UIAlertController(title: model.name, message: "Do you want to add this song to a playlist?", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "Add to Playlist", style: .default, handler: {[weak self] _ in
@@ -293,6 +281,21 @@ class HomeVC: UIViewController {
             }
         }))
         present(actionSheet, animated: true)
+    }
+    
+    @objc
+    private func didLongPress(_ sender: UILongPressGestureRecognizer) {
+        guard sender.state == .began else {
+            return
+        }
+        
+        let touchPoint = sender.location(in: mainCollectionView)
+        guard let indexPath = mainCollectionView.indexPathForItem(at: touchPoint),
+              indexPath.section == 2 else {
+            return
+        }
+        let model = recommendations[indexPath.row]
+        addAlert(model: model)
     }
 }
 

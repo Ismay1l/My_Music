@@ -309,8 +309,7 @@ class APIManager: APIManagerProtocol {
                     }
                     
                     do {
-                        print("Data of Add Track to Playlist")
-                        let result = try JSONSerialization.jsonObject(with: data)
+                        let _ = try JSONSerialization.jsonObject(with: data)
                         fulfill(true)
                     } catch {
                         reject(error)
@@ -321,9 +320,37 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Remove Track From Playlist
-    func removeTrackFromPlaylist(remove track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>> {
-        let promise = Promise<Result<String, Error>> { fulfill, reject in
-            let url = APIConstants.baseURL + "/playlists/playlist_id/tracks"
+    func removeTrackFromPlaylist(remove track: PlaylistItem, playlist: Item) -> Promise<Bool> {
+        let promise = Promise<Bool> { fulfill, reject in
+            guard let playlistID = playlist.id else { return }
+            guard let trackID = track.track?.id else { return }
+            let url = APIConstants.baseURL + "/playlists/\(playlistID)/tracks"
+            let params: Parameters = [
+                "tracks": [
+                    [
+                        "uri": "spotify:track:\(trackID)"
+                    ]
+                ]
+            ]
+            AF.request(url, method: .delete, parameters: params, encoding: JSONEncoding.default, headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                    }
+                    
+                    do {
+                        let _ = try JSONSerialization.jsonObject(with: data)
+                        fulfill(true)
+                    } catch {
+                        reject(error)
+                    }
+                }
         }
         return promise
     }
