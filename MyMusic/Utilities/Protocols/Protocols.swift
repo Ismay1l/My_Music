@@ -21,7 +21,7 @@ protocol APIManagerProtocol {
     func fetchCategoriesPlaylist(item: CategoryItem) -> Promise<CategoriesPlaylistResponse>
     func fetchSearchResult(query: String) -> Promise<Result<[SearchResult], Error>>
     func fetchCurrentUserPlaylist() -> Promise<CurrentUserPlaylistResponse>
-    func createPlaylist(with name: String, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
+    func createPlaylist(with name: String, completion: @escaping (Bool) -> Void)
     func addTrackToPlaylist(add track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
     func removeTrackFromPlaylist(remove track: Track, playlist: PlaylistResponse) -> Promise<Result<String, Error>>
 }
@@ -61,4 +61,8 @@ protocol SearchResultVCDelegate: AnyObject {
 protocol LibrarySwitchViewDelegate: AnyObject {
     func switchToPlaylistVC(_ view: LibrarySwitchView)
     func switchToAlbumVC(_ view: LibrarySwitchView)
+}
+
+protocol AlertViewDelegate: AnyObject {
+    func alertViewButtonTapped(_ view: AlertView)
 }

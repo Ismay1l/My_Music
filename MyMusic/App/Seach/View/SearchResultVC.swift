@@ -118,24 +118,28 @@ extension SearchResultVC: UITableViewDataSource,
                                                         imageURL: URL(string: artist.images?.first?.url ?? ""))
             cell.configure(_with: model)
             cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            cell.selectionStyle = .none
             return cell
         case .album(let album):
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
             let model = SearchResultAlbumTableViewModel(title: album.name, subtitle: album.artists?.first?.name, imageURL: URL(string: album.images?.first?.url ?? ""))
             cell.configure(_with: model)
             cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            cell.selectionStyle = .none
             return cell
         case .track(let track):
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
             let model = SearchResultAlbumTableViewModel(title: track.name, subtitle: track.artists?.first?.name, imageURL: URL(string: track.album?.images?.first?.url ?? ""))
             cell.configure(_with: model)
             cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            cell.selectionStyle = .none
             return cell
         case .playlist(let playlist):
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
             let model = SearchResultAlbumTableViewModel(title: playlist.name, subtitle: playlist.owner?.display_name, imageURL: URL(string: playlist.images?.first?.url ?? ""))
             cell.configure(_with: model)
             cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            cell.selectionStyle = .none
             return cell
         case .none:
             break

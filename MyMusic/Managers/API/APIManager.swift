@@ -167,7 +167,7 @@ class APIManager: APIManagerProtocol {
         return promise
     }
     
-//    MARK: - Fetch Album Details
+    //MARK: - Fetch Album Details
     func fetchAlbumDetails(album: Album) -> Promise<AlbumDetailResponse> {
         let promise = Promise<AlbumDetailResponse> { fulfill, reject in
             guard let id = album.id else { return }
@@ -196,7 +196,7 @@ class APIManager: APIManagerProtocol {
         return promise
     }
     
-//    MARK: - Fetch Playlists
+    //MARK: - Fetch Playlists
     func fetchPlaylists(playlist: Item) -> Promise<PlaylistResponse> {
         let promise = Promise<PlaylistResponse> { fulfill, reject in
             guard let id = playlist.id else { return }
@@ -243,7 +243,6 @@ class APIManager: APIManagerProtocol {
                     
                     do {
                         print("Data of User's Playlist: \(data)")
-//                        let result = try JSONSerialization.jsonObject(with: data)
                         let result = try self.jsonDecoder.decode(CurrentUserPlaylistResponse.self, from: data)
                         fulfill(result)
                     } catch {
@@ -255,11 +254,35 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Create A Playlist
-    func createPlaylist(with name: String, playlist: PlaylistResponse) -> Promise<Result<String, Error>> {
-        let promise = Promise<Result<String, Error>> { fulfill, reject in
-            let url = APIConstants.baseURL + "/users/user_id/playlists"
-        }
-        return promise
+    func createPlaylist(with name: String, completion: @escaping (Bool) -> Void) {
+        guard let  userId = UserDefaultsManager.getString(key: "user_id") else { return }
+        let url = APIConstants.baseURL + "/users/\(userId)/playlists"
+        let params: Parameters = [
+            "name": "\(name)",
+            "description": "no need",
+            "public": "false"
+        ]
+        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: self.header)
+            .validate()
+            .response { response in
+                guard let data = response.data else {
+                    completion(false)
+                    return
+                }
+                
+                if response.error != nil {
+                    completion(false)
+                }
+                
+                do {
+                    print("Data of creating playlist: \(data)")
+                    let _ = try self.jsonDecoder.decode(PlaylistResponse.self, from: data)
+                   completion(true)
+                } catch {
+                    completion(false)
+                    print(error.localizedDescription)
+                }
+            }
     }
     
     //MARK: - Add Track To Playlist

@@ -11,6 +11,6 @@ class LibraryAlbumVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemRed
+        view.backgroundColor = hexStringToUIColor(hex: "370617")
     }
 }

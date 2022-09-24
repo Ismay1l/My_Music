@@ -67,7 +67,6 @@ class SearchResultAlbumCell: UITableViewCell {
         titleLabel.text = model.title
         subtitleLabel.text = model.subtitle
         guard let url = model.imageURL else { return }
-        iconImage.sd_setImage(with: url, completed: nil)
-        
+        iconImage.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"), completed: nil)
     }
 }

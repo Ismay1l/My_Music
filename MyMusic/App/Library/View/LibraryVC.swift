@@ -14,11 +14,7 @@ class LibraryVC: UIViewController {
     private let libraryPlaylistVC = LibraryPlaylistVC()
     private let libraryAlbumVC = LibraryAlbumVC()
     private let switchView = LibrarySwitchView()
-    private let  libraryVM = LibraryVM()
-    private var  compositeBag = CompositeDisposable()
-    private var disposeBag = DisposeBag()
-    private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
-    private var currentUserPlaylist = [Item]()
+    private let libraryVM = LibraryVM()
     
     //MARK: - UI Elements
     private lazy var segmentScrollView: UIScrollView = {
@@ -38,14 +34,8 @@ class LibraryVC: UIViewController {
         switchView.delegate = self
         
         configureConstraints()
+        configureBarButtons()
         addChildVC()
-        observeData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        compositeBag = CompositeDisposable()
-        compositeBag.disposed(by: disposeBag)
     }
     
     //MARK: - Functions
@@ -87,52 +77,42 @@ class LibraryVC: UIViewController {
         libraryAlbumVC .didMove(toParent: self)
     }
     
-    private func observeData() {
-        let currentUserPlaylistSubscription = libraryVM.fetchCurrentUserPlaylist()
-            .observe(on: mainSchedulerInstance)
-            .subscribe { [weak self] response in
-                guard let data = response.element else { return }
-                DispatchQueue.main.async {
-                    switch data {
-                    case .showUserPlaylist(let model):
-                        guard let items = model.items else { return }
-                        self?.currentUserPlaylist = items
-                        self?.updateUI()
-                    }
-                }
-            }
-        addToDisposeBag(subscription: currentUserPlaylistSubscription)
-    }
-    
-    private func addToDisposeBag(subscription: Disposable) {
-        let _ = compositeBag.insert(subscription)
-    }
-    
-    private func updateUI() {
-        if currentUserPlaylist.isEmpty {
-            
-        } else {
-            
+    private func configureBarButtons() {
+        switch switchView.state {
+        case .playlist:
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAddButton(_:)))
+        case .album:
+            navigationItem.rightBarButtonItem = nil
         }
+    }
+    
+    @objc
+    private func didTapAddButton(_ sender: UIBarButtonItem) {
+        libraryPlaylistVC.showAlert()
     }
 }
 
 //MARK: - Extension LibraryVC
 extension LibraryVC: UIScrollViewDelegate,
                      LibrarySwitchViewDelegate {
+    
     func switchToPlaylistVC(_ view: LibrarySwitchView) {
         segmentScrollView.setContentOffset(.zero, animated: true)
+        configureBarButtons()
     }
     
     func switchToAlbumVC(_ view: LibrarySwitchView) {
         segmentScrollView.setContentOffset(CGPoint(x: view.frame.size.width, y: 0), animated: true)
+        configureBarButtons()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x >= (view.frame.size.width - 100) {
             switchView.updateIndicator(_for: .album)
+            configureBarButtons()
         } else {
             switchView.updateIndicator(_for: .playlist)
+            configureBarButtons()
         }
     }
 }

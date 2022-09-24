@@ -9,6 +9,7 @@ import UIKit
 
 class LibrarySwitchView: UIView {
     
+    //MARK: - Variables
     weak var delegate: LibrarySwitchViewDelegate?
     var state: SwitchLibraryVCState = .playlist
     

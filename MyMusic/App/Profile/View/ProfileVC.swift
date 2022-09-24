@@ -168,6 +168,8 @@ class ProfileVC: UIViewController {
                 case .showUserProfile(let model):
                     DispatchQueue.main.async {
                         self?.updateUI(with: model)
+                        guard let userId = model.id else { return }
+                        UserDefaultsManager.setString(value: userId, key: "user_id")
                     }
                 }
             }
