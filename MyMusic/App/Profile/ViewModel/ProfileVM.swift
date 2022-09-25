@@ -27,7 +27,7 @@ class ProfileVM {
     func fetchUserProfileData() -> Observable<UserProfileState> {
         apiManager.fetchUserProfile()
             .then { response in
-                self.userProfileRelay.accept(.showUserProfile(model: response))
+                self.userProfileRelay.accept(.showUserProfile(response))
             }
         return userProfileRelay
             .filter { state in

@@ -25,7 +25,7 @@ class SearchVM {
     func fetchCategories() -> Observable<CategoriesState> {
         apiManager.fetchCategories()
             .then { result in
-                self.categoriesRelay.accept(.showCategories(model: result))
+                self.categoriesRelay.accept(.showCategories(result))
             }
         return categoriesRelay
             .filter { state in
@@ -39,11 +39,11 @@ class SearchVM {
     
     //MARK: - Fetch Search Result
     func fetchSearchResult(query: String) -> Observable<SearchResultState> {
-        apiManager.fetchSearchResult(query: query)
+        apiManager.fetchSearchResult(query)
             .then { result in
                 switch result {
                 case .success(let model):
-                    self.searchResultRelay.accept(.showSearchResult(model: model))
+                    self.searchResultRelay.accept(.showSearchResult(model))
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

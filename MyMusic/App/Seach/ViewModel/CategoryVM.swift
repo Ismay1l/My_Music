@@ -22,9 +22,9 @@ class CategoryVM {
     
     //MARK: - Fetch Category's Playlist
     func fetchCategoriesPlaylist(item: CategoryItem) -> Observable<CategoriesPlaylistState> {
-        apiManager.fetchCategoriesPlaylist(item: item)
+        apiManager.fetchCategoriesPlaylist(item)
             .then { result in
-                self.categoriesPlaylistRelay.accept(.showCategoriesPlaylist(model: result))
+                self.categoriesPlaylistRelay.accept(.showCategoriesPlaylist(result))
             }
         return categoriesPlaylistRelay
             .filter { state in

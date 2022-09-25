@@ -97,7 +97,21 @@ class AlbumVC: UIViewController {
     private func setupBarButton() {
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
         shareButton.tintColor = hexStringToUIColor(hex: "f8f9fa")
-        navigationItem.rightBarButtonItem = shareButton
+        
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+        saveButton.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        
+        navigationItem.rightBarButtonItems = [shareButton, saveButton]
+    }
+    
+    private func addAlert() {
+        let alert = UIAlertController(title: "Success", message: "Album saved to playlist", preferredStyle: .alert)
+        present(alert, animated: true)
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when) {
+          alert.dismiss(animated: true, completion: nil)
+        }
+        NotificationCenter.default.post(name: .savedAlbumNotification, object: nil)
     }
     
     @objc
@@ -107,6 +121,20 @@ class AlbumVC: UIViewController {
                                           applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
+    }
+    
+    @objc
+    private func didTapAdd() {
+        let actionSheet = UIAlertController(title: album.name, message: "Do you want to save this album?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        actionSheet.addAction(UIAlertAction(title: "Add to library", style: .default, handler: {[weak self] _ in
+            guard let album = self?.album else { return }
+            self?.albumVM.saveAlbum(album).then({ _ in
+                print("Saved")
+            })
+            self?.addAlert()
+        }))
+        present(actionSheet, animated: true)
     }
 }
 

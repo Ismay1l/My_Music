@@ -92,6 +92,8 @@
 		4BE4FFF628BBE366009CEDB4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFF528BBE366009CEDB4 /* User.swift */; };
 		4BE4FFFC28BBE50E009CEDB4 /* Generals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFFB28BBE50E009CEDB4 /* Generals.swift */; };
 		4BE4FFFE28BCAC3A009CEDB4 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFFD28BCAC3A009CEDB4 /* ProfileVM.swift */; };
+		4BE6B88328E06E7D0079FE3F /* SavedAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6B88228E06E7D0079FE3F /* SavedAlbum.swift */; };
+		4BE6B88628E0745D0079FE3F /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6B88528E0745D0079FE3F /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +193,8 @@
 		4BE4FFF528BBE366009CEDB4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4BE4FFFB28BBE50E009CEDB4 /* Generals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generals.swift; sourceTree = "<group>"; };
 		4BE4FFFD28BCAC3A009CEDB4 /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
+		4BE6B88228E06E7D0079FE3F /* SavedAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAlbum.swift; sourceTree = "<group>"; };
+		4BE6B88528E0745D0079FE3F /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				4B64D7EE28D88F5100337836 /* CurrentUerPlaylist.swift */,
+				4BE6B88228E06E7D0079FE3F /* SavedAlbum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -657,11 +662,20 @@
 		4BE4FFFA28BBE4FB009CEDB4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4BE6B88428E074500079FE3F /* Extensions */,
 				4B64CEC428C4C68D00BE1935 /* Protocols */,
 				4B80E7A928C2752B00CD4151 /* Enums */,
 				4B80E7A828C2751900CD4151 /* Generals */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4BE6B88428E074500079FE3F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4BE6B88528E0745D0079FE3F /* Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -846,6 +860,7 @@
 				4B13003A28D706AA00775E8F /* Recommendations.swift in Sources */,
 				49F0DD3728CB30C200EB470B /* CategoryVC.swift in Sources */,
 				4B64D7F128D8963400337836 /* AlertView.swift in Sources */,
+				4BE6B88628E0745D0079FE3F /* Extension.swift in Sources */,
 				4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */,
 				4BD33C3728B7F16900BE1353 /* APIManager.swift in Sources */,
 				4949433428C09A4B00E82DBF /* NewRelease.swift in Sources */,
@@ -896,6 +911,7 @@
 				49795E9728C863D100EFF96A /* MainCollectionHeaderView.swift in Sources */,
 				4BE4FFFE28BCAC3A009CEDB4 /* ProfileVM.swift in Sources */,
 				4949433128C0988D00E82DBF /* HomeVM.swift in Sources */,
+				4BE6B88328E06E7D0079FE3F /* SavedAlbum.swift in Sources */,
 				4BE4FFF628BBE366009CEDB4 /* User.swift in Sources */,
 				4B91550E28C5371E00BDFB95 /* AlbumVM.swift in Sources */,
 				4BD33C4A28B8262200BE1353 /* AuthModel.swift in Sources */,

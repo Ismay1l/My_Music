@@ -168,7 +168,7 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Fetch Album Details
-    func fetchAlbumDetails(album: Album) -> Promise<AlbumDetailResponse> {
+    func fetchAlbumDetails(_ album: Album) -> Promise<AlbumDetailResponse> {
         let promise = Promise<AlbumDetailResponse> { fulfill, reject in
             guard let id = album.id else { return }
             let url = APIConstants.baseURL + "/albums/\(id)"
@@ -197,7 +197,7 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Fetch Playlists
-    func fetchPlaylists(playlist: Item) -> Promise<PlaylistResponse> {
+    func fetchPlaylists(_ playlist: Item) -> Promise<PlaylistResponse> {
         let promise = Promise<PlaylistResponse> { fulfill, reject in
             guard let id = playlist.id else { return }
             let url = APIConstants.baseURL + "/playlists/\(id)"
@@ -385,7 +385,7 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Fetch Category's Playlist for SearchVC
-    func fetchCategoriesPlaylist(item: CategoryItem) -> Promise<CategoriesPlaylistResponse> {
+    func fetchCategoriesPlaylist(_ item: CategoryItem) -> Promise<CategoriesPlaylistResponse> {
         let promise = Promise<CategoriesPlaylistResponse> { fulfill, reject in
             guard let id = item.id else { return }
             let url = APIConstants.baseURL + "/browse/categories/\(id)/playlists"
@@ -414,7 +414,7 @@ class APIManager: APIManagerProtocol {
     }
     
     //MARK: - Fetch Search Result
-    func fetchSearchResult(query: String) -> Promise<Result<[SearchResult], Error>> {
+    func fetchSearchResult(_ query: String) -> Promise<Result<[SearchResult], Error>> {
         let promise = Promise<Result<[SearchResult], Error>> { fulfill, reject in
             let url = APIConstants.baseURL + "/search?limit=10&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
             AF.request(url, method: .get, headers: self.header)
@@ -452,10 +452,61 @@ class APIManager: APIManagerProtocol {
         return promise
     }
     
-    //MARK: - Save Album
-    func fetchSavedAlbums() -> Promise<Bool> {
-        let promise = Promise<Bool> { fulfill, reject in
+    //MARK: - Fetch Saved Album
+    func fetchSavedAlbums() -> Promise<SavedAlbumResponse> {
+        let promise = Promise<SavedAlbumResponse> { fulfill, reject in
             let url = APIConstants.baseURL + "/me/albums"
+            AF.request(url, method: .get,   headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                    }
+                    
+                    do {
+                        print("Data of Saved Album: \(data)")
+                        let result = try self.jsonDecoder.decode(SavedAlbumResponse.self, from: data)
+                        fulfill(result)
+                    } catch {
+                        reject(error)
+                    }
+                }
+        }
+        return promise
+    }
+    
+    //MARK: - Save Album
+    func saveAlbum(_ album: Album) -> Promise<Bool> {
+        let promise = Promise<Bool> { fulfill, reject in
+            guard let id = album.id else { return }
+            let url = APIConstants.baseURL + "/me/albums?ids=\(id)"
+            AF.request(url, method: .put, headers: self.header)
+                .validate()
+                .response { response in
+                    guard let data = response.data else {
+                        reject(APIError.failedToGetData)
+                        return
+                    }
+                    
+                    if response.error != nil {
+                        reject(APIError.failedToGetData)
+                    }
+                    
+                    do {
+                        print("Data of save album: \(data)")
+                        let result = try JSONSerialization.jsonObject(with: data)
+                        print("Result: \(result)")
+                        fulfill(true)
+                    } catch {
+                        reject(error)
+                    }
+                }
+            
         }
         return promise
     }

@@ -12,15 +12,15 @@ class LibraryAlbumVC: UIViewController {
 
     //MARK: - Variables
     private let alertView = AlertView()
-    private var currentUserAlbum = [Album]()
+    private var currentUserAlbum = [SavedAlbumResponseItem]()
     private let libraryAlbumVM = LibraryAlbumVM()
     private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
     private var compositeBag = CompositeDisposable()
     private var disposeBag = DisposeBag()
-//    private let tabBar = CustomTabBarController()
+    private var observer: NSObjectProtocol?
     
     //MARK: - UI Elements
-    private lazy var playlistTableView: UITableView = {
+    private lazy var albumTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.isHidden = true
         view.backgroundColor = hexStringToUIColor(hex: "370617")
@@ -38,12 +38,10 @@ class LibraryAlbumVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = hexStringToUIColor(hex: "370617")
         alertView.delegate = self
-        alertView.isHidden = false
         
         configureConstraints()
         observeData()
-        
-        addDismissButton()
+        notificationCenterHandler()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,14 +53,14 @@ class LibraryAlbumVC: UIViewController {
     //MARK: - Functions
     private func configureConstraints() {
         view.addSubview(alertView)
-        view.addSubview(playlistTableView)
+        view.addSubview(albumTableView)
         
         alertView.snp.makeConstraints { make in
             make.center.equalTo(view.safeAreaLayoutGuide.snp.center)
             make.height.width.equalTo(150)
         }
         
-        playlistTableView.snp.makeConstraints { make in
+        albumTableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
@@ -70,38 +68,44 @@ class LibraryAlbumVC: UIViewController {
         }
     }
     
-    private func addDismissButton() {
+    private func notificationCenterHandler() {
+        observer = NotificationCenter.default.addObserver(forName: .savedAlbumNotification,
+                                                          object: nil,
+                                                          queue: .main,
+                                                          using: {[weak self] _ in
+            self?.observeData()
+        })
     }
     
     private func observeData() {
-//        let currentUserPlaylistSubscription = libraryPlaylistVM.fetchCurrentUserPlaylist()
-//            .observe(on: mainSchedulerInstance)
-//            .subscribe { [weak self] response in
-//                guard let data = response.element else { return }
-//                DispatchQueue.main.async {
-//                    switch data {
-//                    case .showUserPlaylist(let model):
-//                        guard let items = model.items else { return }
-//                        self?.currentUserPlaylist = items
-//                        self?.updateUI()
-//                    }
-//                }
-//            }
-//        addToDisposeBag(subscription: currentUserPlaylistSubscription)
+        let savedAlbumsSubscription = libraryAlbumVM.fetchSavedAlbums()
+            .observe(on: mainSchedulerInstance)
+            .subscribe {[weak self] response in
+                guard let data = response.element else { return }
+                DispatchQueue.main.async {
+                    switch data {
+                    case .showSavedAlbum(let model):
+                        guard let albums = model.items else { return }
+                        self?.currentUserAlbum = albums
+                        self?.updateUI()
+                    }
+                }
+            }
+        addToDisposeBag(savedAlbumsSubscription)
     }
     
-    private func addToDisposeBag(subscription: Disposable) {
+    private func addToDisposeBag(_ subscription: Disposable) {
         let _ = compositeBag.insert(subscription)
     }
     
     private func updateUI() {
         if currentUserAlbum.isEmpty {
             alertView.isHidden = false
-//            playlistTableView.isHidden = true
+            albumTableView.isHidden = true
         } else {
             alertView.isHidden = true
-//            playlistTableView.reloadData()
-//            playlistTableView.isHidden = false
+            albumTableView.reloadData()
+            albumTableView.isHidden = false
         }
     }
     
@@ -121,7 +125,7 @@ extension LibraryAlbumVC: UITableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
         let model = currentUserAlbum[indexPath.row]
-        cell.configure(_with: SearchResultAlbumTableViewModel(title: model.name, subtitle: model.artists?.first?.name, imageURL: URL(string: model.images?.first?.url ?? "")))
+        cell.configure(_with: SearchResultAlbumTableViewModel(title: model.album?.name, subtitle: model.album?.artists?.first?.name, imageURL: URL(string: model.album?.images?.first?.url ?? "")))
         cell.backgroundColor = hexStringToUIColor(hex: "370617")
         cell.selectionStyle = .none
         return cell
@@ -130,7 +134,8 @@ extension LibraryAlbumVC: UITableViewDataSource,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = currentUserAlbum[indexPath.row]
-        let albumVC = AlbumVC(album: model)
+        guard let album = model.album else { return }
+        let albumVC = AlbumVC(album: Album(artists: album.artists, available_markets: album.available_markets, external_urls: album.external_urls, id: album.id, name: album.name, release_date: album.release_date, total_tracks: album.total_tracks))
         navigationController?.pushViewController(albumVC, animated: true)
     }
 }

@@ -27,7 +27,7 @@ class HomeVM {
     func fetchBrowseNewReleasesData() -> Observable<NewReleaseState> {
         apiManager.fetchBrowseNewReleases()
             .then { response in
-                self.newReleasesRelay.accept(.showNewReleases(model: response))
+                self.newReleasesRelay.accept(.showNewReleases(response))
             }
         return newReleasesRelay
             .filter { state in
@@ -43,7 +43,7 @@ class HomeVM {
     func fetchFeaturedPlaylist() -> Observable<FeaturedPlaylistState> {
         apiManager.fetchFeaturedPlaylist()
             .then { response in
-                self.featuredPlaylistsRelay.accept(.showFeaturedPlaylists(model: response))
+                self.featuredPlaylistsRelay.accept(.showFeaturedPlaylists(response))
             }
         return featuredPlaylistsRelay
             .filter { state in
@@ -70,7 +70,7 @@ class HomeVM {
                 //MARK: - Fetch Recommendations
                 self.apiManager.fetchRecommendations(genres: seeds)
                     .then { response in
-                        self.recommendationsRelay.accept(.showRecommendations(model: response))
+                        self.recommendationsRelay.accept(.showRecommendations(response))
                     }
             }
         return recommendationsRelay

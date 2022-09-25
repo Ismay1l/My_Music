@@ -8,6 +8,7 @@
 import Foundation
 import RxRelay
 import RxSwift
+import Promises
 
 class AlbumVM {
     
@@ -22,9 +23,9 @@ class AlbumVM {
     
     //MARK: - Fetch Album Details
     func fetchAlbumDetail(album: Album) -> Observable<AlbumDetailsState> {
-        apiManager.fetchAlbumDetails(album: album)
+        apiManager.fetchAlbumDetails(album)
             .then { response in
-                self.albumDetailsRelay.accept(.showAlbumDetails(model: response))
+                self.albumDetailsRelay.accept(.showAlbumDetails(response))
             }
         return albumDetailsRelay
             .filter { state in
@@ -34,5 +35,10 @@ class AlbumVM {
                 state!
             }
             .asObservable()
+    }
+    
+    //MARK: - Save Album
+    func saveAlbum(_ album: Album) -> Promise<Bool> {
+        apiManager.saveAlbum(album)
     }
 }

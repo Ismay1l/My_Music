@@ -68,8 +68,6 @@ class SignInVC: UIViewController, WKUIDelegate {
             return
         }
         
-        print("CodeXXX: \(code)")
-        
         webView.isHidden = true
         
         AuthManager.shared.getTokens(code: code) { [weak self] res in

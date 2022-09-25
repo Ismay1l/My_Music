@@ -8,43 +8,47 @@
 import Foundation
 
 enum NewReleaseState {
-    case showNewReleases(model: NewReleaseResponse)
+    case showNewReleases(_ model: NewReleaseResponse)
 }
 
 enum FeaturedPlaylistState {
-    case showFeaturedPlaylists(model: FeaturedPlaylistResponse)
+    case showFeaturedPlaylists(_ model: FeaturedPlaylistResponse)
 }
 
 enum RecommendationState {
-    case showRecommendations(model: RecommendationsResponse)
+    case showRecommendations(_ model: RecommendationsResponse)
 }
 
 enum UserProfileState {
-    case showUserProfile(model: UserProfileResponse)
+    case showUserProfile(_ model: UserProfileResponse)
 }
 
 enum AlbumDetailsState {
-    case showAlbumDetails(model: AlbumDetailResponse)
+    case showAlbumDetails(_ model: AlbumDetailResponse)
 }
 
 enum PlaylistState {
-    case showPlaylist(model: PlaylistResponse)
+    case showPlaylist(_ model: PlaylistResponse)
 }
 
 enum CategoriesState {
-    case showCategories(model: CategoriesResponse)
+    case showCategories(_ model: CategoriesResponse)
 }
 
 enum CategoriesPlaylistState {
-    case showCategoriesPlaylist(model: CategoriesPlaylistResponse)
+    case showCategoriesPlaylist(_ model: CategoriesPlaylistResponse)
 }
 
 enum SearchResultState {
-    case showSearchResult(model: [SearchResult])
+    case showSearchResult(_ model: [SearchResult])
 }
 
 enum CurrentUserPlaylistState {
-    case showUserPlaylist(model: CurrentUserPlaylistResponse)
+    case showUserPlaylist(_ model: CurrentUserPlaylistResponse)
+}
+
+enum SavedAlbumState {
+    case showSavedAlbum(_ model: SavedAlbumResponse)
 }
 
 enum MainCollectionViewHeaderType {

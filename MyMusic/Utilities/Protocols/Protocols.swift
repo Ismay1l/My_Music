@@ -15,16 +15,17 @@ protocol APIManagerProtocol {
     func fetchFeaturedPlaylist() -> Promise<FeaturedPlaylistResponse>
     func fetchRecommendedGenres() -> Promise<RecommendedGenreResponse>
     func fetchRecommendations(genres: Set<String>) -> Promise<RecommendationsResponse>
-    func fetchAlbumDetails(album: Album) -> Promise<AlbumDetailResponse>
-    func fetchPlaylists(playlist: Item) -> Promise<PlaylistResponse>
+    func fetchAlbumDetails(_ album: Album) -> Promise<AlbumDetailResponse>
+    func fetchPlaylists(_ playlist: Item) -> Promise<PlaylistResponse>
     func fetchCategories() -> Promise<CategoriesResponse>
-    func fetchCategoriesPlaylist(item: CategoryItem) -> Promise<CategoriesPlaylistResponse>
-    func fetchSearchResult(query: String) -> Promise<Result<[SearchResult], Error>>
+    func fetchCategoriesPlaylist(_ item: CategoryItem) -> Promise<CategoriesPlaylistResponse>
+    func fetchSearchResult(_ query: String) -> Promise<Result<[SearchResult], Error>>
     func fetchCurrentUserPlaylist() -> Promise<CurrentUserPlaylistResponse>
     func createPlaylist(with name: String, completion: @escaping (Bool) -> Void)
     func addTrackToPlaylist(add track: Track, playlist: Item) -> Promise<Bool>
     func removeTrackFromPlaylist(remove track: PlaylistItem, playlist: Item) -> Promise<Bool>
-    func fetchSavedAlbums() -> Promise<Bool>
+    func fetchSavedAlbums() -> Promise<SavedAlbumResponse>
+    func saveAlbum(_ album: Album) -> Promise<Bool>
 }
 
 protocol PlaylistHeaderCollectionViewDelegate: AnyObject {

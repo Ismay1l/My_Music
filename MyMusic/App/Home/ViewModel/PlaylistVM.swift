@@ -23,9 +23,9 @@ class PlaylistVM {
     
     //MARK: - Fetch Playlists
     func fetchPlaylists(playlist: Item) -> Observable<PlaylistState> {
-        apiManager.fetchPlaylists(playlist: playlist)
+        apiManager.fetchPlaylists(playlist)
             .then { response in
-                self.playlistRelay.accept(.showPlaylist(model: response))
+                self.playlistRelay.accept(.showPlaylist(response))
             }
         return playlistRelay
             .filter { state in
