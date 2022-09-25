@@ -93,19 +93,7 @@ class LibraryVC: UIViewController {
 }
 
 //MARK: - Extension LibraryVC
-extension LibraryVC: UIScrollViewDelegate,
-                     LibrarySwitchViewDelegate {
-    
-    func switchToPlaylistVC(_ view: LibrarySwitchView) {
-        segmentScrollView.setContentOffset(.zero, animated: true)
-        configureBarButtons()
-    }
-    
-    func switchToAlbumVC(_ view: LibrarySwitchView) {
-        segmentScrollView.setContentOffset(CGPoint(x: view.frame.size.width, y: 0), animated: true)
-        configureBarButtons()
-    }
-    
+extension LibraryVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x >= (view.frame.size.width - 100) {
             switchView.updateIndicator(_for: .album)
@@ -114,5 +102,17 @@ extension LibraryVC: UIScrollViewDelegate,
             switchView.updateIndicator(_for: .playlist)
             configureBarButtons()
         }
+    }
+}
+
+extension LibraryVC: LibrarySwitchViewDelegate {
+    func switchToPlaylistVC(_ view: LibrarySwitchView) {
+        segmentScrollView.setContentOffset(.zero, animated: true)
+        configureBarButtons()
+    }
+    
+    func switchToAlbumVC(_ view: LibrarySwitchView) {
+        segmentScrollView.setContentOffset(CGPoint(x: view.frame.size.width, y: 0), animated: true)
+        configureBarButtons()
     }
 }

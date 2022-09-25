@@ -451,4 +451,12 @@ class APIManager: APIManagerProtocol {
         }
         return promise
     }
+    
+    //MARK: - Save Album
+    func fetchSavedAlbums() -> Promise<Bool> {
+        let promise = Promise<Bool> { fulfill, reject in
+            let url = APIConstants.baseURL + "/me/albums"
+        }
+        return promise
+    }
 }

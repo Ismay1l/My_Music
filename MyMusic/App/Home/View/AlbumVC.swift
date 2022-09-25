@@ -113,8 +113,7 @@ class AlbumVC: UIViewController {
 //MARK: - Extension AlbumVC
 extension AlbumVC: UICollectionViewDelegate,
                    UICollectionViewDataSource,
-                   UICollectionViewDelegateFlowLayout,
-                   BrowseAlbumsHeaderViewDelegate{
+                   UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return albumResponse.count
@@ -153,7 +152,9 @@ extension AlbumVC: UICollectionViewDelegate,
         track.album = album
         PlaybackPresenter.shared.startPlaybackSong(from: self, track: track, tracks: albumResponse)
     }
-    
+}
+
+extension AlbumVC: BrowseAlbumsHeaderViewDelegate {
     func didTapPlayButton(_ header: BrowseAlbumsHeaderView) {
         let tracksWithAlbumImage: [Track] = albumResponse.compactMap {
             var track = $0

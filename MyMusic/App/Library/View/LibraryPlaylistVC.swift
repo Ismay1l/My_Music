@@ -144,13 +144,8 @@ class LibraryPlaylistVC: UIViewController {
 }
 
 //MARK: - Extension LibraryPlaylistVC
-extension LibraryPlaylistVC: AlertViewDelegate,
-                             UITableViewDataSource,
+extension LibraryPlaylistVC: UITableViewDataSource,
                              UITableViewDelegate {
-    func alertViewButtonTapped(_ view: AlertView) {
-        showAlert()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         currentUserPlaylist.count
     }
@@ -176,5 +171,11 @@ extension LibraryPlaylistVC: AlertViewDelegate,
         let playlistVC = PlaylistVC(playlist: model)
         playlistVC.isOwner = true
         navigationController?.pushViewController(playlistVC, animated: true)
+    }
+}
+
+extension LibraryPlaylistVC: AlertViewDelegate {
+    func alertViewButtonTapped(_ view: AlertView) {
+        showAlert()
     }
 }

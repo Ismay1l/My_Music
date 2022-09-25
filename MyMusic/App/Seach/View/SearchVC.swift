@@ -115,9 +115,7 @@ class SearchVC: UIViewController {
 extension SearchVC: UISearchResultsUpdating,
                     UICollectionViewDelegate,
                     UICollectionViewDataSource,
-                    CHTCollectionViewDelegateWaterfallLayout,
-                    UISearchBarDelegate,
-                    SearchResultVCDelegate {
+                    CHTCollectionViewDelegateWaterfallLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.size.width / 2,
@@ -148,7 +146,29 @@ extension SearchVC: UISearchResultsUpdating,
         categoryVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(categoryVC, animated: true)
     }
-    
+}
+
+extension SearchVC: SearchResultVCDelegate {
+    func didSelectOption(_ result: SearchResult) {
+        switch result {
+        case .playlist(let model):
+            let playlistVC = PlaylistVC(playlist: model)
+            navigationController?.pushViewController(playlistVC, animated: true)
+        case .album(let model):
+            let albumVC = AlbumVC(album: model)
+            navigationController?.pushViewController(albumVC, animated: true)
+        case .artist(let model):
+            guard let externalURL = model.external_urls?.spotify else { return }
+            guard let url = URL(string: externalURL) else { return}
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true)
+        case .track(let model):
+            break
+        }
+    }
+}
+
+extension SearchVC: UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         
     }
@@ -170,23 +190,5 @@ extension SearchVC: UISearchResultsUpdating,
                 }
             }
         addToDisposeBag(subscription: searchResultSubscription)
-    }
-    
-    func didSelectOption(_ result: SearchResult) {
-        switch result {
-        case .playlist(let model):
-            let playlistVC = PlaylistVC(playlist: model)
-            navigationController?.pushViewController(playlistVC, animated: true)
-        case .album(let model):
-            let albumVC = AlbumVC(album: model)
-            navigationController?.pushViewController(albumVC, animated: true)
-        case .artist(let model):
-            guard let externalURL = model.external_urls?.spotify else { return }
-            guard let url = URL(string: externalURL) else { return}
-            let safariVC = SFSafariViewController(url: url)
-            present(safariVC, animated: true)
-        case .track(let model):
-            break
-        }
     }
 }

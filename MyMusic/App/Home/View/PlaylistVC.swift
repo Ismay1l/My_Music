@@ -155,8 +155,7 @@ class PlaylistVC: UIViewController {
 //MARK: - Extension PlaylistVC
 extension PlaylistVC: UICollectionViewDelegate,
                       UICollectionViewDataSource,
-                      UICollectionViewDelegateFlowLayout,
-                      PlaylistHeaderCollectionViewDelegate{
+                      UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         playlistResponse.count
@@ -195,7 +194,9 @@ extension PlaylistVC: UICollectionViewDelegate,
         let track = tracks[index]
         PlaybackPresenter.shared.startPlaybackSong(from: self, track: track, tracks: tracks)
     }
-    
+}
+
+extension PlaylistVC: PlaylistHeaderCollectionViewDelegate {
     func didTapPlayButton(_ header: PlaylistHeaderCollectionView) {
         PlaybackPresenter.shared.startPlaybackSongs(from: self, tracks: tracks)
     }
