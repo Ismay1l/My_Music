@@ -56,6 +56,7 @@ class WelcomeVC: UIViewController {
         let left = view.safeAreaLayoutGuide.snp.left
         let right = view.safeAreaLayoutGuide.snp.right
         let bottom = view.safeAreaLayoutGuide.snp.bottom
+        let center = view.safeAreaLayoutGuide.snp.center
         
         wallpaperImage.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top)
@@ -69,6 +70,12 @@ class WelcomeVC: UIViewController {
             make.bottom.equalTo(view.snp.bottom)
             make.left.equalTo(left)
             make.right.equalTo(right)
+        }
+        
+        introLabel.text = "Explore your music world"
+        introLabel.font = UIFont(name: "PassionsConflict-Regular", size: 50)
+        introLabel.snp.makeConstraints { make in
+            make.center.equalTo(center)
         }
         
         signInButton.snp.makeConstraints { make in
