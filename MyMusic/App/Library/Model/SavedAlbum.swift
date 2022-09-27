@@ -12,12 +12,10 @@ struct SavedAlbumResponse: Codable {
     let items: [SavedAlbumResponseItem]?
 }
 
-// MARK: - SavedAlbumResponseItem
 struct SavedAlbumResponseItem: Codable {
     let album: SavedAlbum?
 }
 
-// MARK: - Album
 struct SavedAlbum: Codable {
     let artists: [Artist]?
     let available_markets: [String]?

@@ -10,7 +10,7 @@ import UIKit
 class MainCollectionHeaderView: UICollectionReusableView {
     
     //MARK: - UI Elements
-    private lazy var titleLabel = createLabel(textColor: .white, fontSize: 20, fontWeight: .semibold)
+    private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 20, fontWeight: .semibold)
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +23,7 @@ class MainCollectionHeaderView: UICollectionReusableView {
     
     //MARK: - Functions
     private func setupUI() {
-        backgroundColor = hexStringToUIColor(hex: "370617")
+        backgroundColor = Asset.Colors.black.color
         
         addSubview(titleLabel)
         

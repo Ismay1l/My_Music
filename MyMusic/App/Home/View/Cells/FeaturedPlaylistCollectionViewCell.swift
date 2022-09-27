@@ -16,7 +16,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var nameLabel = createLabel(textColor: .black, fontSize: 14, fontWeight: .semibold)
+    private lazy var nameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: .semibold)
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -30,7 +30,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     
     //MARK: Functions
     private func setupUI() {
-        contentView.backgroundColor = hexStringToUIColor(hex: "d3d3d3")
+        contentView.backgroundColor = Asset.Colors.black.color
         contentView.addSubview(albumCoverImage)
         contentView.addSubview(nameLabel)
         

@@ -26,7 +26,7 @@ class HomeVC: UIViewController {
             return Self.createSectionLayout(section: sectionIndex)
         }
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.showsVerticalScrollIndicator = false
         
         view.register(NewReleaseCollectionViewCell.self, forCellWithReuseIdentifier: "\(NewReleaseCollectionViewCell.self)")
@@ -42,14 +42,14 @@ class HomeVC: UIViewController {
     private lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.hidesWhenStopped = true
-        spinner.tintColor = .label
+        spinner.tintColor = Asset.Colors.secondaryBlack.color
         return spinner
     }()
     
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         
         setUpBackBarButton()
         configureConstraints()
@@ -89,7 +89,7 @@ class HomeVC: UIViewController {
     
     private func setUpBackBarButton() {
         let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        item.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        item.tintColor = Asset.Colors.mainBlue.color
         self.navigationItem.backBarButtonItem = item
     }
     
@@ -323,7 +323,7 @@ extension HomeVC: UICollectionViewDataSource,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(NewReleaseCollectionViewCell.self)", for: indexPath) as! NewReleaseCollectionViewCell
             let item = newReleases[indexPath.row]
             cell.configureCell(item: item)
-            cell.layer.cornerRadius = 12
+            cell.layer.cornerRadius = 16
             cell.clipsToBounds = true
             return cell
         }
@@ -331,16 +331,16 @@ extension HomeVC: UICollectionViewDataSource,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(FeaturedPlaylistCollectionViewCell.self)", for: indexPath) as! FeaturedPlaylistCollectionViewCell
             let item = featuredPlaylists[indexPath.row]
             cell.configureCell(item: item)
-            cell.layer.cornerRadius = 12
+            cell.layer.cornerRadius = 16
             cell.clipsToBounds = true
             return cell
         }
         else if indexPath.section == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(RecommendedTrackCollectionViewCell.self)", for: indexPath) as! RecommendedTrackCollectionViewCell
-            cell.backgroundColor = hexStringToUIColor(hex: "370617")
+            cell.backgroundColor = Asset.Colors.black.color
             let item = recommendations[indexPath.row]
             cell.configureCell(item: item)
-            cell.layer.cornerRadius = 12
+            cell.layer.cornerRadius = 16
             cell.clipsToBounds = true
             return cell
         }
@@ -360,7 +360,7 @@ extension HomeVC: UICollectionViewDataSource,
             albumVC.title = album.name
             albumVC.navigationItem.largeTitleDisplayMode = .never
             let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-            item.tintColor = hexStringToUIColor(hex: "#231F20")
+            item.tintColor = Asset.Colors.mainBlue.color
             albumVC.navigationItem.backBarButtonItem = item
             navigationController?.pushViewController(albumVC, animated: true)
         }

@@ -23,7 +23,7 @@ class LibraryAlbumVC: UIViewController {
     private lazy var albumTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.isHidden = true
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.scrollsToTop = true
         view.showsVerticalScrollIndicator = false
         
@@ -36,7 +36,7 @@ class LibraryAlbumVC: UIViewController {
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         alertView.delegate = self
         
         configureConstraints()
@@ -126,7 +126,7 @@ extension LibraryAlbumVC: UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
         let model = currentUserAlbum[indexPath.row]
         cell.configure(_with: SearchResultAlbumTableViewModel(title: model.album?.name, subtitle: model.album?.artists?.first?.name, imageURL: URL(string: model.album?.images?.first?.url ?? "")))
-        cell.backgroundColor = hexStringToUIColor(hex: "370617")
+        cell.backgroundColor = Asset.Colors.black.color
         cell.selectionStyle = .none
         return cell
     }

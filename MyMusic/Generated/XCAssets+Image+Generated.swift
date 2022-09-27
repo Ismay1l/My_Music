@@ -25,10 +25,11 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal enum Colors {
-    internal static let blue = ColorAsset(name: "blue")
-    internal static let purple = ColorAsset(name: "purple")
-    internal static let red = ColorAsset(name: "red")
-    internal static let testing = ColorAsset(name: "testing")
+    internal static let black = ColorAsset(name: "black")
+    internal static let lightGray = ColorAsset(name: "light-gray")
+    internal static let mainBlue = ColorAsset(name: "main-blue")
+    internal static let secondaryBlack = ColorAsset(name: "secondary-black")
+    internal static let white = ColorAsset(name: "white")
   }
   internal enum Media {
     internal static let intoVCWalpaper = ImageAsset(name: "intoVC_walpaper")
@@ -159,10 +160,10 @@ internal struct ImageAsset {
   @available(iOS 8.0, tvOS 9.0, *)
   internal func image(compatibleWith traitCollection: UITraitCollection) -> Image {
     let bundle = BundleToken.bundle
-    guard let sections = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
+    guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
       fatalError("Unable to load image asset named \(name).")
     }
-    return sections
+    return result
   }
   #endif
 

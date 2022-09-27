@@ -18,8 +18,8 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var trackNameLabel = createLabel(textColor: .black, fontSize: 16, fontWeight: .semibold)
-    private lazy var artistNameLabel = createLabel(textColor: .darkGray, fontSize: 14, fontWeight: .semibold)
+    private lazy var trackNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: .semibold)
+    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: .semibold)
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -33,7 +33,7 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     //MARK: Functions
     private func setupUI() {
-        contentView.backgroundColor = hexStringToUIColor(hex: "d3d3d3")
+        contentView.backgroundColor = Asset.Colors.black.color
         contentView.addSubview(albumCoverImage)
         contentView.addSubview(trackNameLabel)
         contentView.addSubview(artistNameLabel)

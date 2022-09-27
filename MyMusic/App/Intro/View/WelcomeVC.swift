@@ -14,9 +14,9 @@ class WelcomeVC: UIViewController {
     private lazy var signInButton: UIButton = {
         let button = UIButton()
         button.setTitle(L10n.titleWelcomeVCSigninLabel, for: .normal)
-        button.setTitleColor(hexStringToUIColor(hex: "03071e"), for: .normal)
+        button.setTitleColor(Asset.Colors.white.color, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.backgroundColor = hexStringToUIColor(hex: "fdf0d5")
+        button.backgroundColor = Asset.Colors.mainBlue.color
         button.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
         button.layer.cornerRadius = 12
         return button
@@ -31,15 +31,17 @@ class WelcomeVC: UIViewController {
     
     private lazy var overLayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = Asset.Colors.black.color
         view.alpha = 0.7
         return view
     }()
+    
+    private lazy var introLabel = createLabel(textColor: Asset.Colors.mainBlue.color, fontSize: 18, fontWeight: .semibold)
 
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "6a040f")
+        view.backgroundColor = Asset.Colors.black.color
         
         configureConstraints()
     }
@@ -49,6 +51,7 @@ class WelcomeVC: UIViewController {
         view.addSubview(wallpaperImage)
         view.addSubview(overLayView)
         view.addSubview(signInButton)
+        view.addSubview(introLabel)
         
         let left = view.safeAreaLayoutGuide.snp.left
         let right = view.safeAreaLayoutGuide.snp.right

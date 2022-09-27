@@ -13,6 +13,8 @@ class CustomTabBarController: RAMAnimatedTabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        
+        tabBar.unselectedItemTintColor = .white
     }
     
     private func configure() {
@@ -30,6 +32,26 @@ class CustomTabBarController: RAMAnimatedTabBarController {
         vc2.title = L10n.titleSearchPage
         vc3.title = L10n.titleLibraryPage
         vc4.title = L10n.titleProfileVCHeader
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [.foregroundColor: Asset.Colors.white.color]
+        appearance.largeTitleTextAttributes = [.foregroundColor: Asset.Colors.mainBlue.color]
+        vc1.navigationItem.standardAppearance = appearance
+        
+        let appearance2 = UINavigationBarAppearance()
+        appearance2.titleTextAttributes = [.foregroundColor: Asset.Colors.white.color]
+        appearance2.largeTitleTextAttributes = [.foregroundColor: Asset.Colors.mainBlue.color]
+        vc2.navigationItem.standardAppearance = appearance
+        
+        let appearance3 = UINavigationBarAppearance()
+        appearance3.titleTextAttributes = [.foregroundColor: Asset.Colors.white.color]
+        appearance3.largeTitleTextAttributes = [.foregroundColor: Asset.Colors.mainBlue.color]
+        vc3.navigationItem.standardAppearance = appearance
+        
+        let appearance4 = UINavigationBarAppearance()
+        appearance4.titleTextAttributes = [.foregroundColor: Asset.Colors.white.color]
+        appearance4.largeTitleTextAttributes = [.foregroundColor: Asset.Colors.mainBlue.color]
+        vc4.navigationItem.standardAppearance = appearance
         
         let nav1 = UINavigationController(rootViewController: vc1)
         let nav2 = UINavigationController(rootViewController: vc2)

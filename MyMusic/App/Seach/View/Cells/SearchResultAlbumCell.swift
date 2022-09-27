@@ -11,8 +11,8 @@ import SDWebImage
 class SearchResultAlbumCell: UITableViewCell {
     
     //MARK: - UI Elements
-    private lazy var titleLabel = createLabel(textColor: .white, fontSize: 16, fontWeight: .medium)
-    private lazy var subtitleLabel = createLabel(textColor: .white, fontSize: 12, fontWeight: .regular )
+    private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: .medium)
+    private lazy var subtitleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 12, fontWeight: .regular )
     
     private lazy var iconImage: UIImageView = {
         let image = UIImageView()

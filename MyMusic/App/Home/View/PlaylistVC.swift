@@ -28,7 +28,7 @@ class PlaylistVC: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.showsVerticalScrollIndicator = false
         
         view.dataSource = self
@@ -51,7 +51,7 @@ class PlaylistVC: UIViewController {
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         
         configureConstraints()
         setupBarButton()
@@ -100,7 +100,7 @@ class PlaylistVC: UIViewController {
     
     private func setupBarButton() {
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
-        shareButton.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        shareButton.tintColor = Asset.Colors.mainBlue.color
         navigationItem.rightBarButtonItem = shareButton
     }
     
@@ -163,7 +163,7 @@ extension PlaylistVC: UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(PlaylistCollectionViewCell.self)", for: indexPath) as!  PlaylistCollectionViewCell
-        cell.layer.cornerRadius = 5
+        cell.layer.cornerRadius = 12
         cell.clipsToBounds = true
         let item = playlistResponse[indexPath.row]
         cell.configureCell(item: item)

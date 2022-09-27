@@ -18,7 +18,7 @@ class LibrarySwitchView: UIView {
         let button = UIButton()
         button.setTitle("Playlist", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        button.setTitleColor(UIColor.label, for: .normal)
+        button.setTitleColor(Asset.Colors.white.color, for: .normal)
         button.tag = 1
         button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         return button
@@ -28,7 +28,7 @@ class LibrarySwitchView: UIView {
         let button = UIButton()
         button.setTitle("Album", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        button.setTitleColor(UIColor.label, for: .normal)
+        button.setTitleColor(Asset.Colors.white.color, for: .normal)
         button.tag = 2
         button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         return button

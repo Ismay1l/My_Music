@@ -12,11 +12,11 @@ class ImageView: UIView {
     //MARK: - UI Elements
     lazy var trackImage: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .blue
+        view.backgroundColor = Asset.Colors.mainBlue.color
         view.layer.cornerRadius = 12
         view.clipsToBounds = false
         view.layer.shadowRadius = 12
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowColor = Asset.Colors.black.color.cgColor
         view.layer.shadowOpacity = 0.8
         view.layer.shadowOffset = CGSize(width: 20, height: 20)
         return view

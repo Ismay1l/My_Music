@@ -10,8 +10,8 @@ import UIKit
 class BrowseAlbumsCollectionViewCell: UICollectionViewCell {
     
     //MARK: UI Elements
-    private lazy var artistNameLabel = createLabel(textColor: .black, fontSize: 14, fontWeight: .regular)
-    private lazy var albumNameLabel = createLabel(textColor: .black, fontSize: 18, fontWeight: .semibold)
+    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: .regular)
+    private lazy var albumNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: .semibold)
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -25,7 +25,7 @@ class BrowseAlbumsCollectionViewCell: UICollectionViewCell {
     
     //MARK: Functions
     private func setupUI() {
-        contentView.backgroundColor = hexStringToUIColor(hex: "d3d3d3")
+        contentView.backgroundColor = Asset.Colors.lightGray.color
         contentView.addSubview(albumNameLabel)
         contentView.addSubview(artistNameLabel)
         
@@ -36,7 +36,7 @@ class BrowseAlbumsCollectionViewCell: UICollectionViewCell {
         }
         
         albumNameLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(8)
             make.bottom.equalToSuperview().offset(-10)
         }
     }

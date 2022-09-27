@@ -23,7 +23,7 @@ class LibraryPlaylistVC: UIViewController {
     private lazy var playlistTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.isHidden = true
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.scrollsToTop = true
         view.showsVerticalScrollIndicator = false
         
@@ -36,7 +36,7 @@ class LibraryPlaylistVC: UIViewController {
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         alertView.delegate = self
         
         configureConstraints()
@@ -154,7 +154,7 @@ extension LibraryPlaylistVC: UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
         let model = currentUserPlaylist[indexPath.row]
         cell.configure(_with: SearchResultAlbumTableViewModel(title: model.name, subtitle: model.owner?.display_name, imageURL: URL(string: model.images?.first?.url ?? "")))
-        cell.backgroundColor = hexStringToUIColor(hex: "370617")
+        cell.backgroundColor = Asset.Colors.black.color
         cell.selectionStyle = .none
         return cell
     }

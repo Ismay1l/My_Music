@@ -24,14 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = WelcomeVC()
             vc.title = L10n.titleWelcomePage
             vc.navigationItem.largeTitleDisplayMode = .always
+            let appearance = UINavigationBarAppearance()
+            appearance.titleTextAttributes = [.foregroundColor: Asset.Colors.mainBlue.color]
+            appearance.largeTitleTextAttributes = [.foregroundColor: Asset.Colors.mainBlue.color]
+            vc.navigationItem.standardAppearance = appearance
             let navVC = UINavigationController(rootViewController: vc)
             navVC.navigationBar.prefersLargeTitles = true
             window?.rootViewController = navVC
         }
         
         window?.makeKeyAndVisible()
-        print("AccessToken: \(UserDefaultsManager.getString(key: "access_token") ?? "NA")")
-        print("RefreshToken: \(UserDefaultsManager.getString(key: "refresh_token") ?? "NA")")
         return true
     }
 }

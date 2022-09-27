@@ -27,7 +27,7 @@ class AlbumVC: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.showsVerticalScrollIndicator = false
         
         view.dataSource = self
@@ -50,7 +50,7 @@ class AlbumVC: UIViewController {
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         
         configureConstraints()
         setupBarButton()
@@ -96,10 +96,10 @@ class AlbumVC: UIViewController {
     
     private func setupBarButton() {
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
-        shareButton.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        shareButton.tintColor = Asset.Colors.mainBlue.color
         
         let saveButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
-        saveButton.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        saveButton.tintColor = Asset.Colors.mainBlue.color
         
         navigationItem.rightBarButtonItems = [shareButton, saveButton]
     }
@@ -151,7 +151,7 @@ extension AlbumVC: UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(BrowseAlbumsCollectionViewCell.self)", for: indexPath) as!  BrowseAlbumsCollectionViewCell
         let item = albumResponse[indexPath.row]
         cell.configureCell(item: item)
-        cell.layer.cornerRadius = 10
+        cell.layer.cornerRadius = 12
         cell.clipsToBounds = true
         return cell
     }

@@ -29,7 +29,7 @@ class TrackControllerView: UIView {
         label.speed = .duration(80)
         label.fadeLength = 15.0
         label.leadingBuffer = 0
-        label.textColor = .white
+        label.textColor = Asset.Colors.white.color
         label.font = .systemFont(ofSize: 25, weight: .semibold)
         return label
     }()
@@ -69,7 +69,7 @@ class TrackControllerView: UIView {
     private lazy var settingsButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "ellipsis")
-        button.backgroundColor = .gray
+        button.backgroundColor = Asset.Colors.secondaryBlack.color
         button.setImage(image, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 15

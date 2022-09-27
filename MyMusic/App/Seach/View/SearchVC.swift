@@ -34,7 +34,7 @@ class SearchVC: UIViewController {
         layout.itemRenderDirection = .leftToRight
         layout.columnCount = 2
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.showsVerticalScrollIndicator = false
         
         view.register(SearchGenreCollectionViewCell.self, forCellWithReuseIdentifier: "\(SearchGenreCollectionViewCell.self)")
@@ -47,7 +47,7 @@ class SearchVC: UIViewController {
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         
         setUpBackBarButton()
         setUpSearchView()
@@ -71,7 +71,7 @@ class SearchVC: UIViewController {
     
     private func setUpBackBarButton() {
         let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        item.tintColor = hexStringToUIColor(hex: "f8f9fa")
+        item.tintColor = Asset.Colors.mainBlue.color
         self.navigationItem.backBarButtonItem = item
     }
     

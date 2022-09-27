@@ -22,7 +22,7 @@ class ProfileVC: UIViewController {
     private lazy var profileTableView: UITableView = {
         let view = UITableView()
         view.isHidden = true
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.delegate = self
         view.dataSource = self
         view.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
@@ -33,8 +33,8 @@ class ProfileVC: UIViewController {
         let button = UIButton()
         button.setTitle(L10n.titleAccountLabel, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        button.setTitleColor(UIColor.orange, for: .normal)
-        button.backgroundColor = .darkGray
+        button.setTitleColor(Asset.Colors.white.color, for: .normal)
+        button.backgroundColor = Asset.Colors.mainBlue.color
         button.layer.cornerRadius = 12
         button.addTarget(self, action: #selector(didTapSignOut), for: .touchUpInside)
         return button
@@ -53,15 +53,15 @@ class ProfileVC: UIViewController {
         item.alternativeHandler = { _ in
             self.dismiss(animated: true)
         }
-        item.appearance.actionButtonColor = .orange
-//        item.appearance.alternativeButtonTitleColor = .green
+        item.appearance.actionButtonColor = Asset.Colors.mainBlue.color
+        item.appearance.alternativeButtonTitleColor = Asset.Colors.white.color
         return BLTNItemManager(rootItem: item)
     }()
     
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         
         configureConstraints()
         observeData()
@@ -193,11 +193,11 @@ extension ProfileVC: UITableViewDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
         cell.selectionStyle = .none
-        cell.backgroundColor = hexStringToUIColor(hex: "6a040f")
+        cell.backgroundColor = Asset.Colors.lightGray.color
         cell.layer.cornerRadius = 12
         cell.clipsToBounds = true
         cell.layer.opacity = 0.5
-        cell.textLabel?.textColor = hexStringToUIColor(hex: "f8f9fa")
+        cell.textLabel?.textColor = Asset.Colors.white.color
         cell.textLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         cell.textLabel?.text = profileVM.model[indexPath.row]
         return cell

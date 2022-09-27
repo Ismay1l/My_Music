@@ -18,7 +18,7 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
         return icon
     }()
     
-    private lazy var titleLabel = createLabel(textColor: .white, fontSize: 18, fontWeight: .semibold)
+    private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 18, fontWeight: .semibold)
     
     //MARK: - Parent Delegate
     required init?(coder: NSCoder) {

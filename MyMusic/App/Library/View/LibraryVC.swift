@@ -21,7 +21,7 @@ class LibraryVC: UIViewController {
         let view = UIScrollView()
         view.isPagingEnabled = true
         view.delegate = self
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         view.showsHorizontalScrollIndicator = false
         return view
     }()
@@ -29,7 +29,7 @@ class LibraryVC: UIViewController {
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = hexStringToUIColor(hex: "370617")
+        view.backgroundColor = Asset.Colors.black.color
         segmentScrollView.contentSize = CGSize(width: view.frame.size.width * 2, height: segmentScrollView.frame.size.height)
         switchView.delegate = self
         

@@ -20,9 +20,9 @@ class BrowseAlbumsHeaderView: UICollectionReusableView {
         return image
     }()
     
-    private lazy var playlistNameLabel = createLabel(textColor: .white, fontSize: 24, fontWeight: .bold)
-    private lazy var releaseDateLabel = createLabel(textColor: .darkGray, fontSize: 14, fontWeight: .semibold)
-    private lazy var trackCountLabel = createLabel(textColor: .darkGray, fontSize: 14, fontWeight: .semibold)
+    private lazy var playlistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 24, fontWeight: .bold)
+    private lazy var releaseDateLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: .semibold)
+    private lazy var trackCountLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: .semibold)
     
     private lazy var playButton: UIButton = {
         let button = UIButton()
@@ -46,7 +46,7 @@ class BrowseAlbumsHeaderView: UICollectionReusableView {
     
     //MARK: - Functions
     private func setupUI() {
-        backgroundColor = hexStringToUIColor(hex: "370617")
+        backgroundColor = Asset.Colors.black.color
         
         addSubview(playlistImage)
         addSubview(playlistNameLabel)
