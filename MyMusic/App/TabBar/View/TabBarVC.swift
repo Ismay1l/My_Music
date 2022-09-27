@@ -13,8 +13,6 @@ class CustomTabBarController: RAMAnimatedTabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        
-        tabBar.unselectedItemTintColor = .white
     }
     
     private func configure() {

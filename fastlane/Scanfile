@@ -1,5 +1,5 @@
 project("MyMusic.xcodeproj")
-device("iPhone 13")
+device("iPhone 14")
 
 clean(true)
 
