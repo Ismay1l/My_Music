@@ -12,11 +12,17 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
-        self.tabBar.unselectedItemTintColor = Asset.Colors.white.color
+        configureVCs()
+        configureTabBar()
     }
     
-    private func configure() {
+    private func configureTabBar() {
+        tabBar.unselectedItemTintColor = Asset.Colors.white.color
+        tabBar.backgroundColor = Asset.Colors.lightGray.color
+        tabBar.layer.cornerRadius = 22
+    }
+    
+    private func configureVCs() {
         let vc1 = HomeVC()
         let vc2 = LibraryVC()
         let vc3 = SearchVC()

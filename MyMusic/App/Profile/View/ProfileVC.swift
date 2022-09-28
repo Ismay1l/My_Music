@@ -169,7 +169,7 @@ extension ProfileVC: UITableViewDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
         cell.selectionStyle = .none
-        cell.backgroundColor = Asset.Colors.black.color
+        cell.backgroundColor = Asset.Colors.lightGray.color
         cell.layer.cornerRadius = 12
         cell.clipsToBounds = true
         cell.layer.opacity = 0.5

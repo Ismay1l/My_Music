@@ -154,7 +154,7 @@ extension LibraryPlaylistVC: UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
         let model = currentUserPlaylist[indexPath.row]
         cell.configure(_with: SearchResultAlbumTableViewModel(title: model.name, subtitle: model.owner?.display_name, imageURL: URL(string: model.images?.first?.url ?? "")))
-        cell.backgroundColor = Asset.Colors.black.color
+        cell.backgroundColor = Asset.Colors.lightGray.color
         cell.selectionStyle = .none
         return cell
     }

@@ -126,7 +126,7 @@ extension LibraryAlbumVC: UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
         let model = currentUserAlbum[indexPath.row]
         cell.configure(_with: SearchResultAlbumTableViewModel(title: model.album?.name, subtitle: model.album?.artists?.first?.name, imageURL: URL(string: model.album?.images?.first?.url ?? "")))
-        cell.backgroundColor = Asset.Colors.black.color
+        cell.backgroundColor = Asset.Colors.lightGray.color
         cell.selectionStyle = .none
         return cell
     }
