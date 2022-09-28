@@ -10,7 +10,7 @@ import UIKit
 class MainCollectionHeaderView: UICollectionReusableView {
     
     //MARK: - UI Elements
-    private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 20, fontWeight: .semibold)
+    private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 20, fontWeight: "NotoSansMono-Medium")
         
     override init(frame: CGRect) {
         super.init(frame: frame)

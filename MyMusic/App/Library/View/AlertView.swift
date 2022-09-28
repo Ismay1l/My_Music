@@ -12,11 +12,11 @@ class AlertView: UIView {
     weak var delegate: AlertViewDelegate?
     
     //MARK: - UI Elements
-    private lazy var alertLabel = createLabel(textColor: .systemRed, fontSize: 16, fontWeight: .medium)
+    private lazy var alertLabel = createLabel(textColor: .systemRed, fontSize: 16, fontWeight: "NotoSansMono-Medium")
     
     private lazy var createButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Create a Playlist", for: .normal)
+        button.setTitle(L10n.createPlaylist, for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
         button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         return button
@@ -38,7 +38,7 @@ class AlertView: UIView {
         addSubview(alertLabel)
         addSubview(createButton)
         
-        alertLabel.text = "There is no playlist yet"
+        alertLabel.text = L10n.noPlaylistLabel
         alertLabel.numberOfLines = 0
         
         alertLabel.snp.makeConstraints { make in

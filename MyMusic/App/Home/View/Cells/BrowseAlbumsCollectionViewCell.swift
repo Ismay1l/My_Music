@@ -10,8 +10,8 @@ import UIKit
 class BrowseAlbumsCollectionViewCell: UICollectionViewCell {
     
     //MARK: UI Elements
-    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: .regular)
-    private lazy var albumNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: .semibold)
+    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: "NotoSansMono-Regular")
+    private lazy var albumNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: "NotoSansMono-Medium")
     
     required init?(coder: NSCoder) {
         fatalError()

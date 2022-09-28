@@ -16,8 +16,8 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var albumNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: .semibold)
-    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 12, fontWeight: .semibold)
+    private lazy var albumNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
+    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 12, fontWeight: "NotoSansMono-Medium")
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -31,7 +31,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     
     //MARK: Functions
     private func setupUI() {
-        contentView.backgroundColor = Asset.Colors.black.color
+        contentView.backgroundColor = Asset.Colors.lightGray.color
         contentView.addSubview(albumCoverImage)
         contentView.addSubview(albumNameLabel)
         contentView.addSubview(artistNameLabel)

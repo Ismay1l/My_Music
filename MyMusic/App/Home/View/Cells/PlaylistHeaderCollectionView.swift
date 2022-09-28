@@ -21,8 +21,8 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
         return image
     }()
     
-    private lazy var playlistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 24, fontWeight: .bold)
-    private lazy var descriptionLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: .semibold)
+    private lazy var playlistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 24, fontWeight: "NotoSansMono-Bold")
+    private lazy var descriptionLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
     
     private lazy var playButton: UIButton = {
         let button = UIButton()

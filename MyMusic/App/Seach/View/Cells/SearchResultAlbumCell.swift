@@ -11,8 +11,8 @@ import SDWebImage
 class SearchResultAlbumCell: UITableViewCell {
     
     //MARK: - UI Elements
-    private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: .medium)
-    private lazy var subtitleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 12, fontWeight: .regular )
+    private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: "NotoSansMono-Medium")
+    private lazy var subtitleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 12, fontWeight: "NotoSansMono-Regular")
     
     private lazy var iconImage: UIImageView = {
         let image = UIImageView()
@@ -54,6 +54,7 @@ class SearchResultAlbumCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(iconImage.snp.right).offset(10)
+            make.right.equalToSuperview().offset(-10)
             make.top.equalToSuperview().offset(2)
         }
         

@@ -117,15 +117,15 @@ class LibraryPlaylistVC: UIViewController {
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: "New Playlist",
-                                      message: "Enter playlist name",
+        let alert = UIAlertController(title: L10n.newPlaylistLabel,
+                                      message: L10n.newPlaylistMessage,
                                       preferredStyle: .alert)
         alert.addTextField { textField in
-            textField.placeholder = "Playlist...."
+            textField.placeholder = L10n.newPlaylistPlaceholder
         }
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: L10n.buttonCancel, style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.buttonOkay, style: .default, handler: { _ in
             guard let textField = alert.textFields?.first,
                   let text = textField.text,
                   !text.trimmingCharacters(in: .whitespaces).isEmpty else {

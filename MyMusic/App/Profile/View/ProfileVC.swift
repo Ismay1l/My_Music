@@ -8,7 +8,6 @@
 import UIKit
 import SDWebImage
 import Shift
-import BLTNBoard
 import RxSwift
 
 class ProfileVC: UIViewController {
@@ -29,35 +28,6 @@ class ProfileVC: UIViewController {
         return view
     }()
     
-    private lazy var signOutButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(L10n.titleAccountLabel, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        button.setTitleColor(Asset.Colors.white.color, for: .normal)
-        button.backgroundColor = Asset.Colors.mainBlue.color
-        button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(didTapSignOut), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var boardManager: BLTNItemManager = {
-        let item = BLTNPageItem(title: L10n.titleSignOut)
-        item.actionButtonTitle = L10n.buttonSignOut
-        item.alternativeButtonTitle = L10n.buttonCancel
-        item.descriptionText = L10n.descriptionLabel
-        
-        item.actionHandler = { _ in
-            self.didSignOut()
-        }
-        
-        item.alternativeHandler = { _ in
-            self.dismiss(animated: true)
-        }
-        item.appearance.actionButtonColor = Asset.Colors.mainBlue.color
-        item.appearance.alternativeButtonTitleColor = Asset.Colors.white.color
-        return BLTNItemManager(rootItem: item)
-    }()
-    
     //MARK: - Parent Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +35,7 @@ class ProfileVC: UIViewController {
         
         configureConstraints()
         observeData()
+        configureBarButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +48,6 @@ class ProfileVC: UIViewController {
     //MARK: - Functions
     private func configureConstraints() {
         view.addSubview(profileTableView)
-        view.addSubview(signOutButton)
         
         let top = view.safeAreaLayoutGuide.snp.top
         let left = view.safeAreaLayoutGuide.snp.left
@@ -88,14 +58,7 @@ class ProfileVC: UIViewController {
             make.top.equalTo(top).offset(10)
             make.left.equalTo(left).offset(20)
             make.right.equalTo(right).offset(-20)
-            make.bottom.equalTo(signOutButton.snp.top).offset(-10)
-        }
-        
-        signOutButton.snp.makeConstraints { make in
-            make.left.equalTo(left).offset(20)
-            make.right.equalTo(right).offset(-20)
             make.bottom.equalTo(bottom).offset(-10)
-            make.height.equalTo(40)
         }
     }
     
@@ -137,6 +100,18 @@ class ProfileVC: UIViewController {
         profileTableView.tableHeaderView = headerView
     }
     
+    @objc
+    private func DidTapSignOutButton() {
+        let alert = UIAlertController(title: L10n.titleSignOut, message: L10n.descriptionLabel, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: L10n.buttonCancel, style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.buttonSignOut, style: .destructive, handler: {[weak self] _ in
+            DispatchQueue.main.async {
+                self?.didSignOut()
+            }
+        }))
+        present(alert, animated: true)
+    }
+    
     private func didSignOut() {
         dismiss(animated: true)
         AuthManager.shared.signOut { [weak self] success in
@@ -176,9 +151,10 @@ class ProfileVC: UIViewController {
         let _ = compositeDisposable.insert(profileSubscription)
     }
     
-    @objc
-    private func didTapSignOut() {
-        boardManager.showBulletin(above: self, animated: true)
+    private func configureBarButtons() {
+        let signOutButton = UIBarButtonItem(title: L10n.buttonSignOut, style: .plain, target: self, action: #selector(DidTapSignOutButton))
+        signOutButton.tintColor = Asset.Colors.mainBlue.color
+        navigationItem.leftBarButtonItem = signOutButton
     }
 }
 
@@ -193,7 +169,7 @@ extension ProfileVC: UITableViewDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
         cell.selectionStyle = .none
-        cell.backgroundColor = Asset.Colors.lightGray.color
+        cell.backgroundColor = Asset.Colors.black.color
         cell.layer.cornerRadius = 12
         cell.clipsToBounds = true
         cell.layer.opacity = 0.5

@@ -16,7 +16,7 @@ class LibrarySwitchView: UIView {
     //MARK: - UI Elements
     private lazy var playlistButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Playlist", for: .normal)
+        button.setTitle(L10n.playlistTitle, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.setTitleColor(Asset.Colors.white.color, for: .normal)
         button.tag = 1
@@ -26,7 +26,7 @@ class LibrarySwitchView: UIView {
     
     private lazy var albumButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Album", for: .normal)
+        button.setTitle(L10n.albumTitle, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.setTitleColor(Asset.Colors.white.color, for: .normal)
         button.tag = 2

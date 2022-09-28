@@ -16,7 +16,7 @@
 "title_loginVC_header" = "Login";
 
 //MARK: - Home VC
-"title_home_page" = "Browse";
+"title_home_page" = "Home";
 
 //MARK: - Home VC -> Settings VC
 "title_settingsVC_header" = "Settings";
@@ -29,7 +29,7 @@
 "title_profileVC_header" = "Profile";
 "fullname_label" = "Name";
 "userID_label" = "User ID";
-"product_label" = "Product";
+"product_label" = "Your Plan";
 "follower_count_label" = "Followers";
 "country_label" = "Country";
 "could_not_get_data_label" = "Could not get data";
@@ -48,6 +48,7 @@
 "description_label" = "Are you sure to sign out?";
 "button_sign_out" = "Sign out";
 "button_cancel" = "Cancel";
+"button_okay" = "OK";
 
 //MARK: - MainCollectionViewHeader
 "browse_title" = "Browse";
@@ -57,3 +58,16 @@
 //MARK: - Share album/song button
 "share_album_button" = "Share this album via:";
 "share_playlist_button" = "Share this playlist via:";
+
+//MARK: - LibraryVC
+"new_playlist_label" = "New Playlist";
+"new_playlist_message" = "Enter playlist name";
+"new_playlist_placeholder" = "Playlist....";
+
+//MARK: - Library Switching View
+"album_title" = "Album";
+"playlist_title" = "Playlist";
+
+//MARK: - Alert View
+"create_playlist" = "Create a Playlist";
+"no_playlist_label" = "There is no playlist yet";

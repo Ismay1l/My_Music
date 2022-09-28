@@ -16,7 +16,7 @@ class CategoriesPlaylistCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var nameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: .semibold)
+    private lazy var nameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
     
     
     required init?(coder: NSCoder) {

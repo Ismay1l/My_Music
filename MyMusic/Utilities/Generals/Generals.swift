@@ -47,10 +47,10 @@ func hexStringToUIColor (hex:String) -> UIColor {
     )
 }
 
-func createLabel(textColor: UIColor, fontSize: Int, fontWeight: UIFont.Weight) -> UILabel {
+func createLabel(textColor: UIColor, fontSize: Int, fontWeight: String) -> UILabel {
     let label = UILabel()
     label.textColor = textColor
-    label.font = .systemFont(ofSize: CGFloat(fontSize), weight: fontWeight)
+    label.font = UIFont(name: fontWeight, size: CGFloat(fontSize))
     label.textAlignment = .left
     label.numberOfLines = 1
     return label

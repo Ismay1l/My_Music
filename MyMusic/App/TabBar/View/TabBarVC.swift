@@ -8,17 +8,18 @@
 import UIKit
 import RAMAnimatedTabBarController
 
-class CustomTabBarController: RAMAnimatedTabBarController {
+class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        self.tabBar.unselectedItemTintColor = Asset.Colors.white.color
     }
     
     private func configure() {
         let vc1 = HomeVC()
-        let vc2 = SearchVC()
-        let vc3 = LibraryVC()
+        let vc2 = LibraryVC()
+        let vc3 = SearchVC()
         let vc4 = ProfileVC()
         
         vc1.navigationItem.largeTitleDisplayMode = .always
@@ -27,8 +28,8 @@ class CustomTabBarController: RAMAnimatedTabBarController {
         vc4.navigationItem.largeTitleDisplayMode = .never
         
         vc1.title = L10n.titleHomePage
-        vc2.title = L10n.titleSearchPage
-        vc3.title = L10n.titleLibraryPage
+        vc2.title = L10n.titleLibraryPage
+        vc3.title = L10n.titleSearchPage
         vc4.title = L10n.titleProfileVCHeader
         
         let appearance = UINavigationBarAppearance()
@@ -56,15 +57,10 @@ class CustomTabBarController: RAMAnimatedTabBarController {
         let nav3 = UINavigationController(rootViewController: vc3)
         let nav4 = UINavigationController(rootViewController: vc4)
         
-        nav1.tabBarItem = RAMAnimatedTabBarItem(title: L10n.titleHomeTabbar, image: UIImage(systemName: "house"), tag: 1)
-        nav2.tabBarItem = RAMAnimatedTabBarItem(title: L10n.titleSearchPage, image: UIImage(systemName: "magnifyingglass"), tag: 2)
-        nav3.tabBarItem = RAMAnimatedTabBarItem(title: L10n.titleLibraryPage, image: UIImage(systemName: "music.note.list"), tag: 3)
-        nav4.tabBarItem = RAMAnimatedTabBarItem(title:L10n.profileLabel, image: UIImage(systemName: "person.crop.circle"), tag: 4)
-        
-        (nav1.tabBarItem as? RAMAnimatedTabBarItem)?.animation = RAMBounceAnimation()
-        (nav2.tabBarItem as? RAMAnimatedTabBarItem)?.animation = RAMBounceAnimation()
-        (nav3.tabBarItem as? RAMAnimatedTabBarItem)?.animation = RAMBounceAnimation()
-        (nav4.tabBarItem as? RAMAnimatedTabBarItem)?.animation = RAMBounceAnimation()
+        nav1.tabBarItem = UITabBarItem(title: L10n.titleHomeTabbar, image: UIImage(systemName: "house"), tag: 1)
+        nav2.tabBarItem = UITabBarItem(title: L10n.titleLibraryPage, image: UIImage(systemName: "music.note.list"), tag: 2)
+        nav3.tabBarItem = UITabBarItem(title: L10n.titleSearchPage, image: UIImage(systemName: "magnifyingglass"), tag: 3)
+        nav4.tabBarItem = UITabBarItem(title: L10n.profileLabel, image: UIImage(systemName: "person.crop.circle"), tag: 4)
         
         let viewControllers = [nav1, nav2, nav3, nav4]
         setViewControllers(viewControllers, animated: true)

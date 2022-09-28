@@ -15,7 +15,7 @@ class WelcomeVC: UIViewController {
         let button = UIButton()
         button.setTitle(L10n.titleWelcomeVCSigninLabel, for: .normal)
         button.setTitleColor(Asset.Colors.white.color, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.titleLabel?.font = UIFont(name: "NotoSansMono-Medium", size: 16)
         button.backgroundColor = Asset.Colors.mainBlue.color
         button.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
         button.layer.cornerRadius = 12
@@ -36,7 +36,7 @@ class WelcomeVC: UIViewController {
         return view
     }()
     
-    private lazy var introLabel = createLabel(textColor: Asset.Colors.mainBlue.color, fontSize: 18, fontWeight: .semibold)
+    private lazy var introLabel = createLabel(textColor: Asset.Colors.mainBlue.color, fontSize: 18, fontWeight: "NotoSansMono-Medium")
 
     //MARK: - Parent Delegate
     override func viewDidLoad() {
@@ -94,7 +94,7 @@ class WelcomeVC: UIViewController {
             return
         }
         
-        let mainTabBarVC = CustomTabBarController()
+        let mainTabBarVC = TabBarController()
         mainTabBarVC.modalPresentationStyle = .fullScreen
         mainTabBarVC.shift.enable()
         mainTabBarVC.shift.defaultAnimation = DefaultAnimations.Scale(.down)
