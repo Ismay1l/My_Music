@@ -9,10 +9,13 @@ import Foundation
 import RxRelay
 import RxSwift
 import Promises
+import UIKit
+import RealmSwift
 
 class HomeVM {
     
     private let apiManager: APIManagerProtocol
+    let realm = try! Realm()
     
     init(manager: APIManagerProtocol = APIManager()) {
         self.apiManager = manager
@@ -86,5 +89,18 @@ class HomeVM {
     //MARK: - Add Track To Playlist
     func addTrackToPlaylist(add track: Track, playlist: Item) -> Promise<Bool> {
         apiManager.addTrackToPlaylist(add: track, playlist: playlist)
+    }
+    
+    //MARK: - Realm Save NewRealeases
+    func saveNewReleases(_ model: NewReleaseResponseR) {
+        try! realm.write({
+            self.realm.add(model)
+        })
+        getNewReleases()
+    }
+    
+    func getNewReleases() {
+        let model = realm.objects(NewReleaseResponseR.self)
+        print("RealmDatabase: \(model.first?.albums?.items.first?.name ?? "NA")")
     }
 }

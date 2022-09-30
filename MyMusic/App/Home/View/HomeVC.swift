@@ -8,6 +8,7 @@
 import UIKit
 import Shift
 import RxSwift
+import RealmSwift
 
 class HomeVC: UIViewController {
     
@@ -19,6 +20,7 @@ class HomeVC: UIViewController {
     private var newReleases = [Album]()
     private var featuredPlaylists = [Item]()
     private var recommendations = [Track]()
+    private var newReleasesModel = NewReleaseResponseR()
     
     //MARK: - UI Elements
     private lazy var mainCollectionView: UICollectionView = {
@@ -55,6 +57,7 @@ class HomeVC: UIViewController {
         configureConstraints()
         observeData()
         addGesture()
+        homeVM.getNewReleases()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,6 +221,10 @@ class HomeVC: UIViewController {
                         guard let albums = model.albums?.items else { return }
                         self?.newReleases = albums
                         self?.mainCollectionView.reloadData()
+                        let newRelease1 = NewReleaseResponseR()
+                        newRelease1.albums?.items.first?.name = model.albums?.items?.first?.name ?? ""
+                        newRelease1.albums?.items.first?.release_date = model.albums?.items?.first?.release_date ?? ""
+                        self?.homeVM.saveNewReleases(newRelease1)
                     }
                 }
             }
