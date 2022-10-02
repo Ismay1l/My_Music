@@ -15,21 +15,28 @@ import Network
 
 class HomeVM {
     
+    //MARK: - Variables
     private let apiManager: APIManagerProtocol
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private let dataStack = CoreDataStack(modelName: "BrowseModel")
+    
+    private let contextBrowse = (UIApplication.shared.delegate as! AppDelegate).persistentContainerBrowse.viewContext
+    private let contextFeaturedPl = (UIApplication.shared.delegate as! AppDelegate).persistentContainerFeaturedPl.viewContext
+    private let contextTrack = (UIApplication.shared.delegate as! AppDelegate).persistentContainerTrack.viewContext
+    
+    private let dataStackBrowse = CoreDataStack(modelName: "BrowseModel")
+    private let dataStackFeaturedPl = CoreDataStack(modelName: "FeaturedPlModel")
+    private let dataStackTrack = CoreDataStack(modelName: "TrackModel")
     
     var localNewReleases = [Browse]()
-    var localFeaturedPl = [FeaturedPL]()
+    var localFeaturedPl = [FeaturedPl]()
+    var localTrack = [TrackEntity]()
+    
+    private let newReleasesRelay = BehaviorRelay<NewReleaseState?>.init(value: nil)
+    private let featuredPlaylistsRelay = BehaviorRelay<FeaturedPlaylistState?>.init(value: nil)
+    private let recommendationsRelay = BehaviorRelay<RecommendationState?>.init(value: nil)
     
     init(manager: APIManagerProtocol = APIManager()) {
         self.apiManager = manager
     }
-    
-    //MARK: - Variables
-    private let newReleasesRelay = BehaviorRelay<NewReleaseState?>.init(value: nil)
-    private let featuredPlaylistsRelay = BehaviorRelay<FeaturedPlaylistState?>.init(value: nil)
-    private let recommendationsRelay = BehaviorRelay<RecommendationState?>.init(value: nil)
     
     //MARK: - Fetch New Releases
     func fetchBrowseNewReleasesData() -> Observable<NewReleaseState> {
@@ -97,35 +104,61 @@ class HomeVM {
     }
     
     //MARK: - Core Data
-    private func saveContext() {
+    private func saveContextBrowse() {
         
         do {
-            try context.save()
+            try contextBrowse.save()
         } catch {
             print(error)
         }
     }
     
-    //MARK: - Save  Result
+    private func saveContextFeaturedPl () {
+        
+        do {
+            try contextFeaturedPl.save()
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func saveContextTrack () {
+        
+        do {
+            try contextTrack.save()
+        } catch {
+            print(error)
+        }
+    }
+    
+    //MARK: - Save Result
     func saveBrowse(artistTitle: String, albumTitle: String, image: String) {
-        let newBrowse = Browse(context: context)
+        let newBrowse = Browse(context: contextBrowse)
         newBrowse.artistTitle = artistTitle
         newBrowse.albumTitle = albumTitle
         newBrowse.image = image
-        saveContext()
+        saveContextBrowse()
     }
     
     func saveFeaturedPl(image: String, title: String) {
-        let newFeaturedPl = FeaturedPL(context: context)
+        let newFeaturedPl = FeaturedPl(context: contextFeaturedPl)
         newFeaturedPl.image = image
         newFeaturedPl.title = title
-        saveContext()
+        saveContextFeaturedPl()
     }
     
-    //MARK: - Get  Result
+    func saveTrack(artist: String, title: String, image: String) {
+        let newTrack = TrackEntity(context: contextTrack)
+        newTrack.title = title
+        newTrack.artist = artist
+        newTrack.image = image
+        saveContextTrack()
+    }
+    
+    //MARK: - Get Result
     func getAllBrowse() {
         do {
-            localNewReleases = try context.fetch(Browse.fetchRequest())
+            localNewReleases = try contextBrowse.fetch(Browse.fetchRequest())
         } catch {
             print(error)
         }
@@ -133,20 +166,27 @@ class HomeVM {
     
     func getAllFeaturedPl() {
         do {
-            localFeaturedPl = try context.fetch(FeaturedPL.fetchRequest())
-            print("VVV: \(localFeaturedPl.first?.title)")
+            localFeaturedPl = try contextFeaturedPl.fetch(FeaturedPl.fetchRequest())
         } catch {
             print(error)
         }
     }
     
-    //MARK: - Delete Browse Result
+    func getAllTrack() {
+        do {
+            localTrack = try contextTrack.fetch(TrackEntity.fetchRequest())
+        } catch {
+            print(error)
+        }
+    }
+    
+    //MARK: - Delete Result
     func deleteAllBrowse() {
         let fetchRequest = NSFetchRequest<NSManagedObjectID>.init(entityName: "Browse")
         fetchRequest.resultType = .managedObjectResultType
         
         do {
-            let ids = try dataStack.managedContext.fetch(fetchRequest)
+            let ids = try dataStackBrowse.managedContext.fetch(fetchRequest)
             if ids.isEmpty {
                 print("All deleted already")
                 return
@@ -154,7 +194,7 @@ class HomeVM {
             let batchDelete = NSBatchDeleteRequest(objectIDs: ids)
             batchDelete.resultType = .resultTypeCount
             
-            let batchResult = try self.dataStack.managedContext.execute(batchDelete) as? NSBatchDeleteResult
+            let batchResult = try self.dataStackBrowse.managedContext.execute(batchDelete) as? NSBatchDeleteResult
             if let count = batchResult?.result as? Int {
                 print("Deleted elements: \(count)")
             }
@@ -164,11 +204,11 @@ class HomeVM {
     }
     
     func deleteAllFeaturedPl() {
-        let fetchRequest = NSFetchRequest<NSManagedObjectID>.init(entityName: "FeaturedPL")
+        let fetchRequest = NSFetchRequest<NSManagedObjectID>.init(entityName: "FeaturedPl")
         fetchRequest.resultType = .managedObjectResultType
         
         do {
-            let ids = try dataStack.managedContext.fetch(fetchRequest)
+            let ids = try dataStackFeaturedPl.managedContext.fetch(fetchRequest)
             if ids.isEmpty {
                 print("All deleted already")
                 return
@@ -176,7 +216,29 @@ class HomeVM {
             let batchDelete = NSBatchDeleteRequest(objectIDs: ids)
             batchDelete.resultType = .resultTypeCount
             
-            let batchResult = try self.dataStack.managedContext.execute(batchDelete) as? NSBatchDeleteResult
+            let batchResult = try self.dataStackFeaturedPl.managedContext.execute(batchDelete) as? NSBatchDeleteResult
+            if let count = batchResult?.result as? Int {
+                print("Deleted elements: \(count)")
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteAllTrack() {
+        let fetchRequest = NSFetchRequest<NSManagedObjectID>.init(entityName: "TrackEntity")
+        fetchRequest.resultType = .managedObjectResultType
+        
+        do {
+            let ids = try dataStackTrack.managedContext.fetch(fetchRequest)
+            if ids.isEmpty {
+                print("All deleted already")
+                return
+            }
+            let batchDelete = NSBatchDeleteRequest(objectIDs: ids)
+            batchDelete.resultType = .resultTypeCount
+            
+            let batchResult = try self.dataStackTrack.managedContext.execute(batchDelete) as? NSBatchDeleteResult
             if let count = batchResult?.result as? Int {
                 print("Deleted elements: \(count)")
             }
@@ -186,82 +248,4 @@ class HomeVM {
     }
 }
 
-class CoreDataStack {
-    
-    private let modelName: String
-    
-    lazy var managedContext: NSManagedObjectContext = {
-        return self.storeContainer.viewContext
-    }()
-    
-    init(modelName: String) {
-        self.modelName = modelName
-    }
-    
-    private lazy var storeContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: self.modelName)
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                print("Unsolved error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
-    
-    func saveContext() {
-        guard self.managedContext.hasChanges else { return }
-        do {
-            try self.managedContext.save()
-        } catch let error as NSError {
-            print("Unsolved error \(error), \(error.userInfo)")
-        }
-    }
-}
 
-class NetworkMonitor {
-    static let shared = NetworkMonitor()
-    
-    private let queue = DispatchQueue.global()
-    private let monitor: NWPathMonitor
-    
-    public private(set) var isConnected: Bool = false
-    public private(set) var connectionType: ConnectionType = .unknown
-    
-    private init() {
-        monitor = NWPathMonitor()
-    }
-    
-    public func startMonitoring() {
-        monitor.start(queue: queue)
-        monitor.pathUpdateHandler = {[weak self] path in
-            self?.isConnected = path.status == .satisfied
-            self?.getConnectionType(path)
-        }
-    }
-    
-    public func stopMOnitoring() {
-        monitor.cancel()
-    }
-    
-    private func getConnectionType(_ path: NWPath) {
-        if path.usesInterfaceType(.wifi) {
-            connectionType = .wifi
-        }
-        
-        else if path.usesInterfaceType(.cellular) {
-            connectionType = .cellular
-        }
-        
-        else if path.usesInterfaceType(.wiredEthernet) {
-            connectionType = .ethernet
-        }
-        
-        else {
-            connectionType = .unknown
-        }
-    }
-}
-
-enum ConnectionType {
-    case wifi, cellular, ethernet, unknown
-}

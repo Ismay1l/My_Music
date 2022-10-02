@@ -61,4 +61,12 @@ class SearchGenreCollectionViewCell: UICollectionViewCell {
         iconImage.tintColor = randomColors.randomElement()
         contentView.backgroundColor = randomColors.randomElement()
     }
+    
+    func configureCellWithLocalDB(with item: SearchCategory) {
+        titleLabel.text = item.name
+        guard let urlStr = item.icon else { return }
+        iconImage.sd_setImage(with: URL(string: urlStr), completed: nil)
+        iconImage.tintColor = randomColors.randomElement()
+        contentView.backgroundColor = randomColors.randomElement()
+    }
 }

@@ -16,6 +16,8 @@ class ProfileVC: UIViewController {
     private let profileVM = ProfileVM()
     private var compositeDisposable = CompositeDisposable()
     private var disposeBag = DisposeBag()
+    private var isConnectedToInternet = NetworkMonitor.shared.isConnected
+    private var localProfile = [String]()
     
     //MARK: - UI Elements
     private lazy var profileTableView: UITableView = {
@@ -63,8 +65,13 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
         
+        if isConnectedToInternet {
+            observeData()
+        } else {
+            loadDataFromLocalDB()
+        }
+        
         configureConstraints()
-        observeData()
         configureBarButtons()
     }
     
@@ -114,6 +121,21 @@ class ProfileVC: UIViewController {
         }
     }
     
+    private func loadDataFromLocalDB() {
+        DispatchQueue.main.async {[weak self] in
+            self?.profileTableView.isHidden = false
+            self?.profileVM.getProfileData()
+            guard let localDBProfile = self?.profileVM.localProfile else { return }
+            self?.localProfile.append("\(L10n.fullnameLabel): \(localDBProfile.first?.name ?? "NA")")
+            self?.localProfile.append("\(L10n.countryLabel): \(localDBProfile.first?.country ?? "NA")")
+            self?.localProfile.append("\(L10n.productLabel): \(localDBProfile.first?.plan ?? "NA")")
+            self?.localProfile.append("\(L10n.paymentCardLabel): \(1111) \(2222) \(3333) \(4444)")
+            guard let urlStr = localDBProfile.first?.image, let url = URL(string: urlStr) else { return }
+            self?.profileImage.sd_setImage(with: url)
+            self?.profileTableView.reloadData()
+        }
+    }
+    
     private func updateUI(with model: UserProfileResponse) {
         profileTableView.isHidden = false
         profileVM.model.removeAll()
@@ -123,6 +145,11 @@ class ProfileVC: UIViewController {
         profileVM.model.append("\(L10n.paymentCardLabel): \(1111) \(2222) \(3333) \(4444)")
         guard let urlStr = model.images?.first?.url, let url = URL(string: urlStr) else { return }
         profileImage.sd_setImage(with: url)
+        profileVM.deleteAllProfile()
+        profileVM.saveProfile(image: model.images?.first?.url ?? "NA",
+                              name: model.displayName ?? "NA",
+                              country: model.country ?? "NA",
+                              plan: model.product ?? "NA")
         profileTableView.reloadData()
     }
     
@@ -210,20 +237,37 @@ extension ProfileVC: UITableViewDelegate,
                      UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        profileVM.model.count
+        if isConnectedToInternet {
+            return profileVM.model.count
+        } else {
+            return localProfile.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
-        cell.selectionStyle = .none
-        cell.backgroundColor = Asset.Colors.lightGray.color
-        cell.layer.cornerRadius = 12
-        cell.clipsToBounds = true
-        cell.layer.opacity = 0.5
-        cell.textLabel?.textColor = Asset.Colors.white.color
-        cell.textLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        cell.textLabel?.text = profileVM.model[indexPath.row]
-        return cell
+        if isConnectedToInternet {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
+            cell.selectionStyle = .none
+            cell.backgroundColor = Asset.Colors.lightGray.color
+            cell.layer.cornerRadius = 12
+            cell.clipsToBounds = true
+            cell.layer.opacity = 0.5
+            cell.textLabel?.textColor = Asset.Colors.white.color
+            cell.textLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+            cell.textLabel?.text = profileVM.model[indexPath.row]
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
+            cell.selectionStyle = .none
+            cell.backgroundColor = Asset.Colors.lightGray.color
+            cell.layer.cornerRadius = 12
+            cell.clipsToBounds = true
+            cell.layer.opacity = 0.5
+            cell.textLabel?.textColor = Asset.Colors.white.color
+            cell.textLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+            cell.textLabel?.text = localProfile[indexPath.row]
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

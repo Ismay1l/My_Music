@@ -18,6 +18,8 @@ class SearchVC: UIViewController {
     private var disposeBag = DisposeBag()
     private var categories = [CategoryItem]()
     private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
+    private var isConnectedToInternet = NetworkMonitor.shared.isConnected
+    private var localCategories = [SearchCategory]()
     
     //MARK: - UI Elements
     private var searchController: UISearchController = {
@@ -49,10 +51,15 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
         
+        if isConnectedToInternet {
+            observeData()
+        } else {
+            loadDataFromLocalDB()
+        }
+        
         setUpBackBarButton()
         setUpSearchView()
         configureConstraints()
-        observeData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +67,10 @@ class SearchVC: UIViewController {
         
         compositeBag = CompositeDisposable()
         compositeBag.disposed(by: disposeBag)
+        
+        if !NetworkMonitor.shared.isConnected {
+            createAlert(self)
+        }
     }
     
     //MARK: - Functions
@@ -67,6 +78,15 @@ class SearchVC: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
+    }
+    
+    private func loadDataFromLocalDB() {
+        DispatchQueue.main.async {[weak self] in
+            self?.searchVM.getAllCategories()
+            guard let localDBCategories = self?.searchVM.localSearchCategory else { return }
+            self?.localCategories = localDBCategories
+            self?.mainCollectionView.reloadData()
+        }
     }
     
     private func setUpBackBarButton() {
@@ -96,6 +116,11 @@ class SearchVC: UIViewController {
                     DispatchQueue.main.async {
                         guard let items = model.categories?.items else { return }
                         self?.categories = items
+                        self?.searchVM.deleteAllCategories()
+                        items.forEach { category in
+                            self?.searchVM.saveSearchCategory(icon: category.icons?.first?.url ?? "NA",
+                                                              name: category.name ?? "NA")
+                        }
                         self?.mainCollectionView.reloadData()
                     }
                 }
@@ -123,15 +148,26 @@ extension SearchVC: UISearchResultsUpdating,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categories.count
+        if isConnectedToInternet {
+            return categories.count
+        } else {
+            return localCategories.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(SearchGenreCollectionViewCell.self)", for: indexPath) as! SearchGenreCollectionViewCell
         cell.layer.cornerRadius = 16
         cell.layer.masksToBounds = true
-        let item = categories[indexPath.row]
-        cell.configureCell(with: item)
+        
+        if isConnectedToInternet {
+            let item = categories[indexPath.row]
+            cell.configureCell(with: item)
+        } else {
+            let item = localCategories[indexPath.row]
+            cell.configureCellWithLocalDB(with: item)
+        }
+        
         return cell
     }
     
@@ -140,11 +176,15 @@ extension SearchVC: UISearchResultsUpdating,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        let categoryVC = CategoryVC(category: categories[indexPath.row])
-        categoryVC.title = categories.first?.name
-        categoryVC.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(categoryVC, animated: true)
+        if isConnectedToInternet {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            let categoryVC = CategoryVC(category: categories[indexPath.row])
+            categoryVC.title = categories.first?.name
+            categoryVC.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(categoryVC, animated: true)
+        } else {
+            createAlert(self)
+        }
     }
 }
 

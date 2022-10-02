@@ -61,3 +61,9 @@ func createImageView(imageName: String) -> UIImageView {
     view.image = UIImage(systemName: imageName)
     return view
 }
+
+func createAlert(_ viewController: UIViewController) {
+    let alert = UIAlertController(title: "Warning", message: "You are not connected to Internet. Cannot download data", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+    viewController.present(alert, animated: true)
+}

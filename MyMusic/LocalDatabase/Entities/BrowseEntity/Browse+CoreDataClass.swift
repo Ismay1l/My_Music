@@ -13,8 +13,3 @@ import CoreData
 public class Browse: NSManagedObject {
 
 }
-
-@objc(FeaturedPL)
-public class FeaturedPL: NSManagedObject {
-
-}

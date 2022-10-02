@@ -19,9 +19,10 @@ class HomeVC: UIViewController {
     private var newReleases = [Album]()
     private var featuredPlaylists = [Item]()
     private var recommendations = [Track]()
+    private var isConnectedToInternet = NetworkMonitor.shared.isConnected
     private var localNewreleases = [Browse]()
-    private var localFeaturedPl = [FeaturedPL]()
-    private var isConnected = NetworkMonitor.shared.isConnected
+    private var localFeaturedPl = [FeaturedPl]()
+    private var localTrack = [TrackEntity]()
     
     //MARK: - UI Elements
     private lazy var mainCollectionView: UICollectionView = {
@@ -54,7 +55,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
         
-        if isConnected {
+        if isConnectedToInternet {
             observeData()
         } else {
             loadDataFromLocalDB()
@@ -101,13 +102,12 @@ class HomeVC: UIViewController {
             guard let localDataFeaturedPl = self?.homeVM.localFeaturedPl else { return }
             self?.localFeaturedPl = localDataFeaturedPl
             self?.mainCollectionView.reloadData()
+            
+            self?.homeVM.getAllTrack()
+            guard let localDataTrack = self?.homeVM.localTrack else { return }
+            self?.localTrack = localDataTrack
+            self?.mainCollectionView.reloadData()
         }
-    }
-    
-    private func createAlert() {
-        let alert = UIAlertController(title: "Warning", message: "You are not connected to Internet. Cannot download data", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
-        present(alert, animated: true)
     }
     
     private func addGesture() {
@@ -268,7 +268,7 @@ class HomeVC: UIViewController {
                         self?.homeVM.deleteAllFeaturedPl()
                         playlists.forEach { playlist in
                             self?.homeVM.saveFeaturedPl(image: playlist.images?.first?.url ?? "NA",
-                                                        title: playlist.description ?? "NA")
+                                                        title: playlist.owner?.display_name ?? "NA")
                         }
                         self?.mainCollectionView.reloadData()
                     }
@@ -284,6 +284,12 @@ class HomeVC: UIViewController {
                     case .showRecommendations(let model):
                         guard let tracks = model.tracks else { return }
                         self?.recommendations = tracks
+                        self?.homeVM.deleteAllTrack()
+                        tracks.forEach { track in
+                            self?.homeVM.saveTrack(artist: track.artists?.first?.name ?? "NA",
+                                                   title: track.name ?? "NA",
+                                                   image: track.album?.images?.first?.url ?? "NA")
+                        }
                         self?.mainCollectionView.reloadData()
                     }
                 }
@@ -344,17 +350,25 @@ extension HomeVC: UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            if isConnected {
+            if isConnectedToInternet {
                 return newReleases.count
             } else {
                 return localNewreleases.count
             }
         }
         else if section == 1 {
-            return featuredPlaylists.count
+            if isConnectedToInternet {
+                return featuredPlaylists.count
+            } else {
+                return localFeaturedPl.count
+            }
         }
         else if section == 2 {
-            return recommendations.count
+            if isConnectedToInternet {
+                return recommendations.count
+            } else {
+                return localTrack.count
+            }
         }
         else {
             return 0
@@ -365,12 +379,12 @@ extension HomeVC: UICollectionViewDataSource,
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(NewReleaseCollectionViewCell.self)", for: indexPath) as! NewReleaseCollectionViewCell
             
-            if isConnected {
+            if isConnectedToInternet {
                 let item = newReleases[indexPath.row]
                 cell.configureCell(item: item)
             } else {
                 let localItem = localNewreleases[indexPath.row]
-                cell.configureCellFromLocalDB(item: localItem)
+                cell.configureCellWithLocalDB(item: localItem)
             }
             
             cell.layer.cornerRadius = 16
@@ -379,8 +393,15 @@ extension HomeVC: UICollectionViewDataSource,
         }
         else if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(FeaturedPlaylistCollectionViewCell.self)", for: indexPath) as! FeaturedPlaylistCollectionViewCell
-            let item = featuredPlaylists[indexPath.row]
-            cell.configureCell(item: item)
+            
+            if isConnectedToInternet {
+                let item = featuredPlaylists[indexPath.row]
+                cell.configureCell(item: item)
+            } else {
+                let item = localFeaturedPl[indexPath.row]
+                cell.configureCellWithLocalDB(item: item)
+            }
+
             cell.layer.cornerRadius = 16
             cell.clipsToBounds = true
             return cell
@@ -388,8 +409,15 @@ extension HomeVC: UICollectionViewDataSource,
         else if indexPath.section == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(RecommendedTrackCollectionViewCell.self)", for: indexPath) as! RecommendedTrackCollectionViewCell
             cell.backgroundColor = Asset.Colors.black.color
-            let item = recommendations[indexPath.row]
-            cell.configureCell(item: item)
+            
+            if isConnectedToInternet {
+                let item = recommendations[indexPath.row]
+                cell.configureCell(item: item)
+            } else {
+                let item = localTrack[indexPath.row]
+                cell.configureCellWithLocalDB(item: item)
+            }
+            
             cell.layer.cornerRadius = 16
             cell.clipsToBounds = true
             return cell
@@ -405,7 +433,7 @@ extension HomeVC: UICollectionViewDataSource,
         collectionView.deselectItem(at: indexPath, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
         if indexPath.section == 0 {
-            if isConnected {
+            if isConnectedToInternet {
                 let album = newReleases[indexPath.row]
                 let albumVC = AlbumVC(album: album)
                 albumVC.title = album.name
@@ -415,19 +443,27 @@ extension HomeVC: UICollectionViewDataSource,
                 albumVC.navigationItem.backBarButtonItem = item
                 navigationController?.pushViewController(albumVC, animated: true)
             } else {
-                createAlert()
+                createAlert(self)
             }
         }
         else if indexPath.section == 1 {
-            let playlist = featuredPlaylists[indexPath.row]
-            let playlistVC = PlaylistVC(playlist: playlist)
-            playlistVC.title = playlist.name
-            playlistVC.navigationItem.largeTitleDisplayMode = .never
-            navigationController?.pushViewController(playlistVC, animated: true)
+            if isConnectedToInternet {
+                let playlist = featuredPlaylists[indexPath.row]
+                let playlistVC = PlaylistVC(playlist: playlist)
+                playlistVC.title = playlist.name
+                playlistVC.navigationItem.largeTitleDisplayMode = .never
+                navigationController?.pushViewController(playlistVC, animated: true)
+            } else {
+                createAlert(self)
+            }
         }
         else {
-            let track = recommendations[indexPath.row]
-            PlaybackPresenter.shared.startPlaybackSong(from: self, track: track, tracks: [])
+            if isConnectedToInternet {
+                let track = recommendations[indexPath.row]
+                PlaybackPresenter.shared.startPlaybackSong(from: self, track: track, tracks: [])
+            } else {
+                createAlert(self)
+            }
         }
     }
     

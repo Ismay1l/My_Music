@@ -70,7 +70,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         artistNameLabel.text = item.artists?.first?.name
     }
     
-    func configureCellFromLocalDB(item: Browse) {
+    func configureCellWithLocalDB(item: Browse) {
         guard let url = item.image else { return }
         albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
         albumNameLabel.text = item.albumTitle

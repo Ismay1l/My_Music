@@ -37,8 +37,13 @@ class LibraryAlbumVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
         
+        if NetworkMonitor.shared.isConnected {
+            observeData()
+        } else {
+            createAlert(self)
+        }
+        
         configureConstraints()
-        observeData()
         notificationCenterHandler()
     }
     

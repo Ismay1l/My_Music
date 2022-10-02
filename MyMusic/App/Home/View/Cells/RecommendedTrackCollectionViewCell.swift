@@ -64,4 +64,11 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         trackNameLabel.text = item.name
         artistNameLabel.text = item.artists?.first?.name
     }
+    
+    func configureCellWithLocalDB(item: TrackEntity) {
+        guard let url = item.image else { return }
+        albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
+        trackNameLabel.text = item.title
+        artistNameLabel.text = item.artist
+    }
 }

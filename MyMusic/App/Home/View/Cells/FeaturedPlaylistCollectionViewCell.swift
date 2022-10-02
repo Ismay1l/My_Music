@@ -53,4 +53,10 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
         nameLabel.text = item.owner?.display_name
     }
+    
+    func configureCellWithLocalDB(item: FeaturedPl) {
+        guard let url = item.image else { return }
+        albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
+        nameLabel.text = item.description
+    }
 }

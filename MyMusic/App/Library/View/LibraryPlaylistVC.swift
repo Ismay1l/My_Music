@@ -37,8 +37,13 @@ class LibraryPlaylistVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
         
+        if NetworkMonitor.shared.isConnected {
+            observeData()
+        } else {
+            createAlert(self)
+        }
+        
         configureConstraints()
-        observeData()
         addDismissButton()
         setUpBarbUtton()
     }
@@ -138,7 +143,11 @@ class LibraryPlaylistVC: UIViewController {
     
     @objc
     private func didTapAddButton(_ sender: UIBarButtonItem) {
-        showAlert()
+        if NetworkMonitor.shared.isConnected {
+            showAlert()
+        } else {
+            createAlert(self)
+        }
     }
 }
 

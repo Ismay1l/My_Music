@@ -26,18 +26,3 @@ extension Browse : Identifiable {
 
 }
 
-extension FeaturedPL {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<FeaturedPL> {
-        return NSFetchRequest<FeaturedPL>(entityName: "FeaturedPL")
-    }
-
-    @NSManaged public var image: String?
-    @NSManaged public var title: String?
-
-}
-
-extension FeaturedPL : Identifiable {
-
-}
-
