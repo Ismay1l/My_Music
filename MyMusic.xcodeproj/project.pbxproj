@@ -103,6 +103,9 @@
 		4BE6B88628E0745D0079FE3F /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6B88528E0745D0079FE3F /* Extension.swift */; };
 		4BE8DD6128E98D68007598A4 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8DD6028E98D68007598A4 /* TableViewModel.swift */; };
 		4BE8DD6428E99C3C007598A4 /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8DD6328E99C3C007598A4 /* OptionTableViewCell.swift */; };
+		4BE8DD6728E9AB2D007598A4 /* BrowseModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8DD6528E9AB2D007598A4 /* BrowseModel.xcdatamodeld */; };
+		4BE8DD6A28E9ABED007598A4 /* Browse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8DD6828E9ABED007598A4 /* Browse+CoreDataClass.swift */; };
+		4BE8DD6B28E9ABED007598A4 /* Browse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8DD6928E9ABED007598A4 /* Browse+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +217,9 @@
 		4BE8DD5F28E8A454007598A4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BE8DD6028E98D68007598A4 /* TableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
 		4BE8DD6328E99C3C007598A4 /* OptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
+		4BE8DD6628E9AB2D007598A4 /* BrowseModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BrowseModel.xcdatamodel; sourceTree = "<group>"; };
+		4BE8DD6828E9ABED007598A4 /* Browse+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browse+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4BE8DD6928E9ABED007598A4 /* Browse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,6 +608,7 @@
 		4BD4EAA428B6AFAF00CA24D8 /* MyMusic */ = {
 			isa = PBXGroup;
 			children = (
+				4BE8DD6C28E9ABFB007598A4 /* Entities */,
 				4B0C603C28E3886B006517AD /* Fonts */,
 				4BD4EAB928B6AFE400CA24D8 /* App */,
 				4BD4EAC028B6B0D300CA24D8 /* Managers */,
@@ -611,6 +618,7 @@
 				4BCC4B4B28C222DE0061ABD1 /* Assets */,
 				4BD4EAB328B6AFAF00CA24D8 /* Info.plist */,
 				4BCC4B4228C21E1F0061ABD1 /* Localizable.strings */,
+				4BE8DD6528E9AB2D007598A4 /* BrowseModel.xcdatamodeld */,
 			);
 			path = MyMusic;
 			sourceTree = "<group>";
@@ -658,6 +666,7 @@
 		4BD4EAC028B6B0D300CA24D8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4BE8DD6E28E9B3F8007598A4 /* NetworkMonitor */,
 				4B910E9528B8E2AD00E19863 /* Auth */,
 				4B7B311628BBB64B00FFE7E3 /* API */,
 				4B7B311728BBB66B00FFE7E3 /* UserDefaults */,
@@ -736,6 +745,30 @@
 				4BE8DD6328E99C3C007598A4 /* OptionTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		4BE8DD6C28E9ABFB007598A4 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4BE8DD6D28E9AC05007598A4 /* BrowseEntity */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		4BE8DD6D28E9AC05007598A4 /* BrowseEntity */ = {
+			isa = PBXGroup;
+			children = (
+				4BE8DD6828E9ABED007598A4 /* Browse+CoreDataClass.swift */,
+				4BE8DD6928E9ABED007598A4 /* Browse+CoreDataProperties.swift */,
+			);
+			path = BrowseEntity;
+			sourceTree = "<group>";
+		};
+		4BE8DD6E28E9B3F8007598A4 /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -969,6 +1002,7 @@
 				4B7E3EAB28C2284600BE990E /* Strings.swift in Sources */,
 				4BD33C1728B7EF4D00BE1353 /* TabBarVC.swift in Sources */,
 				4BD4EAA628B6AFAF00CA24D8 /* AppDelegate.swift in Sources */,
+				4BE8DD6A28E9ABED007598A4 /* Browse+CoreDataClass.swift in Sources */,
 				4B7E3EAA28C2284600BE990E /* XCAssets+Image+Generated.swift in Sources */,
 				49F0DD2A28CB0EDC00EB470B /* SearchVM.swift in Sources */,
 				4B21572D28D614B300C655DF /* SearchResultAlbumCell.swift in Sources */,
@@ -990,6 +1024,8 @@
 				4B13004828D7152800775E8F /* LibraryAlbumVC.swift in Sources */,
 				4B52F46528CCAA9C00E5AD94 /* PlaybackPresenter.swift in Sources */,
 				4BBFE2B228C66EEF00508C7E /* PlaylistHeaderCollectionView.swift in Sources */,
+				4BE8DD6728E9AB2D007598A4 /* BrowseModel.xcdatamodeld in Sources */,
+				4BE8DD6B28E9ABED007598A4 /* Browse+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,6 +1466,19 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		4BE8DD6528E9AB2D007598A4 /* BrowseModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4BE8DD6628E9AB2D007598A4 /* BrowseModel.xcdatamodel */,
+			);
+			currentVersion = 4BE8DD6628E9AB2D007598A4 /* BrowseModel.xcdatamodel */;
+			path = BrowseModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4BD4EA9A28B6AFAF00CA24D8 /* Project object */;
 }

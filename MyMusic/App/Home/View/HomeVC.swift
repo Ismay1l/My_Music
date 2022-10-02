@@ -217,7 +217,14 @@ class HomeVC: UIViewController {
                     case .showNewReleases(let model):
                         guard let albums = model.albums?.items else { return }
                         self?.newReleases = albums
+                        self?.homeVM.deleteAll()
+                        albums.forEach { album in
+                            self?.homeVM.saveBrowse(artistTitle: album.artists?.first?.name ?? "NA",
+                                                    albumTitle: album.name ?? "NA",
+                                                    image: album.images?.first?.url ?? "NA")
+                        }
                         self?.mainCollectionView.reloadData()
+                        self?.homeVM.getAllNotes()
                     }
                 }
             }

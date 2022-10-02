@@ -24,7 +24,6 @@ class OptionTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    //MARK: - Parent Delegate
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         accessoryType = .disclosureIndicator
