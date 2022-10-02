@@ -19,6 +19,9 @@ class HomeVC: UIViewController {
     private var newReleases = [Album]()
     private var featuredPlaylists = [Item]()
     private var recommendations = [Track]()
+    private var localNewreleases = [Browse]()
+    private var localFeaturedPl = [FeaturedPL]()
+    private var isConnected = NetworkMonitor.shared.isConnected
     
     //MARK: - UI Elements
     private lazy var mainCollectionView: UICollectionView = {
@@ -51,9 +54,14 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
         
+        if isConnected {
+            observeData()
+        } else {
+            loadDataFromLocalDB()
+        }
+        
         setUpBackBarButton()
         configureConstraints()
-        observeData()
         addGesture()
     }
     
@@ -80,6 +88,26 @@ class HomeVC: UIViewController {
             make.right.equalTo(right)
             make.bottom.equalTo(bottom).offset(-10)
         }
+    }
+    
+    private func loadDataFromLocalDB() {
+        DispatchQueue.main.async {[weak self] in
+            self?.homeVM.getAllBrowse()
+            guard let localDataBrowse = self?.homeVM.localNewReleases else { return }
+            self?.localNewreleases = localDataBrowse
+            self?.mainCollectionView.reloadData()
+            
+            self?.homeVM.getAllFeaturedPl()
+            guard let localDataFeaturedPl = self?.homeVM.localFeaturedPl else { return }
+            self?.localFeaturedPl = localDataFeaturedPl
+            self?.mainCollectionView.reloadData()
+        }
+    }
+    
+    private func createAlert() {
+        let alert = UIAlertController(title: "Warning", message: "You are not connected to Internet. Cannot download data", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+        present(alert, animated: true)
     }
     
     private func addGesture() {
@@ -217,14 +245,13 @@ class HomeVC: UIViewController {
                     case .showNewReleases(let model):
                         guard let albums = model.albums?.items else { return }
                         self?.newReleases = albums
-                        self?.homeVM.deleteAll()
+                        self?.homeVM.deleteAllBrowse()
                         albums.forEach { album in
                             self?.homeVM.saveBrowse(artistTitle: album.artists?.first?.name ?? "NA",
                                                     albumTitle: album.name ?? "NA",
                                                     image: album.images?.first?.url ?? "NA")
                         }
                         self?.mainCollectionView.reloadData()
-                        self?.homeVM.getAllNotes()
                     }
                 }
             }
@@ -238,6 +265,11 @@ class HomeVC: UIViewController {
                     case .showFeaturedPlaylists(let model):
                         guard let playlists = model.playlists?.items else { return }
                         self?.featuredPlaylists = playlists
+                        self?.homeVM.deleteAllFeaturedPl()
+                        playlists.forEach { playlist in
+                            self?.homeVM.saveFeaturedPl(image: playlist.images?.first?.url ?? "NA",
+                                                        title: playlist.description ?? "NA")
+                        }
                         self?.mainCollectionView.reloadData()
                     }
                 }
@@ -312,7 +344,11 @@ extension HomeVC: UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return newReleases.count
+            if isConnected {
+                return newReleases.count
+            } else {
+                return localNewreleases.count
+            }
         }
         else if section == 1 {
             return featuredPlaylists.count
@@ -328,8 +364,15 @@ extension HomeVC: UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(NewReleaseCollectionViewCell.self)", for: indexPath) as! NewReleaseCollectionViewCell
-            let item = newReleases[indexPath.row]
-            cell.configureCell(item: item)
+            
+            if isConnected {
+                let item = newReleases[indexPath.row]
+                cell.configureCell(item: item)
+            } else {
+                let localItem = localNewreleases[indexPath.row]
+                cell.configureCellFromLocalDB(item: localItem)
+            }
+            
             cell.layer.cornerRadius = 16
             cell.clipsToBounds = true
             return cell
@@ -362,14 +405,18 @@ extension HomeVC: UICollectionViewDataSource,
         collectionView.deselectItem(at: indexPath, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
         if indexPath.section == 0 {
-            let album = newReleases[indexPath.row]
-            let albumVC = AlbumVC(album: album)
-            albumVC.title = album.name
-            albumVC.navigationItem.largeTitleDisplayMode = .never
-            let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-            item.tintColor = Asset.Colors.mainBlue.color
-            albumVC.navigationItem.backBarButtonItem = item
-            navigationController?.pushViewController(albumVC, animated: true)
+            if isConnected {
+                let album = newReleases[indexPath.row]
+                let albumVC = AlbumVC(album: album)
+                albumVC.title = album.name
+                albumVC.navigationItem.largeTitleDisplayMode = .never
+                let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+                item.tintColor = Asset.Colors.mainBlue.color
+                albumVC.navigationItem.backBarButtonItem = item
+                navigationController?.pushViewController(albumVC, animated: true)
+            } else {
+                createAlert()
+            }
         }
         else if indexPath.section == 1 {
             let playlist = featuredPlaylists[indexPath.row]

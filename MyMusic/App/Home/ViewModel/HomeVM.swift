@@ -11,13 +11,16 @@ import RxSwift
 import Promises
 import UIKit
 import CoreData
+import Network
 
 class HomeVM {
     
     private let apiManager: APIManagerProtocol
-    var browseModel = [Browse]()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let dataStack = CoreDataStack(modelName: "BrowseModel")
+    
+    var localNewReleases = [Browse]()
+    var localFeaturedPl = [FeaturedPL]()
     
     init(manager: APIManagerProtocol = APIManager()) {
         self.apiManager = manager
@@ -103,6 +106,7 @@ class HomeVM {
         }
     }
     
+    //MARK: - Save  Result
     func saveBrowse(artistTitle: String, albumTitle: String, image: String) {
         let newBrowse = Browse(context: context)
         newBrowse.artistTitle = artistTitle
@@ -111,17 +115,56 @@ class HomeVM {
         saveContext()
     }
     
-    func getAllNotes() {
+    func saveFeaturedPl(image: String, title: String) {
+        let newFeaturedPl = FeaturedPL(context: context)
+        newFeaturedPl.image = image
+        newFeaturedPl.title = title
+        saveContext()
+    }
+    
+    //MARK: - Get  Result
+    func getAllBrowse() {
         do {
-            browseModel = try context.fetch(Browse.fetchRequest())
-            print(browseModel.count)
+            localNewReleases = try context.fetch(Browse.fetchRequest())
         } catch {
             print(error)
         }
     }
     
-    func deleteAll() {
+    func getAllFeaturedPl() {
+        do {
+            localFeaturedPl = try context.fetch(FeaturedPL.fetchRequest())
+            print("VVV: \(localFeaturedPl.first?.title)")
+        } catch {
+            print(error)
+        }
+    }
+    
+    //MARK: - Delete Browse Result
+    func deleteAllBrowse() {
         let fetchRequest = NSFetchRequest<NSManagedObjectID>.init(entityName: "Browse")
+        fetchRequest.resultType = .managedObjectResultType
+        
+        do {
+            let ids = try dataStack.managedContext.fetch(fetchRequest)
+            if ids.isEmpty {
+                print("All deleted already")
+                return
+            }
+            let batchDelete = NSBatchDeleteRequest(objectIDs: ids)
+            batchDelete.resultType = .resultTypeCount
+            
+            let batchResult = try self.dataStack.managedContext.execute(batchDelete) as? NSBatchDeleteResult
+            if let count = batchResult?.result as? Int {
+                print("Deleted elements: \(count)")
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteAllFeaturedPl() {
+        let fetchRequest = NSFetchRequest<NSManagedObjectID>.init(entityName: "FeaturedPL")
         fetchRequest.resultType = .managedObjectResultType
         
         do {
@@ -173,4 +216,52 @@ class CoreDataStack {
             print("Unsolved error \(error), \(error.userInfo)")
         }
     }
+}
+
+class NetworkMonitor {
+    static let shared = NetworkMonitor()
+    
+    private let queue = DispatchQueue.global()
+    private let monitor: NWPathMonitor
+    
+    public private(set) var isConnected: Bool = false
+    public private(set) var connectionType: ConnectionType = .unknown
+    
+    private init() {
+        monitor = NWPathMonitor()
+    }
+    
+    public func startMonitoring() {
+        monitor.start(queue: queue)
+        monitor.pathUpdateHandler = {[weak self] path in
+            self?.isConnected = path.status == .satisfied
+            self?.getConnectionType(path)
+        }
+    }
+    
+    public func stopMOnitoring() {
+        monitor.cancel()
+    }
+    
+    private func getConnectionType(_ path: NWPath) {
+        if path.usesInterfaceType(.wifi) {
+            connectionType = .wifi
+        }
+        
+        else if path.usesInterfaceType(.cellular) {
+            connectionType = .cellular
+        }
+        
+        else if path.usesInterfaceType(.wiredEthernet) {
+            connectionType = .ethernet
+        }
+        
+        else {
+            connectionType = .unknown
+        }
+    }
+}
+
+enum ConnectionType {
+    case wifi, cellular, ethernet, unknown
 }

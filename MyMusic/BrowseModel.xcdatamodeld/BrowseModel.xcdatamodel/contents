@@ -5,4 +5,8 @@
         <attribute name="artistTitle" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="FeaturedPL" representedClassName="FeaturedPL" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
 </model>

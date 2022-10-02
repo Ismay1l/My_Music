@@ -69,4 +69,11 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         albumNameLabel.text = item.name
         artistNameLabel.text = item.artists?.first?.name
     }
+    
+    func configureCellFromLocalDB(item: Browse) {
+        guard let url = item.image else { return }
+        albumCoverImage.sd_setImage(with: URL(string: url), completed: nil)
+        albumNameLabel.text = item.albumTitle
+        artistNameLabel.text = item.artistTitle
+    }
 }
