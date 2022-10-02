@@ -33,6 +33,14 @@ class PlayerVC: UIViewController {
         configureConstraints()
         configureData()
         trackControllerView.delegate = self
+//        if self.isBeingDismissed {
+//            delegate?.isDismissed()
+//        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.isDismissed()
     }
     
     //MARK: - Functions

@@ -79,7 +79,6 @@ class PlaylistVC: UIViewController {
                         guard let track = model.tracks?.items?.compactMap({ $0.track }) else { return }
                         self?.tracks = track
                         self?.playlistResponse = trackItem
-                        print(model)
                         self?.mainCollectionView.reloadData()
                     }
                 }
@@ -178,7 +177,6 @@ extension PlaylistVC: UICollectionViewDelegate,
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(PlaylistHeaderCollectionView.self)", for: indexPath) as! PlaylistHeaderCollectionView
             header.configureHeader(item: playlist)
-            header.delegate = self
             return header
         }
         return UICollectionReusableView()
@@ -193,11 +191,5 @@ extension PlaylistVC: UICollectionViewDelegate,
         let index = indexPath.row
         let track = tracks[index]
         PlaybackPresenter.shared.startPlaybackSong(from: self, track: track, tracks: tracks)
-    }
-}
-
-extension PlaylistVC: PlaylistHeaderCollectionViewDelegate {
-    func didTapPlayButton(_ header: PlaylistHeaderCollectionView) {
-        PlaybackPresenter.shared.startPlaybackSongs(from: self, tracks: tracks)
     }
 }

@@ -8,6 +8,7 @@
 //MARK: Welcome VC
 "title_welcome_page" = "My Music";
 "title_welcomeVC_signin_label" = "Sign in with Spotify";
+"explore_your_music_world_label" = "Explore your music world";
 
 //MARK: Auth VC
 "title_authVC_header" = "Sign in";
@@ -71,3 +72,4 @@
 //MARK: - Alert View
 "create_playlist" = "Create a Playlist";
 "no_playlist_label" = "There is no playlist yet";
+

@@ -27,6 +27,6 @@ struct Item: Codable {
 
 struct Owner: Codable {
     let display_name: String?
-    let external_urls: [String: String]?
+    let external_urls: ExternalUrls?
     let id: String?
 }

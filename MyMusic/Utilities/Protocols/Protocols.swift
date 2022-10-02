@@ -28,14 +28,6 @@ protocol APIManagerProtocol {
     func saveAlbum(_ album: Album) -> Promise<Bool>
 }
 
-protocol PlaylistHeaderCollectionViewDelegate: AnyObject {
-    func didTapPlayButton(_ header: PlaylistHeaderCollectionView)
-}
-
-protocol BrowseAlbumsHeaderViewDelegate: AnyObject {
-    func didTapPlayButton(_ header: BrowseAlbumsHeaderView)
-}
-
 protocol TrackControllerViewDelegate: AnyObject {
     func didTapPlayButton(_ playerController: TrackControllerView)
     func didTapBackButton(_ playerController: TrackControllerView)
@@ -54,6 +46,7 @@ protocol PlayerVCDelegate: AnyObject {
     func didTapBack()
     func didTapForward()
     func didChangeSliderValue(_ value: Float)
+    func isDismissed()
 }
 
 protocol SearchResultVCDelegate: AnyObject {

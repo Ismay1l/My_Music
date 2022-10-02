@@ -164,7 +164,6 @@ extension AlbumVC: UICollectionViewDelegate,
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(BrowseAlbumsHeaderView.self)", for: indexPath) as! BrowseAlbumsHeaderView
             header.configureHeader(item: album)
-            header.delegate = self
             return header
         }
         return UICollectionReusableView()
@@ -179,16 +178,5 @@ extension AlbumVC: UICollectionViewDelegate,
         var track = albumResponse[index]
         track.album = album
         PlaybackPresenter.shared.startPlaybackSong(from: self, track: track, tracks: albumResponse)
-    }
-}
-
-extension AlbumVC: BrowseAlbumsHeaderViewDelegate {
-    func didTapPlayButton(_ header: BrowseAlbumsHeaderView) {
-        let tracksWithAlbumImage: [Track] = albumResponse.compactMap {
-            var track = $0
-            track.album = album
-            return track
-        }
-        PlaybackPresenter.shared.startPlaybackSongs(from: self, tracks: tracksWithAlbumImage)
     }
 }

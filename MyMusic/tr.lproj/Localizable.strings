@@ -8,29 +8,30 @@
 //MARK: Welcome VC
 "title_welcome_page" = "My Music";
 "title_welcomeVC_signin_label" = "Spotify ile giriş yap";
+"explore_your_music_world_label" = "Müzik dünyanızı keşfedin";
 
 //MARK: Auth VC
-"title_authVC_header" = "Kayıt ol";
+"title_authVC_header" = "Kayıt olmak";
 
 //MARK: Login VC
 "title_loginVC_header" = "Giriş yap";
 
 //MARK: - Home VC
-"title_home_page" = "Araştır";
+"title_home_page" = "Ana Sayfa";
 
 //MARK: - Home VC -> Settings VC
 "title_settingsVC_header" = "Ayarlar";
 "profile_label" = "Profil";
 "title_profile_label" = "Profilinizi Görüntüle";
 "account_label" = "Hesap";
-"title_account_label" = "Hesaptan çık";
+"title_account_label" = "Çıkış yap";
 
 //MARK: - Home VC -> Profile VC
 "title_profileVC_header" = "Profil";
-"fullname_label" = "Kullanıcı ismi";
+"fullname_label" = "İsim";
 "userID_label" = "Kullanıcı kimliği";
+"product_label" = "Senin planın";
 "follower_count_label" = "Takipçiler";
-"product_label" = "Ürün";
 "country_label" = "Ülke";
 "could_not_get_data_label" = "Veri alınamadı";
 
@@ -44,7 +45,30 @@
 "title_home_tabbar" = "Ana Sayfa";
 
 //MARK: - Sign out Card
-"title_sign_out" = "Hesaptan çık";
+"title_sign_out" = "Çıkış yap";
 "description_label" = "Çıkış yaptığınızdan emin misiniz?";
-"button_sign_out" = "Hesaptan çık";
-"button_cancel" = "Iptal";
+"button_sign_out" = "Çıkış yap";
+"button_cancel" = "İptal et";
+"button_okay" = "Tamam";
+
+//MARK: - MainCollectionViewHeader
+"browse_title" = "Araştır";
+"featured_playlists_title" = "Öne Çıkan Oynatma Listeleri";
+"recommended_tracks_title" = "Önerilen Parçalar";
+
+//MARK: - Share album/song button
+"share_album_button" = "Bu albümü şu yollarla paylaşın:";
+"share_playlist_button" = "Bu oynatma listesini şu yollarla paylaşın:";
+
+//MARK: - LibraryVC
+"new_playlist_label" = "Yeni Oynatma Listesi";
+"new_playlist_message" = "Oynatma listesi adını girin";
+"new_playlist_placeholder" = "Oynatma listesi...";
+
+//MARK: - Library Switching View
+"album_title" = "Albüm";
+"playlist_title" = "Playlist";
+
+//MARK: - Alert View
+"create_playlist" = "Oynatma Listesi Oluşturun";
+"no_playlist_label" = "Henüz oynatma listesi yok";

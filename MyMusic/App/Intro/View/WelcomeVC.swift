@@ -72,7 +72,7 @@ class WelcomeVC: UIViewController {
             make.right.equalTo(right)
         }
         
-        introLabel.text = "Explore your music world"
+        introLabel.text = L10n.exploreYourMusicWorldLabel
         introLabel.font = UIFont(name: "PassionsConflict-Regular", size: 50)
         introLabel.snp.makeConstraints { make in
             make.center.equalTo(center)

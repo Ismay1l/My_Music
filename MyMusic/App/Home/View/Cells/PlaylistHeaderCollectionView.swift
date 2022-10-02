@@ -9,7 +9,6 @@ import UIKit
 
 class PlaylistHeaderCollectionView: UICollectionReusableView {
     
-    weak var delegate: PlaylistHeaderCollectionViewDelegate?
     private let playerVC = PlayerVC()
     
     //MARK: - UI Elements
@@ -23,17 +22,6 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
     
     private lazy var playlistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 24, fontWeight: "NotoSansMono-Bold")
     private lazy var descriptionLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
-    
-    private lazy var playButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .systemRed
-        let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 3, weight: UIImage.SymbolWeight.regular))
-        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        button.tintColor = .white
-        button.layer.cornerRadius = 30
-        button.addTarget(self, action: #selector(didTapPlay), for: .touchUpInside)
-        return button
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +39,6 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
         addSubview(playlistImage)
         addSubview(playlistNameLabel)
         addSubview(descriptionLabel)
-        addSubview(playButton)
         
         playlistImage.snp.makeConstraints { make in
             make.width.equalTo(200)
@@ -63,12 +50,6 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
         playlistNameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(5)
             make.top.equalTo(playlistImage.snp.bottom).offset(13)
-        }
-        
-        playButton.snp.makeConstraints { make in
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-10)
-            make.width.height.equalTo(60)
         }
         
         descriptionLabel.numberOfLines = 0
@@ -84,10 +65,5 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
         playlistImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(systemName: "photo"), completed: nil)
         playlistNameLabel.text = item.name
         descriptionLabel.text = item.owner?.display_name
-    }
-    
-    @objc
-    private func didTapPlay() {
-        delegate?.didTapPlayButton(self)
     }
 }

@@ -8,29 +8,30 @@
 //MARK: Welcome VC
 "title_welcome_page" = "My Music";
 "title_welcomeVC_signin_label" = "Войти через Spotify";
+"explore_your_music_world_label" = "Исследуйте свой музыкальный мир";
 
 //MARK: Auth VC
 "title_authVC_header" = "Войти";
 
 //MARK: Login VC
-"title_loginVC_header" = "Войдите";
+"title_loginVC_header" = "Авторизоваться";
 
 //MARK: - Home VC
-"title_home_page" = "Просматривать";
+"title_home_page" = "Дом";
 
 //MARK: - Home VC -> Settings VC
 "title_settingsVC_header" = "Настройки";
 "profile_label" = "Профиль";
-"title_profile_label" = "Посмотреть Cвой Профиль";
+"title_profile_label" = "Посмотреть свой профиль";
 "account_label" = "Счет";
-"title_account_label" = "Выйдите";
+"title_account_label" = "выход";
 
 //MARK: - Home VC -> Profile VC
 "title_profileVC_header" = "Профиль";
 "fullname_label" = "Имя";
 "userID_label" = "ID пользователя";
+"product_label" = "Ваш план";
 "follower_count_label" = "Последователи";
-"product_label" = "Товар";
 "country_label" = "Страна";
 "could_not_get_data_label" = "Не удалось получить данные";
 
@@ -44,7 +45,30 @@
 "title_home_tabbar" = "Дом";
 
 //MARK: - Sign out Card
-"title_sign_out" = "Выйдите";
+"title_sign_out" = "выход";
 "description_label" = "Вы уверены, что вышли?";
-"button_sign_out" = "Выйдите";
+"button_sign_out" = "выход";
 "button_cancel" = "Отмена";
+"button_okay" = "ХОРОШО";
+
+//MARK: - MainCollectionViewHeader
+"browse_title" = "Просматривать";
+"featured_playlists_title" = "Рекомендуемые плейлисты";
+"recommended_tracks_title" = "Рекомендуемые треки";
+
+//MARK: - Share album/song button
+"share_album_button" = "Поделитесь этим альбомом через:";
+"share_playlist_button" = "Поделитесь этим плейлистом через:";
+
+//MARK: - LibraryVC
+"new_playlist_label" = "Новый плейлист";
+"new_playlist_message" = "Введите название плейлиста";
+"new_playlist_placeholder" = "Плейлист....";
+
+//MARK: - Library Switching View
+"album_title" = "Альбом";
+"playlist_title" = "Плейлист";
+
+//MARK: - Alert View
+"create_playlist" = "Создать плейлист";
+"no_playlist_label" = "Плейлиста пока нет";

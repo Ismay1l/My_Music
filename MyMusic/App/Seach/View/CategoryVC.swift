@@ -129,4 +129,13 @@ extension CategoryVC: UICollectionViewDelegate,
         cell.layer.masksToBounds = true
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let playlist = self.playlist[indexPath.row]
+        let playlistVC = PlaylistVC(playlist: playlist)
+        playlistVC.title = playlist.name
+        playlistVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(playlistVC, animated: true)
+    }
 }

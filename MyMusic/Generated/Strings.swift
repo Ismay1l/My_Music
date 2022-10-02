@@ -30,6 +30,8 @@ internal enum L10n {
   internal static let createPlaylist = L10n.tr("Localizable", "create_playlist", fallback: "Create a Playlist")
   /// Are you sure to sign out?
   internal static let descriptionLabel = L10n.tr("Localizable", "description_label", fallback: "Are you sure to sign out?")
+  /// Explore your music world
+  internal static let exploreYourMusicWorldLabel = L10n.tr("Localizable", "explore_your_music_world_label", fallback: "Explore your music world")
   /// Featured-Playlists
   internal static let featuredPlaylistsTitle = L10n.tr("Localizable", "featured_playlists_title", fallback: "Featured-Playlists")
   /// Followers

@@ -37,7 +37,6 @@ final class PlaybackPresenter {
         player = AVPlayer(url: url)
         player?.volume = 0.5
         self.track = track
-//        self.tracks = []
         let playerVC = PlayerVC()
         playerVC.dataSource = self
         playerVC.delegate = self
@@ -127,6 +126,10 @@ extension PlaybackPresenter: PlayerVCDataSource,
         if let player = player {
             player.volume = value
         }
+    }
+    
+    func isDismissed() {
+        player?.pause()
     }
 }
  

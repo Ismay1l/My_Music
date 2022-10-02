@@ -163,7 +163,7 @@ extension SearchVC: SearchResultVCDelegate {
             let safariVC = SFSafariViewController(url: url)
             present(safariVC, animated: true)
         case .track(let model):
-            break
+            PlaybackPresenter.shared.startPlaybackSong(from: self, track: model, tracks: [])
         }
     }
 }
