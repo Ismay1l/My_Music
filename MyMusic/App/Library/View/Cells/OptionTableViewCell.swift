@@ -1,25 +1,28 @@
 //
-//  SearchResultBasicCell.swift
+//  OptionTableViewCell.swift
 //  MyMusic
 //
-//  Created by Ismayil Ismayilov on 17.09.22.
+//  Created by Ismayil Ismayilov on 02.10.22.
 //
 
+import Foundation
 import UIKit
-import SDWebImage
 
-class SearchResultArtistCell: UITableViewCell {
+class OptionTableViewCell: UITableViewCell {
     
     //MARK: - UI Elements
     private lazy var titleLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontName: "NotoSansMono-Medium")
     
     private lazy var iconImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleToFill
-        image.layer.cornerRadius = 20 
-        image.clipsToBounds = true
+        image.tintColor = Asset.Colors.mainBlue.color
         return image
     }()
+    
+    //MARK: - Parent Delegate
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
     
     //MARK: - Parent Delegate
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,38 +31,31 @@ class SearchResultArtistCell: UITableViewCell {
         setupUI()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-        iconImage.sd_setImage(with: nil, completed: nil)
     }
     
-    //MARK: - Functions
+    //MARK: Functions
     private func setupUI() {
-        contentView.addSubview(titleLabel)
         contentView.addSubview(iconImage)
+        contentView.addSubview(titleLabel)
         
         iconImage.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.height.equalTo(40)
+            make.left.equalToSuperview().offset(2)
+            make.width.height.equalTo(25)
             make.centerY.equalToSuperview()
-            make.width.equalTo(40)
         }
         
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(iconImage.snp.right).offset(10)
-            make.right.equalToSuperview().offset(-10)
             make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-5)
         }
     }
     
-    func configure(_with model: SearchResultArtistTableViewModel) {
+    func setUpCell(_ model: Option) {
         titleLabel.text = model.title
-        guard let url = model.imageURL else { return }
-        iconImage.sd_setImage(with: url, completed: nil)
+        iconImage.image = UIImage(systemName: model.icon)
     }
 }

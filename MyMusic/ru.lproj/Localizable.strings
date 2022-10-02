@@ -31,7 +31,7 @@
 "fullname_label" = "Имя";
 "userID_label" = "ID пользователя";
 "product_label" = "Ваш план";
-"follower_count_label" = "Последователи";
+"payment_card_label" = "Карта оплаты";
 "country_label" = "Страна";
 "could_not_get_data_label" = "Не удалось получить данные";
 
@@ -68,7 +68,17 @@
 //MARK: - Library Switching View
 "album_title" = "Альбом";
 "playlist_title" = "Плейлист";
+"artists_title" = "Художники";
+"made_for_you_title" = "Сделано для вас";
+"songs_title" = "Песни";
+"genres_title" = "Жанры";
+"composers_title" = "Композиторы";
+"downloaded_title" = "Скачано";
 
 //MARK: - Alert View
 "create_playlist" = "Создать плейлист";
 "no_playlist_label" = "Плейлиста пока нет";
+
+//MARK: - ProfileVC Buttons
+"edit_button_title" = "Редактировать";
+"plan_button_title" = "Планы";

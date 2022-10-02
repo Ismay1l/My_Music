@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 //MARK: - Browse New Releases
 struct NewReleaseResponse: Codable {
@@ -42,43 +41,6 @@ struct Image: Codable {
     let url: String?
     let width: Int?
 }
-
-//MARK: - Realm Database
-class NewReleaseResponseR: Object {
-    @Persisted var albums: AlbumsR?
-}
-
-class AlbumsR: Object {
-    @Persisted var items: List<AlbumR>
-}
-
-class AlbumR: Object {
-//    @Persisted var artists: List<ArtistR>
-    @Persisted var available_markets: List<String>
-//    @Persisted var external_urls: ExternalUrlsR
-    @Persisted var id: String
-//    @Persisted var images: List<ImageR>
-    @Persisted var name: String
-    @Persisted var release_date: String?
-    @Persisted var total_tracks: Int
-}
-
-//class ArtistR: Object {
-//    @Persisted var external_urls: ExternalUrlsR
-//    @Persisted var id: String
-//    @Persisted var name: String
-//    @Persisted var images: List<ImageR>
-//}
-//
-//class ExternalUrlsR: Object {
-//    @Persisted var spotify: String
-//}
-//
-//class ImageR: Object {
-//    @Persisted var height: Int
-//    @Persisted var url: String
-//    @Persisted var width: Int
-//}
 
 
 

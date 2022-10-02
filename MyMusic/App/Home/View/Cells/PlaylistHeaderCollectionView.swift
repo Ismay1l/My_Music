@@ -20,8 +20,8 @@ class PlaylistHeaderCollectionView: UICollectionReusableView {
         return image
     }()
     
-    private lazy var playlistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 24, fontWeight: "NotoSansMono-Bold")
-    private lazy var descriptionLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
+    private lazy var playlistNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 24, fontName: "NotoSansMono-Bold")
+    private lazy var descriptionLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontName: "NotoSansMono-Medium")
     
     override init(frame: CGRect) {
         super.init(frame: frame)

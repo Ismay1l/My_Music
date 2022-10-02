@@ -34,7 +34,7 @@ class TrackControllerView: UIView {
         return label
     }()
     
-    lazy var artistLabel = createLabel(textColor: .gray, fontSize: 20, fontWeight: "NotoSansMono-Medium")
+    lazy var artistLabel = createLabel(textColor: .gray, fontSize: 20, fontName: "NotoSansMono-Medium")
     
     private lazy var backButton: UIButton = {
         let button = UIButton()

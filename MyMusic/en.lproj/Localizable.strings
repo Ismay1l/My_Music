@@ -31,7 +31,7 @@
 "fullname_label" = "Name";
 "userID_label" = "User ID";
 "product_label" = "Your Plan";
-"follower_count_label" = "Followers";
+"payment_card_label" = "Payment Card";
 "country_label" = "Country";
 "could_not_get_data_label" = "Could not get data";
 
@@ -68,8 +68,17 @@
 //MARK: - Library Switching View
 "album_title" = "Album";
 "playlist_title" = "Playlist";
+"artists_title" = "Artists";
+"made_for_you_title" = "Made For You";
+"songs_title" = "Songs";
+"genres_title" = "Genres";
+"composers_title" = "Composers";
+"downloaded_title" = "Downloaded";
 
 //MARK: - Alert View
 "create_playlist" = "Create a Playlist";
 "no_playlist_label" = "There is no playlist yet";
 
+//MARK: - ProfileVC Buttons
+"edit_button_title" = "Edit";
+"plan_button_title" = "Plans";

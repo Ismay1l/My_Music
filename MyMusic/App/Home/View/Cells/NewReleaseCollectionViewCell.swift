@@ -16,8 +16,8 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var albumNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
-    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 12, fontWeight: "NotoSansMono-Medium")
+    private lazy var albumNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 12, fontName: "NotoSansMono-Medium")
+    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 10, fontName: "NotoSansMono-Medium")
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -39,13 +39,14 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         albumCoverImage.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-27)
+            make.bottom.equalToSuperview().offset(-30)
             make.width.equalTo(contentView.frame.size.width)
         }
         
         artistNameLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(4)
+            make.right.equalToSuperview()
         }
 
         albumNameLabel.snp.makeConstraints { make in

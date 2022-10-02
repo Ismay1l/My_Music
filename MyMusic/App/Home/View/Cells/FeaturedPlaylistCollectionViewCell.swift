@@ -16,7 +16,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var nameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
+    private lazy var nameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 14, fontName: "NotoSansMono-Medium")
     
     required init?(coder: NSCoder) {
         fatalError()

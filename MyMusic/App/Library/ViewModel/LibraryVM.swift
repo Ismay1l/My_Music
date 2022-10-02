@@ -10,4 +10,6 @@ import RxSwift
 import RxRelay
 
 class LibraryVM {
+    
+    var model = [Option]()
 }

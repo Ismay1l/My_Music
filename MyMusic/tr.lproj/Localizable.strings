@@ -31,7 +31,7 @@
 "fullname_label" = "İsim";
 "userID_label" = "Kullanıcı kimliği";
 "product_label" = "Senin planın";
-"follower_count_label" = "Takipçiler";
+"payment_card_label" = "Ödeme kartı";
 "country_label" = "Ülke";
 "could_not_get_data_label" = "Veri alınamadı";
 
@@ -68,7 +68,17 @@
 //MARK: - Library Switching View
 "album_title" = "Albüm";
 "playlist_title" = "Playlist";
+"artists_title" = "Sanatçılar";
+"made_for_you_title" = "Senin için yapıldı";
+"songs_title" = "Şarkılar";
+"genres_title" = "Türler";
+"composers_title" = "Besteciler";
+"downloaded_title" = "İndirildi";
 
 //MARK: - Alert View
 "create_playlist" = "Oynatma Listesi Oluşturun";
 "no_playlist_label" = "Henüz oynatma listesi yok";
+
+//MARK: - ProfileVC Buttons
+"edit_button_title" = "Düzenlemek";
+"plan_button_title" = "Planlar";

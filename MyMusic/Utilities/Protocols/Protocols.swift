@@ -52,12 +52,3 @@ protocol PlayerVCDelegate: AnyObject {
 protocol SearchResultVCDelegate: AnyObject {
     func didSelectOption(_ result: SearchResult)
 }
-
-protocol LibrarySwitchViewDelegate: AnyObject {
-    func switchToPlaylistVC(_ view: LibrarySwitchView)
-    func switchToAlbumVC(_ view: LibrarySwitchView)
-}
-
-protocol AlertViewDelegate: AnyObject {
-    func alertViewButtonTapped(_ view: AlertView)
-}

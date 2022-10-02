@@ -13,16 +13,19 @@ class LibraryVC: UIViewController {
     //MARK: - Variables
     private let libraryPlaylistVC = LibraryPlaylistVC()
     private let libraryAlbumVC = LibraryAlbumVC()
-    private let switchView = LibrarySwitchView()
     private let libraryVM = LibraryVM()
     
     //MARK: - UI Elements
-    private lazy var segmentScrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.isPagingEnabled = true
-        view.delegate = self
+    
+    private lazy var optionTableView: UITableView = {
+        let view = UITableView()
         view.backgroundColor = Asset.Colors.black.color
-        view.showsHorizontalScrollIndicator = false
+        view.scrollsToTop = true
+        view.showsVerticalScrollIndicator = false
+        
+        view.register(OptionTableViewCell.self, forCellReuseIdentifier: "\(OptionTableViewCell.self)")
+        view.dataSource = self
+        view.delegate = self
         return view
     }()
     
@@ -30,89 +33,95 @@ class LibraryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
-        segmentScrollView.contentSize = CGSize(width: view.frame.size.width * 2, height: segmentScrollView.frame.size.height)
-        switchView.delegate = self
         
+        setUpTableView()
         configureConstraints()
-        configureBarButtons()
-        addChildVC()
     }
     
     //MARK: - Functions
     private func configureConstraints() {
-        view.addSubview(segmentScrollView)
-        view.addSubview(switchView)
+        view.addSubview(optionTableView)
         
         let top = view.safeAreaLayoutGuide.snp.top
         let left = view.safeAreaLayoutGuide.snp.left
         let right = view.safeAreaLayoutGuide.snp.right
         let bottom = view.safeAreaLayoutGuide.snp.bottom
         
-        switchView.snp.makeConstraints { make in
-            make.left.equalTo(left)
-            make.right.equalTo(right)
-            make.top.equalTo(top)
-            make.height.equalTo(40)
-        }
-        
-        segmentScrollView.snp.makeConstraints { make in
-            make.left.equalTo(left)
-            make.right.equalTo(right)
-            make.top.equalTo(switchView.snp.bottom)
-            make.bottom.equalTo(bottom)
+        optionTableView.snp.makeConstraints { make in
+            make.left.equalTo(left).offset(20)
+            make.right.equalTo(right).offset(-20)
+            make.top.equalTo(top).offset(10)
+            make.bottom.equalTo(bottom).offset(-10)
         }
     }
     
-    private func addChildVC() {
-        addChild(libraryPlaylistVC)
-        segmentScrollView.addSubview(libraryPlaylistVC.view)
-        
-        libraryPlaylistVC.view.frame = CGRect(x: 0, y: 0, width: segmentScrollView.frame.size.width, height: segmentScrollView.frame.size.height)
-        libraryPlaylistVC.didMove(toParent: self)
-        
-        addChild(libraryAlbumVC)
-        segmentScrollView.addSubview(libraryAlbumVC.view)
-        
-        libraryAlbumVC.view.frame = CGRect(x: view.frame.size.width, y: 0, width: segmentScrollView.frame.size.width, height: segmentScrollView.frame.size.height)
-        libraryAlbumVC .didMove(toParent: self)
+    private func setUpTableView() {
+        libraryVM.model.append(
+            Option(title: L10n.playlistTitle, icon: "music.note.list", handler: {[weak self] in
+                DispatchQueue.main.async {
+                    guard let vc = self?.libraryPlaylistVC else { return }
+                    self?.pushVC(vc, title: L10n.playlistTitle)
+                }
+            }))
+        libraryVM.model.append(
+            Option(title: L10n.albumTitle, icon: "square.stack",  handler: {[weak self] in
+                DispatchQueue.main.async {
+                    guard let vc = self?.libraryAlbumVC else { return }
+                    self?.pushVC(vc, title: L10n.albumTitle)
+                }
+            }))
+        libraryVM.model.append(
+            Option(title: L10n.artistsTitle, icon: "music.mic", handler: {
+               print("Artists selected")
+            }))
+        libraryVM.model.append(
+            Option(title: L10n.madeForYouTitle, icon: "person.crop.square", handler: {
+               print("Made For You selected")
+            }))
+        libraryVM.model.append(
+            Option(title: L10n.songsTitle, icon: "music.note", handler: {
+               print("Songs selected")
+            }))
+        libraryVM.model.append(
+            Option(title: L10n.genresTitle, icon: "guitars", handler: {
+               print("Genres selected")
+            }))
+        libraryVM.model.append(
+            Option(title: L10n.composersTitle, icon: "person.2.crop.square.stack", handler: {
+               print("Composers selected")
+            }))
+        libraryVM.model.append(
+            Option(title: L10n.downloadedTitle, icon: "arrow.down.circle", handler: {
+               print("Downloaded selected")
+            }))
     }
     
-    private func configureBarButtons() {
-        switch switchView.state {
-        case .playlist:
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAddButton(_:)))
-        case .album:
-            navigationItem.rightBarButtonItem = nil
-        }
-    }
-    
-    @objc
-    private func didTapAddButton(_ sender: UIBarButtonItem) {
-        libraryPlaylistVC.showAlert()
+    private func pushVC(_ viewController: UIViewController, title: String) {
+        viewController.title = title
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
-//MARK: - Extension LibraryVC
-extension LibraryVC: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x >= (view.frame.size.width - 100) {
-            switchView.updateIndicator(_for: .album)
-            configureBarButtons()
-        } else {
-            switchView.updateIndicator(_for: .playlist)
-            configureBarButtons()
-        }
-    }
-}
-
-extension LibraryVC: LibrarySwitchViewDelegate {
-    func switchToPlaylistVC(_ view: LibrarySwitchView) {
-        segmentScrollView.setContentOffset(.zero, animated: true)
-        configureBarButtons()
+extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        libraryVM.model.count
     }
     
-    func switchToAlbumVC(_ view: LibrarySwitchView) {
-        segmentScrollView.setContentOffset(CGPoint(x: view.frame.size.width, y: 0), animated: true)
-        configureBarButtons()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(OptionTableViewCell.self)", for: indexPath) as! OptionTableViewCell
+        let model = libraryVM.model[indexPath.row]
+        cell.setUpCell(model)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = libraryVM.model[indexPath.row]
+        model.handler()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        50
     }
 }

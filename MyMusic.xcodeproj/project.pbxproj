@@ -39,7 +39,6 @@
 		4B13004428D7077800775E8F /* SearchResultTableViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13004328D7077800775E8F /* SearchResultTableViewModels.swift */; };
 		4B13004628D7150B00775E8F /* LibraryPlaylistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13004528D7150B00775E8F /* LibraryPlaylistVC.swift */; };
 		4B13004828D7152800775E8F /* LibraryAlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13004728D7152800775E8F /* LibraryAlbumVC.swift */; };
-		4B13004D28D71B7E00775E8F /* LibrarySwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13004C28D71B7E00775E8F /* LibrarySwitchView.swift */; };
 		4B1D1F0A28CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4B1D1F0928CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout */; };
 		4B1F866528C6002F00F2FC49 /* PlaylistVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */; };
 		4B21572B28D60A5D00C655DF /* SearchResultArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21572A28D60A5D00C655DF /* SearchResultArtistCell.swift */; };
@@ -58,7 +57,6 @@
 		4B64CEC628C4C6A500BE1935 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64CEC528C4C6A500BE1935 /* Protocols.swift */; };
 		4B64D7EC28D88A9700337836 /* LibraryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D7EB28D88A9700337836 /* LibraryVM.swift */; };
 		4B64D7EF28D88F5100337836 /* CurrentUerPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D7EE28D88F5100337836 /* CurrentUerPlaylist.swift */; };
-		4B64D7F128D8963400337836 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D7F028D8963400337836 /* AlertView.swift */; };
 		4B7E3EAA28C2284600BE990E /* XCAssets+Image+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E3EA828C2284600BE990E /* XCAssets+Image+Generated.swift */; };
 		4B7E3EAB28C2284600BE990E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E3EA928C2284600BE990E /* Strings.swift */; };
 		4B80E7AB28C2753800CD4151 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B80E7AA28C2753800CD4151 /* Enums.swift */; };
@@ -103,8 +101,8 @@
 		4BE4FFFE28BCAC3A009CEDB4 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE4FFFD28BCAC3A009CEDB4 /* ProfileVM.swift */; };
 		4BE6B88328E06E7D0079FE3F /* SavedAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6B88228E06E7D0079FE3F /* SavedAlbum.swift */; };
 		4BE6B88628E0745D0079FE3F /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6B88528E0745D0079FE3F /* Extension.swift */; };
-		4BE8DD5A28E4ECFA007598A4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4BE8DD5928E4ECFA007598A4 /* Realm */; };
-		4BE8DD5C28E4ECFA007598A4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4BE8DD5B28E4ECFA007598A4 /* RealmSwift */; };
+		4BE8DD6128E98D68007598A4 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8DD6028E98D68007598A4 /* TableViewModel.swift */; };
+		4BE8DD6428E99C3C007598A4 /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8DD6328E99C3C007598A4 /* OptionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,7 +155,6 @@
 		4B13004328D7077800775E8F /* SearchResultTableViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewModels.swift; sourceTree = "<group>"; };
 		4B13004528D7150B00775E8F /* LibraryPlaylistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPlaylistVC.swift; sourceTree = "<group>"; };
 		4B13004728D7152800775E8F /* LibraryAlbumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAlbumVC.swift; sourceTree = "<group>"; };
-		4B13004C28D71B7E00775E8F /* LibrarySwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySwitchView.swift; sourceTree = "<group>"; };
 		4B1F866428C6002F00F2FC49 /* PlaylistVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVM.swift; sourceTree = "<group>"; };
 		4B21572A28D60A5D00C655DF /* SearchResultArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultArtistCell.swift; sourceTree = "<group>"; };
 		4B21572C28D614B300C655DF /* SearchResultAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultAlbumCell.swift; sourceTree = "<group>"; };
@@ -170,7 +167,6 @@
 		4B64CEC528C4C6A500BE1935 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4B64D7EB28D88A9700337836 /* LibraryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryVM.swift; sourceTree = "<group>"; };
 		4B64D7EE28D88F5100337836 /* CurrentUerPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUerPlaylist.swift; sourceTree = "<group>"; };
-		4B64D7F028D8963400337836 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		4B7E3EA828C2284600BE990E /* XCAssets+Image+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Image+Generated.swift"; sourceTree = "<group>"; };
 		4B7E3EA928C2284600BE990E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		4B80E7AA28C2753800CD4151 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -216,6 +212,8 @@
 		4BE6B88528E0745D0079FE3F /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4BE8DD5E28E8A43C007598A4 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BE8DD5F28E8A454007598A4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE8DD6028E98D68007598A4 /* TableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
+		4BE8DD6328E99C3C007598A4 /* OptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B1D1F0A28CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout in Frameworks */,
-				4BE8DD5C28E4ECFA007598A4 /* RealmSwift in Frameworks */,
 				4B80E7BB28C3485500CD4151 /* RxRelay in Frameworks */,
 				4B3B754D28BFC44800033B61 /* Shift in Frameworks */,
 				4B9430B628BFBD57007295A0 /* Alamofire in Frameworks */,
@@ -247,7 +244,6 @@
 				4B52F47228CE2A8900E5AD94 /* MarqueeLabel in Frameworks */,
 				4B44933E28C00B830030BC00 /* SDWebImage in Frameworks */,
 				4BD33C4D28B82C7800BE1353 /* SnapKit in Frameworks */,
-				4BE8DD5A28E4ECFA007598A4 /* Realm in Frameworks */,
 				4B80E7BD28C3485500CD4151 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +385,7 @@
 			children = (
 				4B64D7EE28D88F5100337836 /* CurrentUerPlaylist.swift */,
 				4BE6B88228E06E7D0079FE3F /* SavedAlbum.swift */,
+				4BE8DD6028E98D68007598A4 /* TableViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -519,11 +516,10 @@
 		4BD33C1D28B7EFCE00BE1353 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4BE8DD6228E99C1D007598A4 /* Cells */,
 				4BD33C1E28B7EFDD00BE1353 /* LibraryVC.swift */,
 				4B13004528D7150B00775E8F /* LibraryPlaylistVC.swift */,
 				4B13004728D7152800775E8F /* LibraryAlbumVC.swift */,
-				4B13004C28D71B7E00775E8F /* LibrarySwitchView.swift */,
-				4B64D7F028D8963400337836 /* AlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -734,6 +730,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4BE8DD6228E99C1D007598A4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4BE8DD6328E99C3C007598A4 /* OptionTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -797,8 +801,6 @@
 				4B64CEC228C4C57600BE1935 /* Promises */,
 				4B1D1F0928CBBCE800E2CF21 /* CHTCollectionViewWaterfallLayout */,
 				4B52F47128CE2A8900E5AD94 /* MarqueeLabel */,
-				4BE8DD5928E4ECFA007598A4 /* Realm */,
-				4BE8DD5B28E4ECFA007598A4 /* RealmSwift */,
 			);
 			productName = MyMusic;
 			productReference = 4BD4EAA228B6AFAF00CA24D8 /* MyMusic.app */;
@@ -847,7 +849,6 @@
 				4B64CEC128C4C57600BE1935 /* XCRemoteSwiftPackageReference "promises" */,
 				4B1D1F0828CBBCE800E2CF21 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */,
 				4B52F47028CE2A8900E5AD94 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
-				4BE8DD5828E4ECFA007598A4 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 4BD4EAA328B6AFAF00CA24D8 /* Products */;
 			projectDirPath = "";
@@ -924,7 +925,6 @@
 			files = (
 				4B13003A28D706AA00775E8F /* Recommendations.swift in Sources */,
 				49F0DD3728CB30C200EB470B /* CategoryVC.swift in Sources */,
-				4B64D7F128D8963400337836 /* AlertView.swift in Sources */,
 				4BE6B88628E0745D0079FE3F /* Extension.swift in Sources */,
 				4B4AA74128C7ABC400465590 /* swiftgen.yml in Sources */,
 				4BD33C3728B7F16900BE1353 /* APIManager.swift in Sources */,
@@ -932,12 +932,13 @@
 				4B13003E28D706C300775E8F /* Playlists.swift in Sources */,
 				4B13003C28D706B600775E8F /* AlbumDetails.swift in Sources */,
 				49795E9928C86F6400EFF96A /* BrowseAlbumsCollectionViewCell.swift in Sources */,
-				4B13004D28D71B7E00775E8F /* LibrarySwitchView.swift in Sources */,
 				4BD33C3328B7F12000BE1353 /* SearchResultVC.swift in Sources */,
 				4B64D7EF28D88F5100337836 /* CurrentUerPlaylist.swift in Sources */,
 				4B47DA1128DF8F750008C78F /* LibraryAlbumVM.swift in Sources */,
 				4BD33C2928B7F06F00BE1353 /* ProfileVC.swift in Sources */,
+				4BE8DD6128E98D68007598A4 /* TableViewModel.swift in Sources */,
 				4BD33C2528B7F03000BE1353 /* SignInVC.swift in Sources */,
+				4BE8DD6428E99C3C007598A4 /* OptionTableViewCell.swift in Sources */,
 				4B1F866528C6002F00F2FC49 /* PlaylistVM.swift in Sources */,
 				4B64D7EC28D88A9700337836 /* LibraryVM.swift in Sources */,
 				4B52F46928CE249700E5AD94 /* TrackControllerView.swift in Sources */,
@@ -1375,14 +1376,6 @@
 				kind = branch;
 			};
 		};
-		4BE8DD5828E4ECFA007598A4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1435,16 +1428,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4BD33C4B28B82C7800BE1353 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		4BE8DD5928E4ECFA007598A4 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4BE8DD5828E4ECFA007598A4 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		4BE8DD5B28E4ECFA007598A4 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4BE8DD5828E4ECFA007598A4 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

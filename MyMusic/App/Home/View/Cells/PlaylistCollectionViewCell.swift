@@ -18,8 +18,8 @@ class PlaylistCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var trackNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontWeight: "NotoSansMono-Medium")
-    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontWeight: "NotoSansMono-Medium")
+    private lazy var trackNameLabel = createLabel(textColor: Asset.Colors.white.color, fontSize: 16, fontName: "NotoSansMono-Medium")
+    private lazy var artistNameLabel = createLabel(textColor: Asset.Colors.secondaryBlack.color, fontSize: 14, fontName: "NotoSansMono-Medium")
     
     required init?(coder: NSCoder) {
         fatalError()

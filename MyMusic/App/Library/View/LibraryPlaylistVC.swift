@@ -11,7 +11,6 @@ import RxSwift
 class LibraryPlaylistVC: UIViewController {
     
     //MARK: - Variables
-    private let alertView = AlertView()
     private var currentUserPlaylist = [Item]()
     private let libraryPlaylistVM = LibraryPlaylistVM()
     private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
@@ -37,12 +36,11 @@ class LibraryPlaylistVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
-        alertView.delegate = self
         
         configureConstraints()
         observeData()
-        
         addDismissButton()
+        setUpBarbUtton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,20 +51,18 @@ class LibraryPlaylistVC: UIViewController {
     
     //MARK: - Functions
     private func configureConstraints() {
-        view.addSubview(alertView)
         view.addSubview(playlistTableView)
         
-        alertView.snp.makeConstraints { make in
-            make.center.equalTo(view.safeAreaLayoutGuide.snp.center)
-            make.height.width.equalTo(150)
-        }
-        
         playlistTableView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
+    }
+    
+    private func setUpBarbUtton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAddButton(_:)))
     }
     
     private func addDismissButton() {
@@ -98,10 +94,8 @@ class LibraryPlaylistVC: UIViewController {
     
     private func updateUI() {
         if currentUserPlaylist.isEmpty {
-            alertView.isHidden = false
             playlistTableView.isHidden = true
         } else {
-            alertView.isHidden = true
             playlistTableView.reloadData()
             playlistTableView.isHidden = false
         }
@@ -116,7 +110,7 @@ class LibraryPlaylistVC: UIViewController {
         }
     }
     
-    func showAlert() {
+    private func showAlert() {
         let alert = UIAlertController(title: L10n.newPlaylistLabel,
                                       message: L10n.newPlaylistMessage,
                                       preferredStyle: .alert)
@@ -141,6 +135,11 @@ class LibraryPlaylistVC: UIViewController {
     private func didTapCancelButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
+    
+    @objc
+    private func didTapAddButton(_ sender: UIBarButtonItem) {
+        showAlert()
+    }
 }
 
 //MARK: - Extension LibraryPlaylistVC
@@ -154,7 +153,7 @@ extension LibraryPlaylistVC: UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
         let model = currentUserPlaylist[indexPath.row]
         cell.configure(_with: SearchResultAlbumTableViewModel(title: model.name, subtitle: model.owner?.display_name, imageURL: URL(string: model.images?.first?.url ?? "")))
-        cell.backgroundColor = Asset.Colors.lightGray.color
+        cell.backgroundColor = Asset.Colors.black.color
         cell.selectionStyle = .none
         return cell
     }
@@ -171,11 +170,5 @@ extension LibraryPlaylistVC: UITableViewDataSource,
         let playlistVC = PlaylistVC(playlist: model)
         playlistVC.isOwner = true
         navigationController?.pushViewController(playlistVC, animated: true)
-    }
-}
-
-extension LibraryPlaylistVC: AlertViewDelegate {
-    func alertViewButtonTapped(_ view: AlertView) {
-        showAlert()
     }
 }

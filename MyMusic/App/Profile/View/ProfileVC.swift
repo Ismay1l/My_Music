@@ -25,7 +25,37 @@ class ProfileVC: UIViewController {
         view.delegate = self
         view.dataSource = self
         view.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
+        view.isScrollEnabled = false
         return view
+    }()
+    
+    private lazy var profileImage: UIImageView = {
+        let image = UIImageView()
+        image.layer.cornerRadius = 100
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.image = UIImage(systemName: "person.fill")
+        return image
+    }()
+    
+    private lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(L10n.editButtonTitle, for: .normal)
+        button.setTitleColor(Asset.Colors.white.color, for: .normal)
+        button.titleLabel?.font = UIFont(name: "NotoSansMono-Medium", size: 18)
+        button.backgroundColor = Asset.Colors.lightGray.color
+        button.layer.cornerRadius = 8
+        return button
+    }()
+    
+    private lazy var planButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(L10n.planButtonTitle, for: .normal)
+        button.setTitleColor(Asset.Colors.white.color, for: .normal)
+        button.titleLabel?.font = UIFont(name: "NotoSansMono-Medium", size: 18)
+        button.backgroundColor = Asset.Colors.lightGray.color
+        button.layer.cornerRadius = 8
+        return button
     }()
     
     //MARK: - Parent Delegate
@@ -48,14 +78,36 @@ class ProfileVC: UIViewController {
     //MARK: - Functions
     private func configureConstraints() {
         view.addSubview(profileTableView)
+        view.addSubview(profileImage)
+        view.addSubview(editButton)
+        view.addSubview(planButton)
         
         let top = view.safeAreaLayoutGuide.snp.top
         let left = view.safeAreaLayoutGuide.snp.left
         let right = view.safeAreaLayoutGuide.snp.right
         let bottom = view.safeAreaLayoutGuide.snp.bottom
+        let centerX = view.safeAreaLayoutGuide.snp.centerX
+        
+        profileImage.snp.makeConstraints { make in
+            make.centerX.equalTo(centerX)
+            make.top.equalTo(top).offset(20)
+            make.width.height.equalTo(200)
+        }
+        
+        editButton.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(10)
+            make.left.equalTo(left).offset(50)
+            make.width.equalTo(80)
+        }
+        
+        planButton.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(10)
+            make.right.equalTo(right).offset(-50)
+            make.width.equalTo(80)
+        }
         
         profileTableView.snp.makeConstraints { make in
-            make.top.equalTo(top).offset(10)
+            make.top.equalTo(editButton.snp.bottom).offset(20)
             make.left.equalTo(left).offset(20)
             make.right.equalTo(right).offset(-20)
             make.bottom.equalTo(bottom).offset(-10)
@@ -67,10 +119,10 @@ class ProfileVC: UIViewController {
         profileVM.model.removeAll()
         profileVM.model.append("\(L10n.fullnameLabel): \(model.displayName ?? "NA")")
         profileVM.model.append("\(L10n.countryLabel): \(model.country ?? "NA")")
-        profileVM.model.append("\(L10n.userIDLabel): \(model.id ?? "NA")")
         profileVM.model.append("\(L10n.productLabel): \(model.product ?? "NA")")
-        profileVM.model.append("\(L10n.followerCountLabel): \(model.followers?.total ?? 0)")
-        createHeaderForTableView(with: model.images?.first?.url ?? "NA")
+        profileVM.model.append("\(L10n.paymentCardLabel): \(1111) \(2222) \(3333) \(4444)")
+        guard let urlStr = model.images?.first?.url, let url = URL(string: urlStr) else { return }
+        profileImage.sd_setImage(with: url)
         profileTableView.reloadData()
     }
     
@@ -81,35 +133,6 @@ class ProfileVC: UIViewController {
         label.sizeToFit()
         view.addSubview(label)
         label.center = view.center
-    }
-    
-    private func createHeaderForTableView(with urlString: String?) {
-        guard let urlStr = urlString, let url = URL(string: urlStr) else { return }
-        
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width / 1.5))
-        let imageSize: CGFloat = headerView.frame.size.height / 2
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
-        
-        headerView.addSubview(imageView)
-        imageView.center = headerView.center
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = imageSize / 2
-        imageView.clipsToBounds = true
-        
-        imageView.sd_setImage(with: url, completed: nil)
-        profileTableView.tableHeaderView = headerView
-    }
-    
-    @objc
-    private func DidTapSignOutButton() {
-        let alert = UIAlertController(title: L10n.titleSignOut, message: L10n.descriptionLabel, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: L10n.buttonCancel, style: .cancel))
-        alert.addAction(UIAlertAction(title: L10n.buttonSignOut, style: .destructive, handler: {[weak self] _ in
-            DispatchQueue.main.async {
-                self?.didSignOut()
-            }
-        }))
-        present(alert, animated: true)
     }
     
     private func didSignOut() {
@@ -152,9 +175,33 @@ class ProfileVC: UIViewController {
     }
     
     private func configureBarButtons() {
-        let signOutButton = UIBarButtonItem(title: L10n.buttonSignOut, style: .plain, target: self, action: #selector(DidTapSignOutButton))
+        let signOutButton = UIBarButtonItem(title: L10n.buttonSignOut, style: .plain, target: self, action: #selector(didTapBarButton(_:)))
         signOutButton.tintColor = Asset.Colors.mainBlue.color
+        signOutButton.tag = 1
         navigationItem.leftBarButtonItem = signOutButton
+        
+        let notificationButton = UIBarButtonItem(image: UIImage(systemName: "bell.badge"), style: .plain, target: self, action: #selector(didTapBarButton(_:)))
+        notificationButton.tintColor = Asset.Colors.mainBlue.color
+        notificationButton.tag = 2
+        navigationItem.rightBarButtonItem = notificationButton
+    }
+    
+    @objc
+    private func didTapBarButton(_ sender: UIBarButtonItem) {
+        switch sender.tag {
+        case 1:
+            let alert = UIAlertController(title: L10n.titleSignOut, message: L10n.descriptionLabel, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: L10n.buttonCancel, style: .cancel))
+            alert.addAction(UIAlertAction(title: L10n.buttonSignOut, style: .destructive, handler: {[weak self] _ in
+                DispatchQueue.main.async {
+                    self?.didSignOut()
+                }
+            }))
+            present(alert, animated: true)
+        case 2:
+            print("Did tap notification button")
+        default: break
+        }
     }
 }
 

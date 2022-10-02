@@ -11,7 +11,6 @@ import RxSwift
 class LibraryAlbumVC: UIViewController {
 
     //MARK: - Variables
-    private let alertView = AlertView()
     private var currentUserAlbum = [SavedAlbumResponseItem]()
     private let libraryAlbumVM = LibraryAlbumVM()
     private let mainSchedulerInstance: ImmediateSchedulerType = MainScheduler.instance
@@ -37,7 +36,6 @@ class LibraryAlbumVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.black.color
-        alertView.delegate = self
         
         configureConstraints()
         observeData()
@@ -52,13 +50,7 @@ class LibraryAlbumVC: UIViewController {
     
     //MARK: - Functions
     private func configureConstraints() {
-        view.addSubview(alertView)
         view.addSubview(albumTableView)
-        
-        alertView.snp.makeConstraints { make in
-            make.center.equalTo(view.safeAreaLayoutGuide.snp.center)
-            make.height.width.equalTo(150)
-        }
         
         albumTableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -100,10 +92,8 @@ class LibraryAlbumVC: UIViewController {
     
     private func updateUI() {
         if currentUserAlbum.isEmpty {
-            alertView.isHidden = false
             albumTableView.isHidden = true
         } else {
-            alertView.isHidden = true
             albumTableView.reloadData()
             albumTableView.isHidden = false
         }
@@ -126,7 +116,7 @@ extension LibraryAlbumVC: UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(SearchResultAlbumCell.self)", for: indexPath) as! SearchResultAlbumCell
         let model = currentUserAlbum[indexPath.row]
         cell.configure(_with: SearchResultAlbumTableViewModel(title: model.album?.name, subtitle: model.album?.artists?.first?.name, imageURL: URL(string: model.album?.images?.first?.url ?? "")))
-        cell.backgroundColor = Asset.Colors.lightGray.color
+        cell.backgroundColor = Asset.Colors.black.color
         cell.selectionStyle = .none
         return cell
     }
@@ -137,12 +127,5 @@ extension LibraryAlbumVC: UITableViewDataSource,
         guard let album = model.album else { return }
         let albumVC = AlbumVC(album: Album(artists: album.artists, available_markets: album.available_markets, external_urls: album.external_urls, id: album.id, name: album.name, release_date: album.release_date, total_tracks: album.total_tracks))
         navigationController?.pushViewController(albumVC, animated: true)
-    }
-}
-
-extension LibraryAlbumVC: AlertViewDelegate {
-    func alertViewButtonTapped(_ view: AlertView) {
-        tabBarController?.selectedIndex = 0
-//        tabBar.selectedIndex = 0
     }
 }

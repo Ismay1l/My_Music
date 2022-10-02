@@ -36,7 +36,7 @@ class WelcomeVC: UIViewController {
         return view
     }()
     
-    private lazy var introLabel = createLabel(textColor: Asset.Colors.mainBlue.color, fontSize: 18, fontWeight: "NotoSansMono-Medium")
+    private lazy var introLabel = createLabel(textColor: Asset.Colors.mainBlue.color, fontSize: 18, fontName: "NotoSansMono-Medium")
 
     //MARK: - Parent Delegate
     override func viewDidLoad() {
